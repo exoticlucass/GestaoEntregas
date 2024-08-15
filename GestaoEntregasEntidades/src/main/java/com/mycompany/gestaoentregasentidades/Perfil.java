@@ -7,6 +7,7 @@ package com.mycompany.gestaoentregasentidades;
 import java.util.*;
 import javax.persistence.*;
 
+@Entity
 public class Perfil {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
