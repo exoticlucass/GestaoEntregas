@@ -9,11 +9,13 @@ import javax.persistence.*;
 
 @Entity
 public class Pedido {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_pedido")
     private int id;
+    @Column(name = "data_pedido")
     private Date data;
+    @Column(name = "valor_total")
     private double valorTotal;
 
     public enum Status {
@@ -28,7 +30,7 @@ public class Pedido {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_cliente_cliente")
     private Cliente cliente;
-
+    
     public int getId() {
         return id;
     }

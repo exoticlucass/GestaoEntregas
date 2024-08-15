@@ -16,9 +16,13 @@ public class Funcionario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_funcionario")
     private int id;
+    @Column(name = "nome")
     private String nome;
+    @Column(name = "senha")
     private String senha;
+    @Column(name = "telefone")
     private String telefone;
 
     @OneToMany(fetch = FetchType.EAGER, cascade

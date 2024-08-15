@@ -9,12 +9,16 @@ import javax.persistence.*;
 
 @Entity
 public class Produto {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_produto")
     private int id;
-    private String produto;
+    @Column(name = "nome_produto")
+    private String nome;
+    @Column(name = "localizacao_produto")
     private String localização;
-    
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_itemPedido_itemPedido")
     private ItemPedido itemPedido;
@@ -27,12 +31,12 @@ public class Produto {
         this.id = id;
     }
 
-    public String getProduto() {
-        return produto;
+    public String getNome() {
+        return nome;
     }
 
-    public void setProduto(String produto) {
-        this.produto = produto;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public String getLocalização() {
@@ -50,6 +54,5 @@ public class Produto {
     public void setItemPedido(ItemPedido itemPedido) {
         this.itemPedido = itemPedido;
     }
-    
-    
+
 }

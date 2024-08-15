@@ -12,12 +12,19 @@ public class Cliente {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_cliente")
     private int id;
+    @Column(name = "nome")
     private String nome;
+    @Column(name = "logradouro")
     private String logradouro;
+    @Column(name = "bairro")
     private String bairro;
+    @Column(name = "telefone")
     private String telefone;
+    @Column(name = "CNPJ_cliente")
     private String CNPJ;
+    @Column(name = "CPF_cliente")
     private String CPF;
 
     @OneToMany(fetch = FetchType.EAGER, cascade

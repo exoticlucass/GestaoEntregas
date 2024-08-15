@@ -11,12 +11,14 @@ import javax.persistence.*;
 public class Perfil {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_perfil")
     private int id;
     
     public enum TipoPerfil{
         ADMINISTRADOR,ATENDENTE,ENTREGADOR;
     }
     
+    @Column(name = "tipo_perfil")
     private TipoPerfil tipoPerfil;
     
     @ManyToOne(fetch = FetchType.EAGER)

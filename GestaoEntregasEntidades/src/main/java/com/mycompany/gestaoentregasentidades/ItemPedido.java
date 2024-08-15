@@ -11,8 +11,11 @@ import javax.persistence.*;
 public class ItemPedido {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_item")
     private int id;
+    @Column(name = "valor_unitario")
     private double valorUnitario;
+    @Column(name = "quantidade")
     private int quantidade;
     
     @ManyToOne(fetch = FetchType.EAGER)
