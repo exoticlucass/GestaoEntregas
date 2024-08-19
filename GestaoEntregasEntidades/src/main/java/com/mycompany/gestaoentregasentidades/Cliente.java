@@ -26,6 +26,7 @@ public class Cliente {
     private String CNPJ;
     @Column(name = "CPF_cliente")
     private String CPF;
+    private static final Random RANDOM = new Random();
 
     @OneToMany(fetch = FetchType.EAGER, cascade
             = CascadeType.PERSIST, mappedBy = "cliente")
@@ -105,6 +106,17 @@ public class Cliente {
 
     public void setEmpresa(Empresa empresa) {
         this.empresa = empresa;
+    }
+
+    public Cliente(String nome, String logradouro, String bairro, String telefone, String CNPJ, String CPF, Empresa empresa) {
+        this.nome = nome;
+        this.logradouro = logradouro;
+        this.bairro = bairro;
+        this.telefone = telefone;
+        this.CNPJ = CNPJ;
+        this.CPF = CPF;
+        this.empresa = empresa;
+        this.id = RANDOM.nextInt(10000);
     }
     
 }
