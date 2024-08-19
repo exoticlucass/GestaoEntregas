@@ -2,36 +2,38 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.mycompany.gestaoentregasentidades;
+package br.cefetmg.gestaoentregasentidades;
 
 import java.util.*;
 import javax.persistence.*;
 
-/**
- *
- * @author Master
- */
 @Entity
-public class Funcionario {
+public class Cliente {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_funcionario")
+    @Column(name = "id_cliente")
     private int id;
     @Column(name = "nome")
     private String nome;
-    @Column(name = "senha")
-    private String senha;
+    @Column(name = "logradouro")
+    private String logradouro;
+    @Column(name = "bairro")
+    private String bairro;
     @Column(name = "telefone")
     private String telefone;
+    @Column(name = "CNPJ_cliente")
+    private String CNPJ;
+    @Column(name = "CPF_cliente")
+    private String CPF;
 
     @OneToMany(fetch = FetchType.EAGER, cascade
-            = CascadeType.PERSIST, mappedBy = "funcionario")
-    private List<Perfil> perfil;
-
+            = CascadeType.PERSIST, mappedBy = "cliente")
+    private List<Pedido> pedido;
+    
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_empresa_empresa")
-    private Empresa empresa;
+    public Empresa empresa;
 
     public int getId() {
         return id;
@@ -49,12 +51,20 @@ public class Funcionario {
         this.nome = nome;
     }
 
-    public String getSenha() {
-        return senha;
+    public String getLogradouro() {
+        return logradouro;
     }
 
-    public void setSenha(String senha) {
-        this.senha = senha;
+    public void setLogradouro(String logradouro) {
+        this.logradouro = logradouro;
+    }
+
+    public String getBairro() {
+        return bairro;
+    }
+
+    public void setBairro(String bairro) {
+        this.bairro = bairro;
     }
 
     public String getTelefone() {
@@ -65,12 +75,28 @@ public class Funcionario {
         this.telefone = telefone;
     }
 
-    public List<Perfil> getPerfil() {
-        return perfil;
+    public String getCNPJ() {
+        return CNPJ;
     }
 
-    public void setPerfil(List<Perfil> perfil) {
-        this.perfil = perfil;
+    public void setCNPJ(String CNPJ) {
+        this.CNPJ = CNPJ;
+    }
+
+    public String getCPF() {
+        return CPF;
+    }
+
+    public void setCPF(String CPF) {
+        this.CPF = CPF;
+    }
+
+    public List<Pedido> getPedido() {
+        return pedido;
+    }
+
+    public void setPedido(List<Pedido> pedido) {
+        this.pedido = pedido;
     }
 
     public Empresa getEmpresa() {
@@ -80,5 +106,5 @@ public class Funcionario {
     public void setEmpresa(Empresa empresa) {
         this.empresa = empresa;
     }
-
+    
 }
