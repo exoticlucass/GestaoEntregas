@@ -73,8 +73,8 @@ public class Funcionario {
         this.perfil = perfil;
     }
 
-    public Empresa getEmpresa() {
-        return empresa;
+    public int getEmpresaId() {
+        return empresa.getId();
     }
 
     public void setEmpresa(Empresa empresa) {
