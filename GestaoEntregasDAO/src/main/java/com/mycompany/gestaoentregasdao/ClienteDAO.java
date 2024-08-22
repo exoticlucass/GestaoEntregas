@@ -33,15 +33,7 @@ public class ClienteDAO {
             pstmt.setString(5, cliente.getTelefone());
             pstmt.setString(6, cliente.getCNPJ());
             pstmt.setString(7, cliente.getCPF());
-            
-            // Assuming cliente.getEmpresa() is not null and id_empresa_empresa is the foreign key column
-            if (cliente.getEmpresa() != null) {
-                pstmt.setInt(8, cliente.getEmpresa().getId());  // Adjust if needed based on your Empresa entity
-            } else {
-                pstmt.setNull(9, java.sql.Types.INTEGER);
-            }
-
-            // Execute the insert operation
+            pstmt.setInt(8, cliente.getEmpresaId());  // Adjust if needed based on your Empresa entity
             pstmt.executeUpdate();
             
         } catch (SQLException e) {

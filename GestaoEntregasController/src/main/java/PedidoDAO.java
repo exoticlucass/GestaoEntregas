@@ -1,5 +1,3 @@
-package com.mycompany.gestaoentregasdao;
-
 import com.mycompany.gestaoentregasentidades.Pedido;
 import java.sql.Connection;
 import java.sql.Date;

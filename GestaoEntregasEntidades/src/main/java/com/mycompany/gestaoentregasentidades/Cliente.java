@@ -34,7 +34,7 @@ public class Cliente {
     
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_empresa_empresa")
-    public Empresa empresa;
+    private Empresa empresa;
 
     public int getId() {
         return id;
@@ -100,8 +100,8 @@ public class Cliente {
         this.pedido = pedido;
     }
 
-    public Empresa getEmpresa() {
-        return empresa;
+    public int getEmpresaId() {
+        return empresa.getId();
     }
 
     public void setEmpresa(Empresa empresa) {
