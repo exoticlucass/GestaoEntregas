@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.VBox?>
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="br.cefetmg.gestaoentregasview.FXMLDadosController">
+
+    
+    <padding>
+        <Insets top="20" bottom="20" left="20" right="20"/>
+    </padding>
+
+    <TableView fx:id="tabela">
+        <columns>
+            <TableColumn fx:id="selectCol" 
+                         text="" 
+                         minWidth="40" 
+                         maxWidth="40"/>
+            <TableColumn fx:id="nomeCol" 
+                         text="Nome produto"/>
+            <TableColumn fx:id="quantidadeCol" 
+                         text="quantidade" 
+                         minWidth="70" 
+                         maxWidth="70"/>
+            <TableColumn fx:id="enderecoCol" 
+                         text="Endereço"/>
+            <TableColumn fx:id="valorUniCol" 
+                         text="Valor Unitario"/>
+            <TableColumn fx:id="valorTotalCol" 
+                         text="Valor Total"/>
+            <TableColumn fx:id="marcaCol" 
+                         text="marca"/>
+            <TableColumn fx:id="formaPagamentoCol" 
+                         text="Forma Pagamento"/>
+            <TableColumn fx:id="observacoesCol" 
+                         text="Observações"/>
+            <TableColumn fx:id="entregadorCol" 
+                         text="Entregador"/>
+        </columns>
+    </TableView>
+</VBox>

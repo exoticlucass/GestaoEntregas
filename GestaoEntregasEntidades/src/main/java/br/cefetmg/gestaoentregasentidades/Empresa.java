@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.mycompany.gestaoentregasentidades;
+package br.cefetmg.gestaoentregasentidades;
 
 import java.util.*;
 import javax.persistence.*;
@@ -13,7 +13,10 @@ import javax.persistence.*;
  */
 @Entity
 public class Empresa {
-
+    private static final Random RANDOM = new Random();
+    public Empresa() {
+        this.id = RANDOM.nextInt(10000);
+    }
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;

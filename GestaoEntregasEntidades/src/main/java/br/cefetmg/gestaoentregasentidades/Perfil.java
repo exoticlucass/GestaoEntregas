@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.mycompany.gestaoentregasentidades;
+package br.cefetmg.gestaoentregasentidades;
 
 import java.util.*;
 import javax.persistence.*;
@@ -24,7 +24,13 @@ public class Perfil {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_funcionario_funcionario")
     private Funcionario funcionario;
-
+    public int getTipoEnumToInt(){
+        if(this.getTipoPerfil() == TipoPerfil.ADMINISTRADOR)
+            return 1;
+        else if(this.getTipoPerfil() == TipoPerfil.ATENDENTE)
+            return 2;
+        return 3;        
+    }
     public int getId() {
         return id;
     }
@@ -41,8 +47,8 @@ public class Perfil {
         this.tipoPerfil = tipoPerfil;
     }
 
-    public Funcionario getFuncionario() {
-        return funcionario;
+    public int getFuncionarioId() {
+        return funcionario.getId();
     }
 
     public void setFuncionario(Funcionario funcionario) {

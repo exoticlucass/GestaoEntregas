@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.mycompany.gestaoentregasentidades;
+package br.cefetmg.gestaoentregasentidades;
 
 import java.util.*;
 import javax.persistence.*;
@@ -20,7 +20,7 @@ public class ItemPedido {
     
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_pedido_pedido")
-    public Pedido pedido;
+    private Pedido pedido;
     
     
     // Talvez tenha que mudar nome
@@ -52,8 +52,8 @@ public class ItemPedido {
         this.quantidade = quantidade;
     }
 
-    public Pedido getPedido() {
-        return pedido;
+    public int getPedidoId() {
+        return pedido.getId();
     }
 
     public void setPedido(Pedido pedido) {

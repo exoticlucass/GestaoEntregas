@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<GridPane xmlns:fx="http://javafx.com/fxml"
+          fx:controller="br.cefetmg.gestaoentregasview.PedidoCadastroController" alignment="center" hgap="10" vgap="10">
+    <!-- Labels and Inputs -->
+    <Label text="Produto:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+    <ComboBox fx:id="comboBoxProduto" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+    <Label text="Quantidade:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+    <TextField fx:id="textFieldQuantidade" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+    <Label text="Valor Unitário (R$):" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+    <TextField fx:id="textFieldValorUnitario" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+    <Label text="Valor Total (R$):" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+    <TextField fx:id="textFieldValorTotal" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+    <Label text="Marca do Produto:" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+    <TextField fx:id="textFieldMarca" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+    <Label text="Forma de Pagamento:" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+    <TextField fx:id="textFieldFormaPagamento" GridPane.rowIndex="5" GridPane.columnIndex="1"/>
+    <Label text="Endereço:" GridPane.rowIndex="6" GridPane.columnIndex="0"/>
+    <TextField fx:id="textFieldEndereco" GridPane.rowIndex="6" GridPane.columnIndex="1"/>
+    <Label text="Entregador:" GridPane.rowIndex="7" GridPane.columnIndex="0"/>
+    <TextField fx:id="textFieldEntregador" GridPane.rowIndex="7" GridPane.columnIndex="1"/>
+    <Label text="Observações:" GridPane.rowIndex="8" GridPane.columnIndex="0"/>
+    <TextArea fx:id="textAreaObservacoes" GridPane.rowIndex="9" GridPane.columnIndex="1"
+              GridPane.columnSpan="2" />
+    <!-- Buttons -->
+    <Button text="Salvar" onAction="#salvarPedido" GridPane.rowIndex="8" GridPane.columnIndex="1" />
+    <Button text="Cancelar" onAction="#onCancelar" GridPane.rowIndex="8" GridPane.columnIndex="2"
+    />
+
+</GridPane>
