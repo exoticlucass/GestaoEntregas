@@ -20,7 +20,7 @@ public class ItemPedido {
     
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_pedido_pedido")
-    public Pedido pedido;
+    private Pedido pedido;
     
     
     // Talvez tenha que mudar nome
@@ -52,8 +52,8 @@ public class ItemPedido {
         this.quantidade = quantidade;
     }
 
-    public Pedido getPedido() {
-        return pedido;
+    public int getPedidoId() {
+        return pedido.getId();
     }
 
     public void setPedido(Pedido pedido) {

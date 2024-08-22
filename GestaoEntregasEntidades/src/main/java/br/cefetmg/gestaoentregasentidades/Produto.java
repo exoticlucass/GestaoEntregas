@@ -23,6 +23,9 @@ public class Produto {
     @JoinColumn(name = "id_itemPedido_itemPedido")
     private ItemPedido itemPedido;
 
+    public Produto() {
+    }
+
     public int getId() {
         return id;
     }
@@ -53,6 +56,11 @@ public class Produto {
 
     public void setItemPedido(ItemPedido itemPedido) {
         this.itemPedido = itemPedido;
+    }
+
+    public Produto(String nome, String localização) {
+        this.nome = nome;
+        this.localização = localização;
     }
 
 }

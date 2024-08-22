@@ -13,7 +13,10 @@ import javax.persistence.*;
  */
 @Entity
 public class Empresa {
-
+    private static final Random RANDOM = new Random();
+    public Empresa() {
+        this.id = RANDOM.nextInt(10000);
+    }
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
