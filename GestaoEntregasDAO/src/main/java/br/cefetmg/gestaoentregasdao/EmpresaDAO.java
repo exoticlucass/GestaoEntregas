@@ -21,7 +21,7 @@ public class EmpresaDAO {
                     "lucas",
                     "123456"
             );
-            String inserir = "INSERT INTO empresa (id_empresa, nome, CNPJ, CPF) VALUES (?, ?, ?, ?)";
+        String inserir = "INSERT INTO empresa (id_empresa, nome, CNPJ) VALUES (?, ?, ?)";
 
             // Create a prepared statement
             pstmt = conn.prepareStatement(inserir);
@@ -32,7 +32,6 @@ public class EmpresaDAO {
             pstmt.setInt(1, empresa.getId());
             pstmt.setString(2, empresa.getNome());
             pstmt.setString(3, empresa.getCNPJ());
-            pstmt.setString(4, empresa.getCPF());
 
             pstmt.executeUpdate();
 
