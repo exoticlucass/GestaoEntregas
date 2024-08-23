@@ -1,16 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package br.cefetmg.gestaoentregasentidades;
 
 import java.util.*;
 import javax.persistence.*;
 
-/**
- *
- * @author Master
- */
 @Entity
 public class Funcionario {
 
@@ -25,13 +17,16 @@ public class Funcionario {
     @Column(name = "telefone")
     private String telefone;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade
-            = CascadeType.PERSIST, mappedBy = "funcionario")
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST, mappedBy = "funcionario")
     private List<Perfil> perfil;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_empresa_empresa")
     private Empresa empresa;
+
+    public Funcionario() {
+        this.perfil = new ArrayList<Perfil>(); 
+    }
 
     public int getId() {
         return id;
@@ -69,8 +64,8 @@ public class Funcionario {
         return perfil;
     }
 
-    public void setPerfil(List<Perfil> perfil) {
-        this.perfil = perfil;
+    public void setPerfil(Perfil perfil) {
+        this.perfil.add(perfil);
     }
 
     public int getEmpresaId() {
@@ -80,5 +75,4 @@ public class Funcionario {
     public void setEmpresa(Empresa empresa) {
         this.empresa = empresa;
     }
-
 }
