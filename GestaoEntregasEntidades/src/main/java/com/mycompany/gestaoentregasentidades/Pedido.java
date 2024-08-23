@@ -2,7 +2,7 @@ package com.mycompany.gestaoentregasentidades;
 
 import java.util.*;
 import javax.persistence.*;
-
+import java.time.LocalDate;
 @Entity
 public class Pedido {
     private static final Random RANDOM = new Random();
@@ -14,7 +14,7 @@ public class Pedido {
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "data_pedido")
-    private java.util.Date data; // Use java.util.Date for JPA
+    private LocalDate data; // Use java.util.Date for JPA
 
     @Column(name = "valor_total")
     private double valorTotal;
@@ -39,8 +39,8 @@ public class Pedido {
     }
 
     // Constructor for creating new Pedido instances
-    public Pedido(java.util.Date data, double valorTotal, Cliente cliente) {
-        this.data = data;
+    public Pedido(double valorTotal, Cliente cliente) {
+        this.data = new LocalDate();
         this.valorTotal = valorTotal;
         this.cliente = cliente;
         this.status = Status.EM_PREPARACAO; // Default status if needed
