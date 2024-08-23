@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package br.cefetmg.gestaoentregasentidades;
 
 import java.util.*;
@@ -42,7 +38,14 @@ public class Perfil {
     public TipoPerfil getTipoPerfil() {
         return tipoPerfil;
     }
-
+    public void setTipoPerfilById(int id) {
+        if(id == 1)
+            this.tipoPerfil = TipoPerfil.ADMINISTRADOR;
+        else if(id == 2)
+            this.tipoPerfil = TipoPerfil.ATENDENTE;
+        else
+            this.tipoPerfil = TipoPerfil.ENTREGADOR;
+    }
     public void setTipoPerfil(TipoPerfil tipoPerfil) {
         this.tipoPerfil = tipoPerfil;
     }
