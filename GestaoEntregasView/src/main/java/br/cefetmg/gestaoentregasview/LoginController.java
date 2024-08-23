@@ -1,6 +1,6 @@
 package br.cefetmg.gestaoentregasview;
 
-import br.cefetmg.gestaoentregascontroller.LoginController;
+//import br.cefetmg.gestaoentregascontroller.LoginController;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -21,7 +21,7 @@ public class LoginController {
         String username = usernameField.getText();
         String password = passwordField.getText();
         
-        LoginController controle = new LoginController;
+        LoginController controle = new LoginController();
         controle.validarLogin(username, password);
     }
     
@@ -31,5 +31,9 @@ public class LoginController {
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
+    }
+
+    private void validarLogin(String username, String password) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }
