@@ -1,8 +1,7 @@
 
 package br.cefetmg.gestaoentregasdao;
 
-
-import  br.cefetmg.gestaoentregasentidades.Produto;
+import br.cefetmg.gestaoentregasentidades.Produto;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
