@@ -31,10 +31,14 @@ public class Cliente {
     @OneToMany(fetch = FetchType.EAGER, cascade
             = CascadeType.PERSIST, mappedBy = "cliente")
     private List<Pedido> pedido;
-    
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_empresa_empresa")
     private Empresa empresa;
+
+    public Cliente() {
+        this.id = RANDOM.nextInt(10000);
+    }
 
     public int getId() {
         return id;
@@ -118,5 +122,5 @@ public class Cliente {
         this.empresa = empresa;
         this.id = RANDOM.nextInt(10000);
     }
-    
+
 }

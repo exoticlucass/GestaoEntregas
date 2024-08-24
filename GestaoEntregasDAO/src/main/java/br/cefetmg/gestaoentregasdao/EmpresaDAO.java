@@ -66,7 +66,7 @@ public class EmpresaDAO {
         return empresas;
     }
 
-    public Empresa pesquisar(int id) {
+    public Empresa pesquisar(String nome) {
         Connection conn = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
@@ -81,11 +81,11 @@ public class EmpresaDAO {
             );
 
             // SQL para pesquisar a empresa pelo ID
-            String sql = "SELECT id_empresa, nome, CNPJ FROM empresa WHERE id_empresa = ?";
+            String sql = "SELECT id_empresa, nome, CNPJ FROM empresa WHERE nome = ?";
 
             // Cria o prepared statement
             pstmt = conn.prepareStatement(sql);
-            pstmt.setInt(1, id);
+            pstmt.setString(1, nome);
 
             // Executa a consulta
             rs = pstmt.executeQuery();

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<GridPane xmlns:fx="http://javafx.com/fxml"
+          fx:controller="br.cefetmg.gestaoentregasview.CadastroEntregador" alignment="center" hgap="10" vgap="10">
+    <!-- Labels and Inputs -->
+    <Label text="Nome: " GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+    <TextField fx:id="textFieldNome" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+    <Label text="Telefone: " GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+    <TextField fx:id="textFieldTelefone" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+    <Label text="Senha: " GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+    <TextField fx:id="textFieldSenha" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+    <Label text="Empresa:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+    <ComboBox fx:id="comboBoxProduto" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+    <!-- Buttons -->
+    <Button text="Salvar" onAction="#salvarPedido" GridPane.rowIndex="8" GridPane.columnIndex="1" />
+    <Button text="Cancelar" onAction="#onCancelar" GridPane.rowIndex="8" GridPane.columnIndex="2"
+    />
+
+</GridPane>
