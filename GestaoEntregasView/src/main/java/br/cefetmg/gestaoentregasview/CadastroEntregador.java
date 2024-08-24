@@ -1,6 +1,5 @@
 package br.cefetmg.gestaoentregasview;
 
-import br.cefetmg.gestaoentregascontroller.FuncionarioController;
 import br.cefetmg.gestaoentregasdao.EmpresaDAO;
 import br.cefetmg.gestaoentregasdao.FuncionarioDAO;
 import br.cefetmg.gestaoentregasdao.PerfilDAO;
@@ -18,7 +17,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
 
-public class CadastroAtendente {
+public class CadastroEntregador {
 
     @FXML
     private ComboBox<String> comboBoxProduto;
@@ -52,12 +51,14 @@ public class CadastroAtendente {
         Empresa empresaSelecionada = empresaDAO.pesquisar(nomeEmpresaSelecionada);
         funcionario.setEmpresa(empresaSelecionada);
         Random random = new Random();
-        perfil.setTipoPerfilById(1); // Defina o tipo de perfil conforme necessário
+        perfil.setTipoPerfilById(2); // Defina o tipo de perfil conforme necessário
         perfil.setId(random.nextInt(1000)); // ID aleatório para o perfil
         funcionario.setPerfil(perfil);
         perfil.setFuncionario(funcionario);
-        FuncionarioController funcionarioController = new FuncionarioController();
-        funcionarioController.inserir(funcionario, perfil);
+        PerfilDAO perfilDAO = new PerfilDAO();
+        perfilDAO.inserir(perfil);
+        FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
+        funcionarioDAO.inserir(funcionario);
     }
 
     @FXML

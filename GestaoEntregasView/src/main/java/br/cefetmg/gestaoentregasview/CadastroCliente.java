@@ -1,9 +1,10 @@
 package br.cefetmg.gestaoentregasview;
 
-import br.cefetmg.gestaoentregascontroller.FuncionarioController;
+import br.cefetmg.gestaoentregasdao.ClienteDAO;
 import br.cefetmg.gestaoentregasdao.EmpresaDAO;
 import br.cefetmg.gestaoentregasdao.FuncionarioDAO;
 import br.cefetmg.gestaoentregasdao.PerfilDAO;
+import br.cefetmg.gestaoentregasentidades.Cliente;
 import br.cefetmg.gestaoentregasentidades.Empresa;
 import br.cefetmg.gestaoentregasentidades.Funcionario;
 import br.cefetmg.gestaoentregasentidades.Perfil;
@@ -18,7 +19,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
 
-public class CadastroAtendente {
+public class CadastroCliente {
 
     @FXML
     private ComboBox<String> comboBoxProduto;
@@ -27,7 +28,11 @@ public class CadastroAtendente {
     @FXML
     private TextField textFieldTelefone;
     @FXML
-    private TextField textFieldSenha;
+    private TextField textFieldLogradouro;
+    @FXML
+    private TextField textFieldBairro;
+    @FXML
+    private TextField textFieldCPF;
 
     @FXML
     private void initialize() {
@@ -42,22 +47,14 @@ public class CadastroAtendente {
 
     @FXML
     public void salvarPedido() {
-        Funcionario funcionario = new Funcionario();
-        funcionario.setNome(textFieldNome.getText());
-        funcionario.setTelefone(textFieldTelefone.getText());
-        funcionario.setSenha(textFieldSenha.getText());
-        Perfil perfil = new Perfil();
-        String nomeEmpresaSelecionada = comboBoxProduto.getSelectionModel().getSelectedItem();
-        EmpresaDAO empresaDAO = new EmpresaDAO();
-        Empresa empresaSelecionada = empresaDAO.pesquisar(nomeEmpresaSelecionada);
-        funcionario.setEmpresa(empresaSelecionada);
-        Random random = new Random();
-        perfil.setTipoPerfilById(1); // Defina o tipo de perfil conforme necessário
-        perfil.setId(random.nextInt(1000)); // ID aleatório para o perfil
-        funcionario.setPerfil(perfil);
-        perfil.setFuncionario(funcionario);
-        FuncionarioController funcionarioController = new FuncionarioController();
-        funcionarioController.inserir(funcionario, perfil);
+        Cliente cliente = new Cliente();
+        cliente.setNome(textFieldNome.getText());
+        cliente.setTelefone(textFieldTelefone.getText());
+        cliente.setLogradouro(textFieldLogradouro.getText());
+        cliente.setBairro(textFieldBairro.getText());
+        cliente.setCPF(textFieldCPF.getText());
+        ClienteDAO clienteDAO = new ClienteDAO();
+        clienteDAO.inserir(cliente);
     }
 
     @FXML
