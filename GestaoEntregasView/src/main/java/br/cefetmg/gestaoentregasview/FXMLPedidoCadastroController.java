@@ -47,27 +47,28 @@ public class FXMLPedidoCadastroController {
 
     @FXML
     private void salvarPedido() {
-        if (verificarCamposPreenchidos()) {
-            Produto produto = comboBoxProduto.getValue();
-            int quantidade = Integer.parseInt(textFieldQuantidade.getText());
-            double valorUnitario = Double.parseDouble(textFieldValorUnitario.getText());
-            double valorTotal = Double.parseDouble(textFieldValorTotal.getText());
-            String marca = textFieldMarca.getText();
-            String formaPagamento = textFieldFormaPagamento.getText();
-            String endereco = textFieldEndereco.getText();
-            String observacoes = textAreaObservacoes.getText();
+        try {
+            if (verificarCamposPreenchidos()) {
+                Produto produto = comboBoxProduto.getValue();
+                int quantidade = Integer.parseInt(textFieldQuantidade.getText());
+                double valorUnitario = Double.parseDouble(textFieldValorUnitario.getText());
+                double valorTotal = Double.parseDouble(textFieldValorTotal.getText());
+                String marca = textFieldMarca.getText();
+                String formaPagamento = textFieldFormaPagamento.getText();
+                String endereco = textFieldEndereco.getText();
+                String observacoes = textAreaObservacoes.getText();
 
-            // Envia os dados para o PedidoController
-            boolean sucesso = pedidoController.salvarPedido(produto, quantidade, valorUnitario, valorTotal, marca, formaPagamento, endereco, observacoes);
+                // Envia os dados para o PedidoController
+                boolean sucesso = pedidoController.salvarPedido(produto, quantidade, valorUnitario, valorTotal, marca, formaPagamento, endereco, observacoes);
 
-            if (sucesso) {
                 exibirAlerta("Sucesso", "Pedido salvo com sucesso!", AlertType.INFORMATION);
                 limparCampos();
             } else {
-                exibirAlerta("Erro", "Erro ao salvar o pedido. Tente novamente.", AlertType.ERROR);
+                exibirAlerta("Campos Incompletos", "Preencha todos os campos obrigatórios.", AlertType.WARNING);
             }
-        } else {
-            exibirAlerta("Campos Incompletos", "Preencha todos os campos obrigatórios.", AlertType.WARNING);
+        }
+        catch(Exception e){
+            exibirAlerta("Erro", "Erro ao salvar o pedido. Tente novamente.", AlertType.ERROR);
         }
     }
 
@@ -112,7 +113,7 @@ public class FXMLPedidoCadastroController {
         p1.setNome("produto1");
         p1.setLocalização("barreiro");
         p1.setItemPedido(new ItemPedido());
-        
+
         List<Produto> produtos = new ArrayList<>();
         produtos.add(p1);
         comboBoxProduto.setItems(FXCollections.observableArrayList(produtos));

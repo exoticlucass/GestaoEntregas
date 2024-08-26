@@ -4,7 +4,7 @@ import br.cefetmg.gestaoentregascontroller.FuncionarioController;
 import br.cefetmg.gestaoentregasdao.EmpresaDAO;
 import br.cefetmg.gestaoentregasdao.FuncionarioDAO;
 import br.cefetmg.gestaoentregasdao.PerfilDAO;
-import br.cefetmg.gestaoentregasentidades.Empresa;
+import br.cefetmg.gestaoentregasentidades.Empresa; 
 import br.cefetmg.gestaoentregasentidades.Funcionario;
 import br.cefetmg.gestaoentregasentidades.Perfil;
 import javafx.collections.FXCollections;

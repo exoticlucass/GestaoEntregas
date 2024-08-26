@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
@@ -5,13 +6,13 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" spacing="10" alignment="CENTER" fx:controller="br.cefetmg.gestaoentregasview.FXMLLoginController">
-    <Label text="Login" style="-fx-font-size: 20px;"/>
-    <VBox spacing="10" alignment="CENTER">
-        <Label text="Usuário:"/>
-        <TextField fx:id="usernameField" promptText="Digite seu usuário"/>
-        <Label text="Senha:"/>
-        <PasswordField fx:id="passwordField" promptText="Digite sua senha"/>
+<VBox alignment="CENTER" prefHeight="384.0" prefWidth="494.0" spacing="10" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.cefetmg.gestaoentregasview.FXMLLoginController">
+    <Label style="-fx-font-size: 20px;" text="Login" />
+    <VBox alignment="CENTER" spacing="10">
+        <Label text="Telefone:" />
+        <TextField fx:id="usernameField" prefHeight="25.0" prefWidth="349.0" promptText="Digite seu usuário" />
+        <Label text="Senha:" />
+        <PasswordField fx:id="passwordField" promptText="Digite sua senha" />
     </VBox>
-    <Button text="Entrar" fx:id="loginButton" onAction="#handleLogin"/>
+    <Button fx:id="loginButton" onAction="#handleLogin" text="Entrar" />
 </VBox>
