@@ -1,8 +1,7 @@
 package br.cefetmg.gestaoentregasview;
 
-import br.cefetmg.gestaoentregasdao.EmpresaDAO;
-import br.cefetmg.gestaoentregasdao.FuncionarioDAO;
-import br.cefetmg.gestaoentregasdao.PerfilDAO;
+import br.cefetmg.gestaoentregascontroller.EmpresaController;
+import br.cefetmg.gestaoentregascontroller.FuncionarioController;
 import br.cefetmg.gestaoentregasentidades.Empresa;
 import br.cefetmg.gestaoentregasentidades.Funcionario;
 import br.cefetmg.gestaoentregasentidades.Perfil;
@@ -31,8 +30,8 @@ public class CadastroEntregador {
     @FXML
     private void initialize() {
         // Carregar a lista de empresas do banco de dados
-        EmpresaDAO empresaDAO = new EmpresaDAO();
-        List<Empresa> empresas = empresaDAO.listarTodas();
+        EmpresaController empresaController = new EmpresaController();
+        List<Empresa> empresas = empresaController.listarTodas();
 
         // Adicionar os nomes das empresas ao ComboBox
         comboBoxProduto.setItems(FXCollections.observableArrayList(empresas.stream().map(Empresa::getNome).collect(Collectors.toList())
@@ -40,25 +39,23 @@ public class CadastroEntregador {
     }
 
     @FXML
-    public void salvarPedido() {
+    public void salvar() {
         Funcionario funcionario = new Funcionario();
         funcionario.setNome(textFieldNome.getText());
         funcionario.setTelefone(textFieldTelefone.getText());
         funcionario.setSenha(textFieldSenha.getText());
         Perfil perfil = new Perfil();
         String nomeEmpresaSelecionada = comboBoxProduto.getSelectionModel().getSelectedItem();
-        EmpresaDAO empresaDAO = new EmpresaDAO();
-        Empresa empresaSelecionada = empresaDAO.pesquisar(nomeEmpresaSelecionada);
+        EmpresaController empresaController = new EmpresaController();
+        Empresa empresaSelecionada = empresaController.pesquisar(nomeEmpresaSelecionada);
         funcionario.setEmpresa(empresaSelecionada);
         Random random = new Random();
-        perfil.setTipoPerfilById(2); // Defina o tipo de perfil conforme necessário
-        perfil.setId(random.nextInt(1000)); // ID aleatório para o perfil
+        perfil.setTipoPerfilById(2); 
+        perfil.setId(random.nextInt(1000));
         funcionario.setPerfil(perfil);
         perfil.setFuncionario(funcionario);
-        PerfilDAO perfilDAO = new PerfilDAO();
-        perfilDAO.inserir(perfil);
-        FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
-        funcionarioDAO.inserir(funcionario);
+        FuncionarioController funcionarioController = new FuncionarioController();
+        funcionarioController.inserir(funcionario, perfil);
     }
 
     @FXML

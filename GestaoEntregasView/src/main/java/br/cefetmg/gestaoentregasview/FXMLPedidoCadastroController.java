@@ -15,7 +15,7 @@ import javafx.scene.control.Alert.AlertType;
 
 public class FXMLPedidoCadastroController {
 
-    @FXML
+  /*  @FXML
     private ComboBox<Produto> comboBoxProduto;
 
     @FXML
@@ -121,5 +121,5 @@ public class FXMLPedidoCadastroController {
             public void onScreenChanged(String newString, Object viewData) {
             }
         });
-    }
+    } */
 }

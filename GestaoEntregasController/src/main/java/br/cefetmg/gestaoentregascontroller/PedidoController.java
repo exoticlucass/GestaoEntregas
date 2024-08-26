@@ -4,8 +4,8 @@
  */
 package br.cefetmg.gestaoentregascontroller;
 
+import br.cefetmg.gestaoentregasdao.PedidoDAO;
 import br.cefetmg.gestaoentregasentidades.*;
-
 
 /**
  *
@@ -13,11 +13,13 @@ import br.cefetmg.gestaoentregasentidades.*;
  */
 public class PedidoController {
 
-    public boolean salvarPedido(Produto produto, int quantidade, double valorUnitario, double valorTotal, String marca, String formaPagamento, String endereco, String observacoes){
-        
-        
-        
-        
-        return true;
+    public PedidoDAO dao;
+
+    public PedidoController() {
+        dao = new PedidoDAO();
+    }
+
+    public void inserir(Pedido pedido) {
+        dao.inserir(pedido);
     }
 }

@@ -17,7 +17,7 @@
     <Label text="Empresa:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
     <ComboBox fx:id="comboBoxProduto" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
     <!-- Buttons -->
-    <Button text="Salvar" onAction="#salvarPedido" GridPane.rowIndex="8" GridPane.columnIndex="1" />
+    <Button text="Salvar" onAction="#salvar" GridPane.rowIndex="8" GridPane.columnIndex="1" />
     <Button text="Cancelar" onAction="#onCancelar" GridPane.rowIndex="8" GridPane.columnIndex="2"
     />
 

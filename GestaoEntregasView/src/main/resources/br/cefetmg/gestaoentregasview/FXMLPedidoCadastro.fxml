@@ -28,7 +28,7 @@
     <Label text="Observações:" GridPane.columnIndex="0" GridPane.rowIndex="8" />
     <TextArea fx:id="textAreaObservacoes" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="8" />
     <!-- Buttons -->
-    <Button onAction="#salvarPedido" text="Salvar" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+    <Button onAction="#salvar" text="Salvar" GridPane.columnIndex="1" GridPane.rowIndex="9" />
     <Button onAction="#onCancelar" text="Cancelar" GridPane.columnIndex="2" GridPane.rowIndex="9" />
    <columnConstraints>
       <ColumnConstraints />

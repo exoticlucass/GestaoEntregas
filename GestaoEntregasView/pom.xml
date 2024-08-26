@@ -29,6 +29,12 @@
             <groupId>br.cefetmg</groupId>
             <artifactId>GestaoEntregasController</artifactId>
             <version>1.0-SNAPSHOT</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>br.cefetmg</groupId>
+                    <artifactId>GestaoEntregasDAO</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.openjfx</groupId>
