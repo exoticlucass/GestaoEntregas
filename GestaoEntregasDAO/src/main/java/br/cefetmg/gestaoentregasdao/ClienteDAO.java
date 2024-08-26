@@ -1,4 +1,3 @@
-
 package br.cefetmg.gestaoentregasdao;
 
 import br.cefetmg.gestaoentregasentidades.Cliente;
@@ -6,47 +5,53 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 public class ClienteDAO {
-    
-    
-    public void inserir(Cliente cliente) {
-        Connection conn = null;
-        PreparedStatement pstmt = null;
 
-        try {
-            // Establish the connection
-            conn = DriverManager.getConnection(
-                "jdbc:postgresql://localhost:5432/GestaoEntregas", 
-                "lucas", 
-                "123456"
-            );
-            String inserir = "INSERT INTO cliente (id_cliente, nome, logradouro, bairro, telefone, CNPJ_cliente, CPF_cliente, id_empresa_empresa) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    private EntityManagerFactory emf;
+    private EntityManager em;
 
-            // Create a prepared statement
-            pstmt = conn.prepareStatement(inserir);
-            
-            // Set the parameters
-            pstmt.setInt(1, cliente.getId());
-            pstmt.setString(2, cliente.getNome());
-            pstmt.setString(3, cliente.getLogradouro());
-            pstmt.setString(4, cliente.getBairro());
-            pstmt.setString(5, cliente.getTelefone());
-            pstmt.setString(6, cliente.getCNPJ());
-            pstmt.setString(7, cliente.getCPF());
-            pstmt.setInt(8, cliente.getEmpresaId());  // Adjust if needed based on your Empresa entity
-            pstmt.executeUpdate();
-            
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            // Close resources
-            try {
-                if (pstmt != null) pstmt.close();
-                if (conn != null) conn.close();
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-            }
+    public ClienteDAO() {
+        emf = Persistence.createEntityManagerFactory("br.cefetmg_gestaoentregasdao_jar_0.1.0-SNAPSHOTPU");
+        em = emf.createEntityManager();
+    }
+
+    public void create(Cliente cliente) {
+        em.getTransaction().begin();
+        em.persist(cliente);
+        em.getTransaction().commit();
+    }
+
+    public Cliente read(int id) {
+        return em.find(Cliente.class, id);
+    }
+
+    public void update(Cliente cliente) {
+        em.getTransaction().begin();
+        em.merge(cliente);
+        em.getTransaction().commit();
+    }
+
+    public void delete(int id) {
+        em.getTransaction().begin();
+        Cliente cliente = em.find(Cliente.class, id);
+        if (cliente != null) {
+            em.remove(cliente);
         }
+        em.getTransaction().commit();
+    }
+
+    public List<Cliente> listAll() {
+        return em.createQuery("FROM Pedido", Cliente.class).getResultList();
+    }
+
+    public Cliente selecionar(int id) {
+        em.getTransaction().begin();
+        Cliente x = em.find(Cliente.class, id);
+        return x;
     }
 }

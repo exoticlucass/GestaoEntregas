@@ -26,7 +26,7 @@ public class PedidoController {
         else if(pedido.getStatus() == Pedido.Status.ENTREGA){
             pedido.setStatus(Pedido.Status.ENTREGUE);
         }
-        pedidoDAO.modificar(pedido);
+        pedidoDAO.update(pedido);
     }
     
     
@@ -52,7 +52,7 @@ public class PedidoController {
         listItem.add(itemPedido);
         pedido.setItemPedido(listItem);
 
-        pedidoDAO.inserir(pedido);
+        pedidoDAO.create(pedido);
         return true;
     }
     

@@ -8,41 +8,53 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 public class ItemPedidoDAO {
 
-    public void inserir(ItemPedido itemPedido) {
-        java.sql.Connection conn = null;
-        PreparedStatement pstmt = null;
-        try {
-            // Establish the connection
-            conn = DriverManager.getConnection(
-                    "jdbc:postgresql://localhost:5432/GestaoEntregas",
-                    "lucas",
-                    "123456"
-            );
-            String inserir = "INSERT INTO ItemPedido (id_item, valor_unitario, quantidade_item, id_pedido_pedido) VALUES (?, ?, ?, ?, ?)";
-            pstmt = conn.prepareStatement(inserir);
-            pstmt.setInt(1, itemPedido.getId());
-            pstmt.setInt(2, itemPedido.getQuantidade()); // Current date and time
-            pstmt.setDouble(3, itemPedido.getValorUnitario());
-            pstmt.setInt(4, itemPedido.getPedidoId());
-            pstmt.executeUpdate();
+    private EntityManagerFactory emf;
+    private EntityManager em;
 
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            // Close resources
-            try {
-                if (pstmt != null) {
-                    pstmt.close();
-                }
-                if (conn != null) {
-                    conn.close();
-                }
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-            }
+    public ItemPedidoDAO() {
+        emf = Persistence.createEntityManagerFactory("br.cefetmg_gestaoentregasdao_jar_0.1.0-SNAPSHOTPU");
+        em = emf.createEntityManager();
+    }
+
+    public void create(ItemPedido itemPedido) {
+        em.getTransaction().begin();
+        em.persist(itemPedido);
+        em.getTransaction().commit();
+    }
+
+    public ItemPedido read(int id) {
+        return em.find(ItemPedido.class, id);
+    }
+
+    public void update(ItemPedido itemPedido) {
+        em.getTransaction().begin();
+        em.merge(itemPedido);
+        em.getTransaction().commit();
+    }
+
+    public void delete(int id) {
+        em.getTransaction().begin();
+        ItemPedido itemPedido = em.find(ItemPedido.class, id);
+        if (itemPedido != null) {
+            em.remove(itemPedido);
         }
+        em.getTransaction().commit();
+    }
+
+    public List<ItemPedido> listAll() {
+        return em.createQuery("FROM ItemPedido", ItemPedido.class).getResultList();
+    }
+
+    public ItemPedido selecionar(int id) {
+        em.getTransaction().begin();
+        ItemPedido x = em.find(ItemPedido.class, id);
+        return x;
     }
 }
