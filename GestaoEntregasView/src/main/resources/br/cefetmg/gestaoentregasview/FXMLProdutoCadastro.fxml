@@ -36,9 +36,9 @@
             <Insets left="20.0" />
          </GridPane.margin>
       </Label>
-      <TextField fx:id="textFieldQuantidade" GridPane.columnIndex="1" />
-      <TextField fx:id="textFieldQuantidade1" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-      <TextField fx:id="textFieldQuantidade2" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+      <TextField fx:id="textFieldNome" GridPane.columnIndex="1" />
+      <TextField fx:id="textFieldLocalizacao" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+      <TextField fx:id="textFieldValorUnitario" GridPane.columnIndex="1" GridPane.rowIndex="2" />
       <Button text="Salvar" GridPane.columnIndex="1" GridPane.rowIndex="3" />
       <Button text="Cancelar" GridPane.columnIndex="2" GridPane.rowIndex="3" />
    </children>

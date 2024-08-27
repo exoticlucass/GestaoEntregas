@@ -18,43 +18,32 @@ import java.util.List;
 public class PedidoController {
 
     PedidoDAO pedidoDAO = new PedidoDAO();
-    
-    public void estadoPedido(Pedido pedido){
-        if(pedido.getStatus() == Pedido.Status.EM_PREPARACAO){
+
+    public void estadoPedido(Pedido pedido) {
+        if (pedido.getStatus() == Pedido.Status.EM_PREPARACAO) {
             pedido.setStatus(Pedido.Status.ENTREGA);
-        }
-        else if(pedido.getStatus() == Pedido.Status.ENTREGA){
+        } else if (pedido.getStatus() == Pedido.Status.ENTREGA) {
             pedido.setStatus(Pedido.Status.ENTREGUE);
         }
         pedidoDAO.update(pedido);
     }
-    
-    
-    public boolean salvarPedido(Produto produto, int quantidade, double valorUnitario, double valorTotal, String marca, String formaPagamento, String endereco, String observacoes) {
 
-        Pedido pedido = new Pedido();
-        ItemPedido itemPedido = new ItemPedido();
-        pedido.setStatus(Pedido.Status.EM_PREPARACAO);
-        pedido.setValorTotal(valorTotal);
-
-        java.util.Date date = new java.util.Date();   
-        pedido.setData(date);
-
-        List<Produto> listproduto = new ArrayList<>();
-        listproduto.add(produto);
-
-        itemPedido.setProduto(listproduto);
-        itemPedido.setQuantidade(quantidade);
-        itemPedido.setValorUnitario(valorUnitario);
-        itemPedido.setPedido(pedido);
-
-        List<ItemPedido> listItem = new ArrayList<>();
-        listItem.add(itemPedido);
-        pedido.setItemPedido(listItem);
-
+    public void salvarPedido(Pedido pedido) {
         pedidoDAO.create(pedido);
-        return true;
     }
-    
-    
+
+    public List<Pedido> listarPedidos() {
+        return pedidoDAO.listAll();
+    }
+
+    public List<Pedido> listaPedidosStatus(Pedido.Status status) {
+        List<Pedido> lista = listarPedidos();
+        List<Pedido> listaStatus = new ArrayList<>();
+        for (int i = 0; i < lista.size(); i++) {
+            if (lista.get(i).getStatus() == status) {
+                listaStatus.add(lista.get(i));
+            }
+        }
+        return listaStatus;
+    }
 }

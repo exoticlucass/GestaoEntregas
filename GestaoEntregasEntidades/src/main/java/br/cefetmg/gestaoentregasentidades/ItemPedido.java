@@ -23,10 +23,10 @@ public class ItemPedido {
     private Pedido pedido;
     
     
-    // Talvez tenha que mudar nome
-    @OneToMany(fetch = FetchType.EAGER, cascade
-            = CascadeType.PERSIST, mappedBy = "itemPedido")
-    private List<Produto> produto;
+    // Conferir se ta certo no banco de dados
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "id_produto_produto")
+    private Produto produto;
 
     public int getId() {
         return id;
@@ -60,11 +60,11 @@ public class ItemPedido {
         this.pedido = pedido;
     }
 
-    public List<Produto> getProduto() {
+    public Produto getProduto() {
         return produto;
     }
 
-    public void setProduto(List<Produto> produto) {
+    public void setProduto(Produto produto) {
         this.produto = produto;
     }
     

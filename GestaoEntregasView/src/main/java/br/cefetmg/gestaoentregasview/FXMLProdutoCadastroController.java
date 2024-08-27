@@ -14,4 +14,71 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 
 public class FXMLProdutoCadastroController {
+
+    @FXML
+    private TextField textFieldNome;
+
+    @FXML
+    private TextField textFieldLocalizacao;
+
+    @FXML
+    private TextField textFieldValorUnitario;    
+    
+    private ProdutoController produtoController;
+
+    public FXMLProdutoCadastroController() {
+        this.produtoController = new ProdutoController(); // Inicializa o PedidoController
+    }
+
+    @FXML
+    private void salvarProduto() {
+        try {
+            if (verificarCamposPreenchidos()) {
+                double valorUnitario = Double.parseDouble(textFieldValorUnitario.getText());
+                String nome = textFieldNome.getText();
+                String localizacao = textFieldLocalizacao.getText();
+                
+                Produto produto = new Produto();
+                produto.setNome(nome);
+                produto.setLocalização(localizacao);
+                // adicionar valorunitario
+                
+                produtoController.salvarProduto(produto);
+
+                exibirAlerta("Sucesso", "Produto salvo com sucesso!", AlertType.INFORMATION);
+                limparCampos();
+            } else {
+                exibirAlerta("Campos Incompletos", "Preencha todos os campos obrigatórios.", AlertType.WARNING);
+            }
+        }
+        catch(Exception e){
+            exibirAlerta("Erro", "Erro ao salvar o produto. Tente novamente.", AlertType.ERROR);
+        }
+    }
+
+    @FXML
+    private void onCancelar() {
+        limparCampos();
+    }
+
+    private boolean verificarCamposPreenchidos() {
+        return !textFieldNome.getText().isEmpty()
+                && !textFieldValorUnitario.getText().isEmpty()
+                && !textFieldLocalizacao.getText().isEmpty();
+    }
+
+    private void limparCampos() {
+        textFieldValorUnitario.clear();
+        textFieldNome.clear();
+        textFieldLocalizacao.clear();
+    }
+
+    private void exibirAlerta(String titulo, String mensagem, AlertType tipo) {
+        Alert alerta = new Alert(tipo);
+        alerta.setTitle(titulo);
+        alerta.setHeaderText(null);
+        alerta.setContentText(mensagem);
+        alerta.showAndWait();
+    }
+    
 }

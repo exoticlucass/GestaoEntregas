@@ -56,9 +56,9 @@ public class CadastroEntregador {
         funcionario.setPerfil(perfil);
         perfil.setFuncionario(funcionario);
         PerfilDAO perfilDAO = new PerfilDAO();
-        perfilDAO.inserir(perfil);
+        // perfilDAO.inserir(perfil);
         FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
-        funcionarioDAO.inserir(funcionario);
+        // funcionarioDAO.inserir(funcionario);
     }
 
     @FXML

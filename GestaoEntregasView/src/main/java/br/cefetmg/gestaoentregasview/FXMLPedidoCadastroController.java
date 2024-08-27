@@ -3,6 +3,7 @@ package br.cefetmg.gestaoentregasview;
 import br.cefetmg.gestaoentregascontroller.PedidoController;
 import br.cefetmg.gestaoentregasentidades.*;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -58,16 +59,31 @@ public class FXMLPedidoCadastroController {
                 String endereco = textFieldEndereco.getText();
                 String observacoes = textAreaObservacoes.getText();
 
+                ItemPedido itemPedido = new ItemPedido();
+
+                itemPedido.setProduto(produto);
+                itemPedido.setQuantidade(quantidade);
+                itemPedido.setValorUnitario(valorUnitario);
+
+                Pedido pedido = new Pedido();
+                // pedido.setCliente(cliente);
+                Date dataAtual = new Date();
+                pedido.setData(dataAtual);
+                List<ItemPedido> listaitem = new ArrayList<>();
+                listaitem.add(itemPedido);
+                pedido.setItemPedido(listaitem);
+                pedido.setStatus(Pedido.Status.EM_PREPARACAO);
+                pedido.setValorTotal(valorTotal);
+
                 // Envia os dados para o PedidoController
-                boolean sucesso = pedidoController.salvarPedido(produto, quantidade, valorUnitario, valorTotal, marca, formaPagamento, endereco, observacoes);
+                pedidoController.salvarPedido(pedido);
 
                 exibirAlerta("Sucesso", "Pedido salvo com sucesso!", AlertType.INFORMATION);
                 limparCampos();
             } else {
                 exibirAlerta("Campos Incompletos", "Preencha todos os campos obrigatórios.", AlertType.WARNING);
             }
-        }
-        catch(Exception e){
+        } catch (Exception e) {
             exibirAlerta("Erro", "Erro ao salvar o pedido. Tente novamente.", AlertType.ERROR);
         }
     }

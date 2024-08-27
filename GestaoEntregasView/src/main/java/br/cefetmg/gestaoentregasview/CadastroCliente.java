@@ -54,7 +54,7 @@ public class CadastroCliente {
         cliente.setBairro(textFieldBairro.getText());
         cliente.setCPF(textFieldCPF.getText());
         ClienteDAO clienteDAO = new ClienteDAO();
-        clienteDAO.inserir(cliente);
+        // clienteDAO.inserir(cliente);
     }
 
     @FXML

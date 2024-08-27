@@ -26,16 +26,12 @@ public class Produto {
     public Produto() {
     }
 
-    
-    
     public Produto(int id, String nome, String localização, ItemPedido itemPedido) {
         this.id = id;
         this.nome = nome;
         this.localização = localização;
         this.itemPedido = itemPedido;
     }
-
-    
 
     public int getId() {
         return id;
@@ -73,8 +69,9 @@ public class Produto {
         this.nome = nome;
         this.localização = localização;
     }
+
     @Override
     public String toString() {
-        return this.nome; 
+        return this.nome;
     }
 }
