@@ -21,9 +21,6 @@ public class Funcionario {
     @Column(name = "porcentagem_comissao_entregador")
     private double porcentagemComissaoEntregador;
 
-    @OneToOne(mappedBy = "Perfil")
-    private Perfil perfil;
-
     @OneToMany(fetch = FetchType.EAGER, cascade
             = CascadeType.PERSIST, mappedBy = "funcionario")
     private List<Pedido> pedido;
@@ -63,13 +60,13 @@ public class Funcionario {
         this.telefone = telefone;
     }
 
-    public Perfil getPerfil() {
-        return perfil;
-    }
-
-    public void setPerfil(Perfil perfil) {
-        this.perfil = perfil;
-    }
+//    public Perfil getPerfil() {
+//        return perfil;
+//    }
+//
+//    public void setPerfil(Perfil perfil) {
+//        this.perfil = perfil;
+//    }
 
     public String getCPF() {
         return CPF;

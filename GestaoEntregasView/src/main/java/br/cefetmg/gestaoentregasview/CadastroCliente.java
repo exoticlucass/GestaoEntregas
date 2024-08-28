@@ -1,11 +1,11 @@
 package br.cefetmg.gestaoentregasview;
 
 import br.cefetmg.gestaoentregasdao.ClienteDAO;
-import br.cefetmg.gestaoentregasdao.EmpresaDAO;
+
 import br.cefetmg.gestaoentregasdao.FuncionarioDAO;
 import br.cefetmg.gestaoentregasdao.PerfilDAO;
 import br.cefetmg.gestaoentregasentidades.Cliente;
-import br.cefetmg.gestaoentregasentidades.Empresa;
+
 import br.cefetmg.gestaoentregasentidades.Funcionario;
 import br.cefetmg.gestaoentregasentidades.Perfil;
 import javafx.collections.FXCollections;
@@ -36,13 +36,13 @@ public class CadastroCliente {
 
     @FXML
     private void initialize() {
-        // Carregar a lista de empresas do banco de dados
-        EmpresaDAO empresaDAO = new EmpresaDAO();
-        List<Empresa> empresas = empresaDAO.listarTodas();
-
-        // Adicionar os nomes das empresas ao ComboBox
-        comboBoxProduto.setItems(FXCollections.observableArrayList(empresas.stream().map(Empresa::getNome).collect(Collectors.toList())
-        ));
+//        // Carregar a lista de empresas do banco de dados
+//        EmpresaDAO empresaDAO = new EmpresaDAO();
+//        List<Empresa> empresas = empresaDAO.listarTodas();
+//
+//        // Adicionar os nomes das empresas ao ComboBox
+////        comboBoxProduto.setItems(FXCollections.observableArrayList(empresas.stream().map(Empresa::getNome).collect(Collectors.toList())
+//        ));
     }
 
     @FXML

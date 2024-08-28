@@ -3,7 +3,6 @@
   <persistence-unit name="br.cefetmg_GestaoEntregasDAO_jar_1.0-SNAPSHOTPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>br.cefetmg.gestaoentregasentidades.Cliente</class>
-    <class>br.cefetmg.gestaoentregasentidades.Empresa</class>
     <class>br.cefetmg.gestaoentregasentidades.Funcionario</class>
     <class>br.cefetmg.gestaoentregasentidades.ItemPedido</class>
     <class>br.cefetmg.gestaoentregasentidades.Pedido</class>
@@ -13,7 +12,7 @@
       <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/postgres"/>
       <property name="javax.persistence.jdbc.user" value="postgres"/>
       <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
-      <property name="javax.persistence.jdbc.password" value=""/>
+      <property name="javax.persistence.jdbc.password" value="123456"/>
       <property name="javax.persistence.schema-generation.database.action" value="create"/>
     </properties>
   </persistence-unit>

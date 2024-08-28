@@ -1,7 +1,7 @@
 package br.cefetmg.gestaoentregasview;
 
 import br.cefetmg.gestaoentregascontroller.FuncionarioController;
-import br.cefetmg.gestaoentregasentidades.Empresa;
+
 import br.cefetmg.gestaoentregasentidades.Funcionario;
 import br.cefetmg.gestaoentregasentidades.Perfil;
 import javafx.fxml.FXML;
