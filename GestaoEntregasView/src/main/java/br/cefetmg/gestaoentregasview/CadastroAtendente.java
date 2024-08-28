@@ -1,22 +1,16 @@
 package br.cefetmg.gestaoentregasview;
 
 import br.cefetmg.gestaoentregascontroller.FuncionarioController;
-import br.cefetmg.gestaoentregasdao.EmpresaDAO;
-import br.cefetmg.gestaoentregasdao.FuncionarioDAO;
-import br.cefetmg.gestaoentregasdao.PerfilDAO;
-import br.cefetmg.gestaoentregasentidades.Empresa; 
+import br.cefetmg.gestaoentregasentidades.Empresa;
 import br.cefetmg.gestaoentregasentidades.Funcionario;
 import br.cefetmg.gestaoentregasentidades.Perfil;
-import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 
-import java.util.List;
 import java.util.Random;
-import java.util.stream.Collectors;
 
 public class CadastroAtendente {
 
@@ -31,37 +25,58 @@ public class CadastroAtendente {
 
     @FXML
     private void initialize() {
-        // Carregar a lista de empresas do banco de dados
-        EmpresaDAO empresaDAO = new EmpresaDAO();
-        List<Empresa> empresas = empresaDAO.listarTodas();
-
-        // Adicionar os nomes das empresas ao ComboBox
-        comboBoxProduto.setItems(FXCollections.observableArrayList(empresas.stream().map(Empresa::getNome).collect(Collectors.toList())
-        ));
     }
 
     @FXML
     public void salvarPedido() {
-        Funcionario funcionario = new Funcionario();
-        funcionario.setNome(textFieldNome.getText());
-        funcionario.setTelefone(textFieldTelefone.getText());
-        funcionario.setSenha(textFieldSenha.getText());
-        Perfil perfil = new Perfil();
+        // Validação dos campos
+        String nome = textFieldNome.getText();
+        String telefone = textFieldTelefone.getText();
+        String senha = textFieldSenha.getText();
         String nomeEmpresaSelecionada = comboBoxProduto.getSelectionModel().getSelectedItem();
-        EmpresaDAO empresaDAO = new EmpresaDAO();
-        Empresa empresaSelecionada = empresaDAO.pesquisar(nomeEmpresaSelecionada);
-        funcionario.setEmpresa(empresaSelecionada);
-        Random random = new Random();
-        perfil.setTipoPerfilById(1); // Defina o tipo de perfil conforme necessário
-        perfil.setId(random.nextInt(1000)); // ID aleatório para o perfil
-        funcionario.setPerfil(perfil);
-        perfil.setFuncionario(funcionario);
-        FuncionarioController funcionarioController = new FuncionarioController();
-        funcionarioController.inserir(funcionario, perfil);
+
+        if (nome.isEmpty() || telefone.isEmpty() || senha.isEmpty() || nomeEmpresaSelecionada == null) {
+            showAlert(AlertType.WARNING, "Campos incompletos", "Por favor, preencha todos os campos e selecione uma empresa.");
+            return;
+        }
+
+        try {
+            Funcionario funcionario = new Funcionario();
+            funcionario.setNome(nome);
+            funcionario.setTelefone(telefone);
+            funcionario.setSenha(senha);
+
+
+            Perfil perfil = new Perfil();
+            perfil.setTipoPerfilById(1); // Defina o tipo de perfil conforme necessário
+            perfil.setId(new Random().nextInt(1000)); // ID aleatório para o perfil
+            funcionario.setPerfil(perfil);
+            perfil.setFuncionario(funcionario);
+
+            FuncionarioController funcionarioController = new FuncionarioController();
+            funcionarioController.inserir(funcionario, perfil);
+
+            showAlert(AlertType.INFORMATION, "Sucesso", "Funcionário cadastrado com sucesso.");
+            onCancelar(); // Fechar a janela após salvar
+
+        } catch (Exception e) {
+            showAlert(AlertType.ERROR, "Erro ao salvar", "Ocorreu um erro ao salvar o funcionário.");
+        }
     }
 
     @FXML
     private void onCancelar() {
-        // Fechar a janela ou limpar os campos, se necessário
+        // Obtém a janela (Stage) atual e a fecha
+        if (textFieldNome.getScene() != null) {
+            textFieldNome.getScene().getWindow().hide();
+        }
+    }
+
+    private void showAlert(AlertType type, String title, String message) {
+        Alert alert = new Alert(type);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 }
