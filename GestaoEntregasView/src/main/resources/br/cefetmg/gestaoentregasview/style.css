@@ -1,0 +1,39 @@
+/* style.css */
+
+/* Estiliza o GridPane */
+.grid-pane {
+    -fx-background-color: #e0f2f1; /* Cor de fundo verde clara */
+    -fx-padding: 20;
+    -fx-border-color: #004d40; /* Borda verde escura */
+    -fx-border-width: 2px;
+}
+
+/* Estiliza Labels */
+.label {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #004d40; /* Cor do texto verde escura */
+}
+
+/* Estiliza TextFields */
+.text-field {
+    -fx-background-color: #ffffff; /* Cor de fundo branca */
+    -fx-border-color: #004d40; /* Borda verde escura */
+    -fx-border-width: 1px;
+    -fx-padding: 5px;
+}
+
+/* Estiliza Buttons */
+.button {
+    -fx-background-color: #004d40; /* Cor de fundo verde escuro */
+    -fx-text-fill: #ffffff; /* Cor do texto branca */
+    -fx-font-size: 14px;
+    -fx-padding: 10px 20px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+}
+
+/* Estiliza o botão "Cancelar" para ter uma cor diferente */
+.button.cancel {
+    -fx-background-color: #00796b; /* Cor de fundo verde médio */
+}
