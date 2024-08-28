@@ -22,7 +22,11 @@ public class Produto {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_itemPedido_itemPedido")
     private ItemPedido itemPedido;
-
+   
+    @Column(name = "valor_unitario")
+    private double valorUnitario;
+    
+     
     public Produto() {
     }
 
@@ -74,4 +78,13 @@ public class Produto {
     public String toString() {
         return this.nome;
     }
+
+    public double getValorUnitario() {
+        return valorUnitario;
+    }
+
+    public void setValorUnitario(double valorUnitario) {
+        this.valorUnitario = valorUnitario;
+    }
+    
 }

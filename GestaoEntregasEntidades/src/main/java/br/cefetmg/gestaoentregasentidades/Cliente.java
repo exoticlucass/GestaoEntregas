@@ -32,9 +32,6 @@ public class Cliente {
             = CascadeType.PERSIST, mappedBy = "cliente")
     private List<Pedido> pedido;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "id_empresa_empresa")
-    private Empresa empresa;
 
     public Cliente() {
         this.id = RANDOM.nextInt(10000);
@@ -104,22 +101,14 @@ public class Cliente {
         this.pedido = pedido;
     }
 
-    public int getEmpresaId() {
-        return empresa.getId();
-    }
 
-    public void setEmpresa(Empresa empresa) {
-        this.empresa = empresa;
-    }
-
-    public Cliente(String nome, String logradouro, String bairro, String telefone, String CNPJ, String CPF, Empresa empresa) {
+    public Cliente(String nome, String logradouro, String bairro, String telefone, String CNPJ, String CPF) {
         this.nome = nome;
         this.logradouro = logradouro;
         this.bairro = bairro;
         this.telefone = telefone;
         this.CNPJ = CNPJ;
         this.CPF = CPF;
-        this.empresa = empresa;
         this.id = RANDOM.nextInt(10000);
     }
 

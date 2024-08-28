@@ -8,10 +8,13 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaQuery;
 
 public class PedidoDAO {
 
@@ -56,5 +59,23 @@ public class PedidoDAO {
         em.getTransaction().begin();
         Pedido x = em.find(Pedido.class, id);
         return x;
+    }
+    
+     public List<Pedido> pesquisarData(String data) {
+        var cb = em.getCriteriaBuilder();
+        CriteriaQuery<Pedido> criteria = cb.createQuery(Pedido.class);
+        var root = criteria.from(Pedido.class);
+        criteria.select(root).where(cb.like(root.get("data"), "%"+data+"%"));
+        List<Pedido> lista = em.createQuery(criteria).getResultList();
+        return lista;
+    }
+    
+    public List<Pedido> pesquisarPeriodo(Funcionario funcionario, Date startDate, Date endDate) {
+        String jpql = "SELECT p FROM Pedido p JOIN p.funcionario f WHERE f = :funcionario AND p.dt BETWEEN :startDate AND :endDate";
+        TypedQuery<Pedido> query = em.createQuery(jpql, Pedido.class);
+        query.setParameter("funcionario", funcionario);
+        query.setParameter("startDate", startDate);
+        query.setParameter("endDate", endDate);
+        return query.getResultList();
     }
 }

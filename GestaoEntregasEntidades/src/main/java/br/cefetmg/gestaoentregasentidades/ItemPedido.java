@@ -13,8 +13,7 @@ public class ItemPedido {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_item")
     private int id;
-    @Column(name = "valor_unitario")
-    private double valorUnitario;
+    
     @Column(name = "quantidade")
     private int quantidade;
     
@@ -34,14 +33,6 @@ public class ItemPedido {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public double getValorUnitario() {
-        return valorUnitario;
-    }
-
-    public void setValorUnitario(double valorUnitario) {
-        this.valorUnitario = valorUnitario;
     }
 
     public int getQuantidade() {

@@ -1,6 +1,7 @@
 package br.cefetmg.gestaoentregasview;
 
 import br.cefetmg.gestaoentregascontroller.PedidoController;
+import br.cefetmg.gestaoentregascontroller.ProdutoController;
 import br.cefetmg.gestaoentregasentidades.*;
 import java.util.ArrayList;
 import java.util.Date;
@@ -63,7 +64,6 @@ public class FXMLPedidoCadastroController {
 
                 itemPedido.setProduto(produto);
                 itemPedido.setQuantidade(quantidade);
-                itemPedido.setValorUnitario(valorUnitario);
 
                 Pedido pedido = new Pedido();
                 // pedido.setCliente(cliente);
@@ -124,14 +124,8 @@ public class FXMLPedidoCadastroController {
 
     @FXML
     private void initialize() {
-        Produto p1 = new Produto();
-        p1.setId(666);
-        p1.setNome("produto1");
-        p1.setLocalização("barreiro");
-        p1.setItemPedido(new ItemPedido());
-
-        List<Produto> produtos = new ArrayList<>();
-        produtos.add(p1);
+        ProdutoController pc = new ProdutoController();
+        List<Produto> produtos = pc.listarProdutos();
         comboBoxProduto.setItems(FXCollections.observableArrayList(produtos));
         FXPrincipal.addOnChangeScreenListener(new FXPrincipal.OnChangeScreen() {
             @Override

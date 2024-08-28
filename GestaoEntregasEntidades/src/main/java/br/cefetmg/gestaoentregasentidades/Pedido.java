@@ -16,7 +16,7 @@ public class Pedido {
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "data_pedido")
-    private java.util.Date data; // Use java.util.Date for JPA
+    private java.util.Date dt; // Use java.util.Date for JPA
 
     @Column(name = "valor_total")
     private double valorTotal;
@@ -31,6 +31,10 @@ public class Pedido {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_cliente_cliente")
     private Cliente cliente;
+    
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "id_funcionario_funcionario")
+    private Funcionario funcionario;
 
     public enum Status {
         EM_PREPARACAO, ENTREGA, ENTREGUE;
@@ -41,8 +45,8 @@ public class Pedido {
     }
 
     // Constructor for creating new Pedido instances
-    public Pedido(java.util.Date data, double valorTotal, Cliente cliente) {
-        this.data = data;
+    public Pedido(java.util.Date dt, double valorTotal, Cliente cliente) {
+        this.dt = dt;
         this.valorTotal = valorTotal;
         this.cliente = cliente;
         this.status = Status.EM_PREPARACAO; // Default status if needed
@@ -59,11 +63,11 @@ public class Pedido {
     }
 
     public java.util.Date getData() {
-        return data;
+        return dt;
     }
 
-    public void setData(java.util.Date data) {
-        this.data = data;
+    public void setData(java.util.Date dt) {
+        this.dt = dt;
     }
 
     public double getValorTotal() {
@@ -101,4 +105,15 @@ public class Pedido {
     public int getClienteId() {
         return cliente != null ? cliente.getId() : 0; // Ensure cliente is not null
     }
+
+    public Funcionario getFuncionario() {
+        return funcionario;
+    }
+
+    public void setFuncionario(Funcionario funcionario) {
+        this.funcionario = funcionario;
+    }
+    
+    
+    
 }
