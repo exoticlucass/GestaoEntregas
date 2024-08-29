@@ -15,6 +15,8 @@ import java.util.Random;
 public class CadastroAtendente {
 
     @FXML
+    private ComboBox<String> comboBoxProduto;
+    @FXML
     private TextField textFieldNome;
     @FXML
     private TextField textFieldTelefone;
@@ -31,8 +33,9 @@ public class CadastroAtendente {
         String nome = textFieldNome.getText();
         String telefone = textFieldTelefone.getText();
         String senha = textFieldSenha.getText();
+        String nomeEmpresaSelecionada = comboBoxProduto.getSelectionModel().getSelectedItem();
 
-        if (nome.isEmpty() || telefone.isEmpty() || senha.isEmpty()) {
+        if (nome.isEmpty() || telefone.isEmpty() || senha.isEmpty() || nomeEmpresaSelecionada == null) {
             showAlert(AlertType.WARNING, "Campos incompletos", "Por favor, preencha todos os campos e selecione uma empresa.");
             return;
         }
@@ -45,8 +48,11 @@ public class CadastroAtendente {
 
 
             Perfil perfil = new Perfil();
-            perfil.setTipoPerfil(Perfil.TipoPerfil.ATENDENTE);
+            perfil.setTipoPerfilById(1); // Defina o tipo de perfil conforme necessário
+            perfil.setId(new Random().nextInt(1000)); // ID aleatório para o perfil
+//            funcionario.setPerfil(perfil);
             perfil.setFuncionario(funcionario);
+
             FuncionarioController funcionarioController = new FuncionarioController();
             funcionarioController.inserir(funcionario, perfil);
 

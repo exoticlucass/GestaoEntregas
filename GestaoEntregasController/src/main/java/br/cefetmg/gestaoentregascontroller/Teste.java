@@ -1,37 +1,29 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package br.cefetmg.gestaoentregascontroller;
 
-import br.cefetmg.gestaoentregascontroller.FuncionarioController;
+import br.cefetmg.gestaoentregasdao.*;
+import br.cefetmg.gestaoentregasentidades.*;
+import java.util.List;
 
-import br.cefetmg.gestaoentregasentidades.Funcionario;
-import br.cefetmg.gestaoentregasentidades.Perfil;
-
-import java.util.Random;
-
+/**
+ *
+ * @author Aluno
+ */
 public class Teste {
 
     public static void main(String[] args) {
+        Produto p = new Produto();
+        p.setNome("legal2");
+        p.setItemPedido(null);
+        p.setValorUnitario(2);
+        p.setLocalização("ali");
+        ProdutoController pc = new ProdutoController();
+        pc.salvarProduto(p);
 
-        {
-            // Validação dos campos
-            String nome = "Juan";
-            String telefone = "1231321312321";
-            String senha = "sarcofago";
-
-            if (nome.isEmpty() || telefone.isEmpty() || senha.isEmpty()) {
-                return;
-            }
-
-            Funcionario funcionario = new Funcionario();
-            funcionario.setNome(nome);
-            funcionario.setTelefone(telefone);
-            funcionario.setSenha(senha);
-
-            Perfil perfil = new Perfil();
-            perfil.setTipoPerfil(Perfil.TipoPerfil.ATENDENTE);
-            perfil.setFuncionario(funcionario);
-            FuncionarioController funcionarioController = new FuncionarioController();
-            funcionarioController.inserir(funcionario, perfil);
-        }
-
+        List<Produto> pl = pc.listarProdutos();
+        System.out.println(pl.get(0).getNome());
     }
 }
