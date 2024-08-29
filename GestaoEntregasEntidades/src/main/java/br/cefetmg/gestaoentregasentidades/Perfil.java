@@ -45,16 +45,6 @@ public class Perfil {
         return tipoPerfil;
     }
 
-    public void setTipoPerfilById(int id) {
-        if (id == 1) {
-            this.tipoPerfil = TipoPerfil.ADMINISTRADOR;
-        } else if (id == 2) {
-            this.tipoPerfil = TipoPerfil.ATENDENTE;
-        } else {
-            this.tipoPerfil = TipoPerfil.ENTREGADOR;
-        }
-    }
-
     public void setTipoPerfil(TipoPerfil tipoPerfil) {
         this.tipoPerfil = tipoPerfil;
     }

@@ -1,23 +1,12 @@
 package br.cefetmg.gestaoentregasview;
 
-import br.cefetmg.gestaoentregasdao.ClienteDAO;
-
-import br.cefetmg.gestaoentregasdao.FuncionarioDAO;
-import br.cefetmg.gestaoentregasdao.PerfilDAO;
+import br.cefetmg.gestaoentregascontroller.ClienteController;
 import br.cefetmg.gestaoentregasentidades.Cliente;
-
-import br.cefetmg.gestaoentregasentidades.Funcionario;
-import br.cefetmg.gestaoentregasentidades.Perfil;
-import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-
-import java.util.List;
-import java.util.Random;
-import java.util.stream.Collectors;
 
 public class CadastroCliente {
 
@@ -36,29 +25,61 @@ public class CadastroCliente {
 
     @FXML
     private void initialize() {
-//        // Carregar a lista de empresas do banco de dados
-//        EmpresaDAO empresaDAO = new EmpresaDAO();
-//        List<Empresa> empresas = empresaDAO.listarTodas();
-//
-//        // Adicionar os nomes das empresas ao ComboBox
-////        comboBoxProduto.setItems(FXCollections.observableArrayList(empresas.stream().map(Empresa::getNome).collect(Collectors.toList())
-//        ));
+        // Inicialização do controller, como carregar dados para o ComboBox, etc.
     }
 
     @FXML
     public void salvarPedido() {
-        Cliente cliente = new Cliente();
-        cliente.setNome(textFieldNome.getText());
-        cliente.setTelefone(textFieldTelefone.getText());
-        cliente.setLogradouro(textFieldLogradouro.getText());
-        cliente.setBairro(textFieldBairro.getText());
-        cliente.setCPF(textFieldCPF.getText());
-        ClienteDAO clienteDAO = new ClienteDAO();
-        // clienteDAO.inserir(cliente);
+        // Validação dos campos obrigatórios
+        String nome = textFieldNome.getText();
+        String telefone = textFieldTelefone.getText();
+        String bairro = textFieldBairro.getText();
+        String CPF = textFieldCPF.getText();
+        String logradouro = textFieldLogradouro.getText();
+
+        if (nome.isEmpty() || telefone.isEmpty() || bairro.isEmpty() || CPF.isEmpty() || logradouro.isEmpty()) {
+            showAlert(AlertType.WARNING, "Campos incompletos", "Por favor, preencha todos os campos.");
+            return;
+        }
+
+        try {
+            // Criação do objeto Cliente com os dados do formulário
+            Cliente cliente = new Cliente();
+            cliente.setNome(nome);
+            cliente.setTelefone(telefone);
+            cliente.setBairro(bairro);
+            cliente.setCPF(CPF);
+            cliente.setLogradouro(logradouro);
+
+            // Instância do controller e chamada do método para inserir o cliente
+            ClienteController controller = new ClienteController();
+            controller.inserir(cliente);
+
+            // Exibição de alerta de sucesso
+            showAlert(AlertType.INFORMATION, "Sucesso", "Cliente cadastrado com sucesso.");
+            onCancelar(); // Fechar a janela após salvar
+
+        } catch (Exception e) {
+            // Log do erro e exibição de alerta para o usuário
+            e.printStackTrace(); // Exibe o erro completo no console
+            showAlert(AlertType.ERROR, "Erro ao salvar", "Ocorreu um erro ao salvar o cliente.");
+        }
     }
 
     @FXML
     private void onCancelar() {
         // Fechar a janela ou limpar os campos, se necessário
+        if (textFieldNome.getScene() != null) {
+            textFieldNome.getScene().getWindow().hide(); // Fecha a janela atual
+        }
+    }
+
+    private void showAlert(AlertType type, String title, String message) {
+        // Método para exibir alertas para o usuário
+        Alert alert = new Alert(type);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 }

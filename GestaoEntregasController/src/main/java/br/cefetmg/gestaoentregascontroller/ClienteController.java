@@ -4,10 +4,19 @@
  */
 package br.cefetmg.gestaoentregascontroller;
 
+import br.cefetmg.gestaoentregasdao.*;
+import br.cefetmg.gestaoentregasentidades.*;
+
 /**
  *
  * @author lucas
  */
 public class ClienteController {
-    
+
+    public void inserir(Cliente cliente) {
+        ClienteDAO dao = new ClienteDAO();
+        FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
+        dao.create(cliente);
+    }
+
 }
