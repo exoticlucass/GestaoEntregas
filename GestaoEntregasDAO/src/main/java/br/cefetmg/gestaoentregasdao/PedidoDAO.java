@@ -22,7 +22,7 @@ public class PedidoDAO {
     private EntityManager em;
 
     public PedidoDAO() {
-        emf = Persistence.createEntityManagerFactory("br.cefetmg_gestaoentregasdao_jar_0.1.0-SNAPSHOTPU");
+        emf = Persistence.createEntityManagerFactory("br.cefetmg_GestaoEntregasDAO_jar_1.0-SNAPSHOTPU");
         em = emf.createEntityManager();
     }
 

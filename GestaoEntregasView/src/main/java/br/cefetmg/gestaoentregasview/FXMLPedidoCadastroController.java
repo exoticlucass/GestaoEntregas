@@ -9,11 +9,12 @@ import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.ComboBox;
+import javafx.scene.control.ComboBox;   
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.event.ActionEvent;
 
 public class FXMLPedidoCadastroController {
 
@@ -127,10 +128,17 @@ public class FXMLPedidoCadastroController {
         ProdutoController pc = new ProdutoController();
         List<Produto> produtos = pc.listarProdutos();
         comboBoxProduto.setItems(FXCollections.observableArrayList(produtos));
-        FXPrincipal.addOnChangeScreenListener(new FXPrincipal.OnChangeScreen() {
-            @Override
-            public void onScreenChanged(String newString, Object viewData) {
+
+        // Adiciona listener ao ComboBox para preencher os campos
+        comboBoxProduto.getSelectionModel().selectedItemProperty().addListener((obs, oldProduto, newProduto) -> {
+            if (newProduto != null) {
+                preencherCamposProduto(newProduto);
             }
         });
+    }
+
+    private void preencherCamposProduto(Produto produto) {
+        textFieldValorUnitario.setText(String.valueOf(produto.getValorUnitario()));
+        textFieldMarca.setText(produto.getNome());
     }
 }
