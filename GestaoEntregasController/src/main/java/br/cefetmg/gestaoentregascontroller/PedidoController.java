@@ -31,7 +31,9 @@ public class PedidoController {
     public void salvarPedido(Pedido pedido) {
         pedidoDAO.create(pedido);
     }
-
+    public void atualizarPedido(Pedido pedido){
+        pedidoDAO.update(pedido);
+    }
     public List<Pedido> listarPedidos() {
         return pedidoDAO.listAll();
     }

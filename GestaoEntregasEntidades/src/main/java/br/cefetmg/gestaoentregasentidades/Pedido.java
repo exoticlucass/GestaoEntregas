@@ -1,12 +1,11 @@
-
 package br.cefetmg.gestaoentregasentidades;
-
 
 import java.util.*;
 import javax.persistence.*;
 
 @Entity
 public class Pedido {
+
     private static final Random RANDOM = new Random();
 
     @Id
@@ -28,10 +27,10 @@ public class Pedido {
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST, mappedBy = "pedido")
     private List<ItemPedido> itemPedido;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "id_cliente_cliente")
     private Cliente cliente;
-    
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_funcionario_funcionario")
     private Funcionario funcionario;
@@ -53,7 +52,6 @@ public class Pedido {
     }
 
     // Getters and setters
-
     public int getId() {
         return id;
     }
@@ -101,7 +99,7 @@ public class Pedido {
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
-    
+
     public int getClienteId() {
         return cliente != null ? cliente.getId() : 0; // Ensure cliente is not null
     }
@@ -113,7 +111,5 @@ public class Pedido {
     public void setFuncionario(Funcionario funcionario) {
         this.funcionario = funcionario;
     }
-    
-    
-    
+
 }

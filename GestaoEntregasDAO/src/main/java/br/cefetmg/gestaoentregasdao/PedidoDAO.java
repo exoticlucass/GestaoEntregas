@@ -52,7 +52,7 @@ public class PedidoDAO {
     }
 
     public List<Pedido> listAll() {
-        return em.createQuery("FROM Pedido", Pedido.class).getResultList();
+        return em.createQuery("SELECT p FROM Pedido p", Pedido.class).getResultList();
     }
 
     public Pedido selecionar(int id) {

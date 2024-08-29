@@ -49,7 +49,7 @@ public class FuncionarioDAO {
     }
 
     public List<Funcionario> listAll() {
-        return em.createQuery("FROM Funcionario", Funcionario.class).getResultList();
+        return em.createQuery("SELECT f FROM Funcionario f", Funcionario.class).getResultList();
     }
     
     public Funcionario selecionar(int id) {

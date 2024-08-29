@@ -49,7 +49,7 @@ public class ItemPedidoDAO {
     }
 
     public List<ItemPedido> listAll() {
-        return em.createQuery("FROM ItemPedido", ItemPedido.class).getResultList();
+        return em.createQuery("SELECT ip FROM ItemPedido ip", ItemPedido.class).getResultList();
     }
 
     public ItemPedido selecionar(int id) {

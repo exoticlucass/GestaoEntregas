@@ -46,7 +46,7 @@ public class PerfilDAO {
     }
 
     public List<Perfil> listAll() {
-        return em.createQuery("FROM Perfil", Perfil.class).getResultList();
+        return em.createQuery("SELECT p FROM Perfil p", Perfil.class).getResultList();
     }
 
     public Perfil selecionar(int id) {

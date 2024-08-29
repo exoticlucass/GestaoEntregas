@@ -23,7 +23,7 @@ public class DadosApp extends Application {
     @Override
     public void start(Stage stage) throws IOException {
 //scene = new Scene(loadFXML("primary"), 640, 480);
-        scene = new Scene(loadFXML("FXMLTelaInicialAdmAtendente"), 640, 480);
+        scene = new Scene(loadFXML("FXMLPedidosListagemController"), 640, 480);
         stage.setScene(scene);
         stage.show();
     }

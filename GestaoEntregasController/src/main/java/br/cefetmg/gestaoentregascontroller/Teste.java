@@ -22,7 +22,12 @@ public class Teste {
         p.setLocalização("ali");
         ProdutoController pc = new ProdutoController();
         pc.salvarProduto(p);
-
+        
+        
+        Pedido ped = new Pedido();
+        PedidoController pedc = new PedidoController();
+        
+        
         List<Produto> pl = pc.listarProdutos();
         System.out.println(pl.get(0).getNome());
     }

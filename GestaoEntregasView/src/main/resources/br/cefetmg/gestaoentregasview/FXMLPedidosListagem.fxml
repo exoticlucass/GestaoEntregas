@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.cefetmg.gestaoentregasview.FXMLPedidosListagemController">
+    <TableView fx:id="tableViewPedidos" prefHeight="400.0" prefWidth="600.0">
+        <columns>
+            <TableColumn fx:id="columnId" text="ID" />
+            <TableColumn fx:id="columnCliente" text="Cliente" />
+            <TableColumn fx:id="columnData" text="Data" />
+            <TableColumn fx:id="columnValorTotal" text="Valor Total" />
+            <TableColumn fx:id="columnStatus" text="Status" />
+            <TableColumn fx:id="columnAcoes" text="Ações">
+                <cellValueFactory>
+                    <PropertyValueFactory property="DUMMY" />
+                </cellValueFactory>
+            </TableColumn>
+
+        </columns>
+    </TableView>
+</VBox>
