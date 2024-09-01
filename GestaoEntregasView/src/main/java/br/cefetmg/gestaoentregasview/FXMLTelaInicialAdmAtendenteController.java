@@ -1,27 +1,27 @@
 package br.cefetmg.gestaoentregasview;
 
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
- */
-
+import br.cefetmg.gestaoentregasentidades.Funcionario;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.fxml.Initializable;
 
-/**
- * FXML Controller class
- *
- * @author Aluno
- */
 public class FXMLTelaInicialAdmAtendenteController implements Initializable {
 
-    /**
-     * Initializes the controller class.
-     */
+    @FXML
+    private Label welcomeLabel;
+
+    private Funcionario loggedInFuncionario;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
-    
+        // Inicialização básica
+    }
+
+    // Método para definir o Funcionario
+    public void setFuncionario(Funcionario funcionario) {
+        this.loggedInFuncionario = funcionario;
+        welcomeLabel.setText("Bem-vindo, " + funcionario.getNome());
+    }
 }

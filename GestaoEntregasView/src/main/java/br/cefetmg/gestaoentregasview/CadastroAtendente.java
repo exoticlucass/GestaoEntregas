@@ -50,8 +50,7 @@ public class CadastroAtendente {
             Perfil perfil = new Perfil();
             perfil.setTipoPerfilById(1); // Defina o tipo de perfil conforme necessário
             perfil.setId(new Random().nextInt(1000)); // ID aleatório para o perfil
-//            funcionario.setPerfil(perfil);
-            perfil.setFuncionario(funcionario);
+            funcionario.setPerfil(perfil);
 
             FuncionarioController funcionarioController = new FuncionarioController();
             funcionarioController.inserir(funcionario, perfil);

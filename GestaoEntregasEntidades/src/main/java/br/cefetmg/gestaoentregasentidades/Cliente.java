@@ -32,6 +32,11 @@ public class Cliente {
             = CascadeType.PERSIST, mappedBy = "cliente")
     private List<Pedido> pedido;
 
+    @OneToOne(cascade = CascadeType.ALL,
+            fetch = FetchType.EAGER,
+            orphanRemoval = true)
+    @JoinColumn(name = "id_perfil")
+    private Perfil perfil;
 
     public Cliente() {
         this.id = RANDOM.nextInt(10000);
@@ -101,7 +106,6 @@ public class Cliente {
         this.pedido = pedido;
     }
 
-
     public Cliente(String nome, String logradouro, String bairro, String telefone, String CNPJ, String CPF) {
         this.nome = nome;
         this.logradouro = logradouro;
@@ -112,4 +116,12 @@ public class Cliente {
         this.id = RANDOM.nextInt(10000);
     }
 
+    public Perfil getPerfil() {
+        return perfil;
+    }
+
+    public void setPerfil(Perfil perfil) {
+        this.perfil = perfil;
+    }
+    
 }

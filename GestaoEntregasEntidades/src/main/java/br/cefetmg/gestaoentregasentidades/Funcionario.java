@@ -24,7 +24,14 @@ public class Funcionario {
     @OneToMany(fetch = FetchType.EAGER, cascade
             = CascadeType.PERSIST, mappedBy = "funcionario")
     private List<Pedido> pedido;
-
+    
+    
+    @OneToOne(cascade = CascadeType.ALL,
+            fetch = FetchType.EAGER,
+            orphanRemoval = true)
+    @JoinColumn(name = "id_perfil")
+    private Perfil perfil;
+    
     public Funcionario() {
     }
 
@@ -90,6 +97,14 @@ public class Funcionario {
 
     public void setPedido(List<Pedido> pedido) {
         this.pedido = pedido;
+    }
+
+    public Perfil getPerfil() {
+        return perfil;
+    }
+
+    public void setPerfil(Perfil perfil) {
+        this.perfil = perfil;
     }
     
     

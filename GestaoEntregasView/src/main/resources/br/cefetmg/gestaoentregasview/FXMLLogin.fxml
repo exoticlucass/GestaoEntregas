@@ -4,6 +4,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
 <VBox alignment="CENTER" prefHeight="553.0" prefWidth="1302.0" spacing="10" stylesheets="@style.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.cefetmg.gestaoentregasview.FXMLLoginController">
@@ -13,6 +14,10 @@
         <TextField fx:id="usernameField" prefHeight="29.0" prefWidth="846.0" promptText="Digite seu telefone" />
         <Label text="Senha:" />
     </VBox>
-     <PasswordField fx:id="passwordField" promptText="Digite sua senha" />
+    <PasswordField fx:id="passwordField" promptText="Digite sua senha" /> 
     <Button fx:id="loginButton" onAction="#handleLogin" text="Entrar" />
+    <HBox alignment="CENTER" spacing="5">
+        <Label text="Não tem uma conta?" />
+        <Button fx:id="cadastroButton" onAction="#handleCadastro" text="Cadastre-se" style="-fx-background-color: transparent; -fx-text-fill: #007bff; -fx-underline: true;" />
+    </HBox>
 </VBox>

@@ -27,7 +27,7 @@ public class FXMLProdutoCadastroController {
     private ProdutoController produtoController;
 
     public FXMLProdutoCadastroController() {
-        this.produtoController = new ProdutoController(); // Inicializa o PedidoController
+        this.produtoController = new ProdutoController(); 
     }
 
     @FXML
@@ -41,7 +41,7 @@ public class FXMLProdutoCadastroController {
                 Produto produto = new Produto();
                 produto.setNome(nome);
                 produto.setLocalização(localizacao);
-                produto.setValorUnitario(valorUnitario);// adicionar valorunitario
+                produto.setValorUnitario(valorUnitario);
                 
                 produtoController.salvarProduto(produto);
 

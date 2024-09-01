@@ -11,18 +11,17 @@ public class Perfil {
     @Column(name = "id_perfil")
     private int id;
 
+    @Column(name = "senha")
+    private String senha;
+
     public enum TipoPerfil {
-        ADMINISTRADOR, ATENDENTE, ENTREGADOR;
+        ADMINISTRADOR, ATENDENTE, ENTREGADOR, CLIENTE;
     }
 
     @Column(name = "tipo_perfil")
     private TipoPerfil tipoPerfil;
 
-    @OneToOne(cascade = CascadeType.ALL,
-            fetch = FetchType.EAGER,
-            orphanRemoval = true)
-    @JoinColumn(name = "id_funcionario")
-    private Funcionario funcionario;
+    
 
     public int getTipoEnumToInt() {
         if (this.getTipoPerfil() == TipoPerfil.ADMINISTRADOR) {
@@ -30,7 +29,10 @@ public class Perfil {
         } else if (this.getTipoPerfil() == TipoPerfil.ATENDENTE) {
             return 2;
         }
-        return 3;
+        else if (this.getTipoPerfil() == TipoPerfil.CLIENTE) {
+            return 3;
+        }
+        return 4;
     }
 
     public int getId() {
@@ -59,17 +61,24 @@ public class Perfil {
         this.tipoPerfil = tipoPerfil;
     }
 
-    public int getFuncionarioId() {
-        return funcionario.getId();
+//    public int getFuncionarioId() {
+//        return funcionario.getId();
+//    }
+//
+//    public void setFuncionario(Funcionario funcionario) {
+//        this.funcionario = funcionario;
+//    }
+//
+//    public Funcionario getFuncionario() {
+//        return funcionario;
+//    }
+
+    public String getSenha() {
+        return senha;
     }
 
-    public void setFuncionario(Funcionario funcionario) {
-        this.funcionario = funcionario;
+    public void setSenha(String senha) {
+        this.senha = senha;
     }
-
-    public Funcionario getFuncionario() {
-        return funcionario;
-    }
-    
     
 }

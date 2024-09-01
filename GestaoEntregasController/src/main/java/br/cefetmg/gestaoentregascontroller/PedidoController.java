@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -47,5 +48,8 @@ public class PedidoController {
             }
         }
         return listaStatus;
+    }
+    public List<Pedido> pesquisarPeriodo(Funcionario funcionario, Date startDate, Date endDate) {
+        return pedidoDAO.pesquisarPeriodo(funcionario, startDate, endDate);
     }
 }
