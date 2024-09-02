@@ -10,7 +10,7 @@
 <VBox alignment="CENTER" prefHeight="553.0" prefWidth="1302.0" spacing="10" stylesheets="@style.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.cefetmg.gestaoentregasview.FXMLLoginController">
     <Label style="-fx-font-size: 20px;" text="Login" />
     <VBox alignment="CENTER" prefHeight="89.0" prefWidth="86.0" spacing="10">
-        <Label text="Telefone:" />
+        <Label text="Cpf:" />
         <TextField fx:id="usernameField" prefHeight="29.0" prefWidth="846.0" promptText="Digite seu telefone" />
         <Label text="Senha:" />
     </VBox>

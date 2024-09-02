@@ -12,8 +12,6 @@ public class Funcionario {
     private int id;
     @Column(name = "nome")
     private String nome;
-    @Column(name = "senha")
-    private String senha;
     @Column(name = "telefone")
     private String telefone;
     @Column(name = "CPF")
@@ -51,13 +49,6 @@ public class Funcionario {
         this.nome = nome;
     }
 
-    public String getSenha() {
-        return senha;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
-    }
 
     public String getTelefone() {
         return telefone;

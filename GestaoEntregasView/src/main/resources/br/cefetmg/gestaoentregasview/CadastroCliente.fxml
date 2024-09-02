@@ -19,6 +19,8 @@
     <TextField fx:id="textFieldBairro" GridPane.columnIndex="1" GridPane.rowIndex="4" />
     <Label text="CPF: " GridPane.rowIndex="8" />
     <TextField fx:id="textFieldCPF" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+    <Label text="Senha: " GridPane.rowIndex="12" />
+    <TextField fx:id="textFieldSenha" GridPane.columnIndex="1" GridPane.rowIndex="12" />
     <!-- Buttons -->
     <Button onAction="#salvarPedido" text="Salvar" GridPane.rowIndex="13" />
     <Button onAction="#onCancelar" text="Cancelar" GridPane.columnIndex="1" GridPane.rowIndex="13" />

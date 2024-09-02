@@ -18,10 +18,8 @@ public class FuncionarioController {
 
     FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
 
-    public void inserir(Funcionario funcionario, Perfil perfil) {
-        PerfilDAO perfilDAO = new PerfilDAO();
-        funcionarioDAO = new FuncionarioDAO();
-        perfilDAO.create(perfil);
+    public void inserir(Funcionario funcionario) {
+        
         funcionarioDAO.create(funcionario);
     }
 
