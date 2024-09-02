@@ -28,6 +28,7 @@ public class FXMLLoginController implements Initializable {
 
     private final FuncionarioController funcionarioController = new FuncionarioController();
     private final ClienteController clienteController = new ClienteController();
+    FXRedirecionador r =  new FXRedirecionador();
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -43,67 +44,26 @@ public class FXMLLoginController implements Initializable {
             Perfil perfil = funcionario.getPerfil();
             if (perfil.getTipoPerfil() == Perfil.TipoPerfil.ADMINISTRADOR
                     || perfil.getTipoPerfil() == Perfil.TipoPerfil.ATENDENTE) {
-                loadScene("FXMLTelaInicialAdmAtendente.fxml", funcionario);
+                r.loadScene("FXMLTelaInicialAdmAtendente.fxml", funcionario, usernameField);
             } else if (perfil.getTipoPerfil() == Perfil.TipoPerfil.ENTREGADOR) {
-                loadScene("FXMLTelaInicialEntregador.fxml", funcionario);
+                r.loadScene("FXMLTelaInicialEntregador.fxml", funcionario, usernameField);
             }
             return;
         }
 
         Cliente cliente = clienteController.procurarCPF(cpf);
         if (cliente != null && clienteController.validarSenha(cliente, senha)) {
-            showAlert("Login bem-sucedido", "Bem-vindo, " + cliente.getNome() + "!");
-            // redirecionar para a de cliente depois
+            r.showAlert("Login bem-sucedido", "Bem-vindo, " + cliente.getNome() + "!");
+            r.loadScene("FXMLTelaInicialCliente.fmxl", cliente, usernameField);
             return;
         }
 
-        showAlert("Login falhou", "CPF ou senha incorretos. Por favor, tente novamente.");
+        r.showAlert("Login falhou", "CPF ou senha incorretos. Por favor, tente novamente.");
     }
 
-    private void loadScene(String fxmlFile) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
-            Parent root = loader.load();
-            Stage stage = (Stage) usernameField.getScene().getWindow();
-            stage.setScene(new Scene(root));
-            stage.show();
-        } catch (IOException e) {
-            showAlert("Erro", "Não foi possível carregar a tela: " + e.getMessage());
-        }
-    }
-
-    private void loadScene(String fxmlFile, Funcionario funcionario) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
-            Parent root = loader.load();
-
-            // Grama esse aqui é o codigo que passa se vc precisar (dentro do controller desse fxml tem a outra parte dele)
-            if (fxmlFile.equals("FXMLTelaInicialAdmAtendente.fxml")) {
-                FXMLTelaInicialAdmAtendenteController controller = loader.getController();
-                controller.setFuncionario(funcionario);
-            } else if (fxmlFile.equals("FXMLTelaInicialEntregador.fxml")) {
-                FXMLTelaInicialEntregadorController controller = loader.getController();
-                controller.setFuncionario(funcionario);
-            }
-
-            Stage stage = (Stage) usernameField.getScene().getWindow();
-            stage.setScene(new Scene(root));
-            stage.show();
-        } catch (IOException e) {
-            showAlert("Erro", "Não foi possível carregar a tela: " + e.getMessage());
-        }
-    }
-
-    private void showAlert(String title, String message) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
-    }
 
     @FXML
     private void handleCadastro() {
-        loadScene("CadastroCliente.fxml");
+        r.loadScene("CadastroCliente.fxml", usernameField);
     }
 }
