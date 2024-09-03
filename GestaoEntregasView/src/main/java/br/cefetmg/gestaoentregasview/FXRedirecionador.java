@@ -13,6 +13,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -29,6 +30,18 @@ public class FXRedirecionador {
             showAlert("Erro", "Não foi possível carregar a tela: " + e.getMessage());
         }
     }
+    public void loadScene(String fxmlFile, Label label) {
+    try {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
+        Parent root = loader.load();
+        Stage stage = (Stage) label.getScene().getWindow();
+        stage.setScene(new Scene(root));
+        stage.show();
+    } catch (IOException e) {
+        showAlert("Erro", "Não foi possível carregar a tela: " + e.getMessage());
+    }
+}
+
 
     public void loadScene(String fxmlFile, Funcionario funcionario, TextField field) {
         try {
@@ -63,6 +76,27 @@ public class FXRedirecionador {
             }
 
             Stage stage = (Stage) field.getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            showAlert("Erro", "Não foi possível carregar a tela: " + e.getMessage());
+        }
+    }
+    public void loadScene(String fxmlFile, Cliente cliente, Label label) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
+            Parent root = loader.load();
+
+            if (fxmlFile.equals("FXMLTelaInicialCliente.fxml")){
+                FXMLTelaInicialClienteController controller = loader.getController();
+                controller.setCliente(cliente);
+            }
+            if(fxmlFile.equals("FXMLPedidoCadastro.fxml")){
+                FXMLPedidoCadastroController controller = loader.getController();
+                controller.setCliente(cliente);
+            }
+
+            Stage stage = (Stage) label.getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.show();
         } catch (IOException e) {

@@ -6,6 +6,7 @@ import br.cefetmg.gestaoentregasentidades.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -15,6 +16,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.event.ActionEvent;
+import javafx.scene.control.TableCell;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 public class FXMLPedidoCadastroController {
 
@@ -44,6 +49,21 @@ public class FXMLPedidoCadastroController {
 
     private PedidoController pedidoController;
 
+    @FXML
+    private TableView<ItemPedido> tableViewItens;
+
+    @FXML
+    private TableColumn<ItemPedido, String> colunaProduto;
+
+    @FXML
+    private TableColumn<ItemPedido, Integer> colunaQuantidade;
+
+    @FXML
+    private TableColumn<ItemPedido, Double> colunaValorTotal;
+    private ObservableList<ItemPedido> listaItens;
+
+    private Cliente loggedInCliente;
+
     public FXMLPedidoCadastroController() {
         this.pedidoController = new PedidoController(); // Inicializa o PedidoController
     }
@@ -51,41 +71,20 @@ public class FXMLPedidoCadastroController {
     @FXML
     private void salvarPedido() {
         try {
-            if (verificarCamposPreenchidos()) {
-                Produto produto = comboBoxProduto.getValue();
-                int quantidade = Integer.parseInt(textFieldQuantidade.getText());
-                double valorUnitario = Double.parseDouble(textFieldValorUnitario.getText().replace(',', '.'));
-                double valorTotal = Double.parseDouble(textFieldValorTotal.getText().replace(',', '.'));
-
-                String marca = textFieldMarca.getText();
-                String formaPagamento = textFieldFormaPagamento.getText();
-                String endereco = textFieldEndereco.getText();
-                String observacoes = textAreaObservacoes.getText();
-
-                ItemPedido itemPedido = new ItemPedido();
-
-                itemPedido.setProduto(produto);
-                itemPedido.setQuantidade(quantidade);
-
+            if (!listaItens.isEmpty()) {
                 Pedido pedido = new Pedido();
-                Cliente cliente = new Cliente(); // teste
-                cliente.setNome("Exotic");
-                pedido.setCliente(cliente);
-                Date dataAtual = new Date();
-                pedido.setData(dataAtual);
-                List<ItemPedido> listaitem = new ArrayList<>();
-                listaitem.add(itemPedido);
-                pedido.setItemPedido(listaitem);
+                pedido.setCliente(loggedInCliente);
+                pedido.setData(new Date());
+                pedido.setItemPedido(new ArrayList<>(listaItens));
                 pedido.setStatus(Pedido.Status.EM_PREPARACAO);
-                pedido.setValorTotal(valorTotal);
+                pedido.setValorTotal(Double.parseDouble(textFieldValorTotal.getText()));
 
-                // Envia os dados para o PedidoController
                 pedidoController.salvarPedido(pedido);
 
                 exibirAlerta("Sucesso", "Pedido salvo com sucesso!", AlertType.INFORMATION);
                 limparCampos();
             } else {
-                exibirAlerta("Campos Incompletos", "Preencha todos os campos obrigatórios.", AlertType.WARNING);
+                exibirAlerta("Nenhum Item", "Adicione pelo menos um item ao pedido.", AlertType.WARNING);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -109,14 +108,12 @@ public class FXMLPedidoCadastroController {
     }
 
     private void limparCampos() {
-        comboBoxProduto.setValue(null);
-        textFieldQuantidade.clear();
-        textFieldValorUnitario.clear();
-        textFieldValorTotal.clear();
-        textFieldMarca.clear();
+        limparCamposProduto();
         textFieldFormaPagamento.clear();
         textFieldEndereco.clear();
         textAreaObservacoes.clear();
+        listaItens.clear();
+        textFieldValorTotal.clear();
     }
 
     private void exibirAlerta(String titulo, String mensagem, AlertType tipo) {
@@ -129,6 +126,24 @@ public class FXMLPedidoCadastroController {
 
     @FXML
     private void initialize() {
+
+        colunaProduto.setCellValueFactory(new PropertyValueFactory<>("produto"));
+        colunaQuantidade.setCellValueFactory(new PropertyValueFactory<>("quantidade"));
+        colunaValorTotal.setCellValueFactory(cellData -> {
+            ItemPedido item = cellData.getValue();
+            double valorTotal = item.getValorTotal();
+            return new ReadOnlyObjectWrapper<>(valorTotal);
+        });
+        colunaValorTotal.setCellFactory(column -> new TableCell<ItemPedido, Double>() {
+            @Override
+            protected void updateItem(Double item, boolean empty) {
+                super.updateItem(item, empty);
+                setText(empty ? "" : String.format("%.2f", item));
+            }
+        });
+        listaItens = FXCollections.observableArrayList();
+        tableViewItens.setItems(listaItens);
+
         textFieldValorUnitario.setEditable(false);
         textFieldValorTotal.setEditable(false);
         textFieldMarca.setEditable(false);
@@ -150,9 +165,42 @@ public class FXMLPedidoCadastroController {
         });
     }
 
+    @FXML
+    private void adicionarItem() {
+        if (verificarCamposPreenchidos()) {
+            Produto produto = comboBoxProduto.getValue();
+            int quantidade = Integer.parseInt(textFieldQuantidade.getText());
+            double valorUnitario = Double.parseDouble(textFieldValorUnitario.getText().replace(',', '.'));
+            double valorTotal = quantidade * valorUnitario;
+
+            ItemPedido itemPedido = new ItemPedido();
+            itemPedido.setProduto(produto);
+            itemPedido.setQuantidade(quantidade);
+
+            listaItens.add(itemPedido);
+            calcularValorTotalPedido(); // Recalcula o valor total do pedido com os itens adicionados
+
+            limparCamposProduto(); // Limpa os campos de produto para novo item
+        } else {
+            exibirAlerta("Campos Incompletos", "Preencha todos os campos obrigatórios.", AlertType.WARNING);
+        }
+    }
+
+    private void calcularValorTotalPedido() {
+        double valorTotalPedido = listaItens.stream().mapToDouble(item -> item.getQuantidade() * item.getProduto().getValorUnitario()).sum();
+        textFieldValorTotal.setText(String.format("%.2f", valorTotalPedido));
+    }
+
     private void preencherCamposProduto(Produto produto) {
         textFieldValorUnitario.setText(String.valueOf(produto.getValorUnitario()));
         textFieldMarca.setText(produto.getNome());
+    }
+
+    private void limparCamposProduto() {
+        comboBoxProduto.setValue(null);
+        textFieldQuantidade.clear();
+        textFieldValorUnitario.clear();
+        textFieldMarca.clear();
     }
 
     private void calcularValorTotal() {
@@ -170,5 +218,9 @@ public class FXMLPedidoCadastroController {
             // Em caso de erro de conversão, deixar o campo de valor total vazio
             textFieldValorTotal.setText("");
         }
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.loggedInCliente = cliente;
     }
 }

@@ -9,34 +9,35 @@
 <?import javafx.scene.text.Text?>
 
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.cefetmg.gestaoentregasview.FXMLTelaInicialAdmAtendenteController">
-   <children>
-      <AnchorPane id="AnchorPane" layoutX="70.0" layoutY="5.0" prefHeight="400.0" prefWidth="600.0">
-         <children>
-            <GridPane layoutY="98.0" prefHeight="241.0" prefWidth="533.0">
-               <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="354.0" minWidth="10.0" prefWidth="157.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="239.0" minWidth="1.0" prefWidth="178.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="354.0" minWidth="10.0" prefWidth="193.0" />
-               </columnConstraints>
-               <rowConstraints>
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-               </rowConstraints>
-               <children>
-                  <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="168.0" text="Emitir relatórios" GridPane.rowIndex="2" />
-                  <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="199.0" text="Cadastrar Pedido" GridPane.columnIndex="2" />
-                  <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="289.0" text="Cadastrar Produto" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                  <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="164.0" text="Listar Pedidos" textAlignment="CENTER" />
-                  <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="164.0" text="Listar Produtos" GridPane.rowIndex="1" />
-                  <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="235.0" text="Cadastrar Perfil" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-               </children>
-            </GridPane>
-         </children></AnchorPane>
-      <Text layoutX="52.0" layoutY="79.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Seja bem vindo">
-         <font>
-            <Font size="30.0" />
-         </font>
-      </Text>
-   </children>
+    <children>
+        <AnchorPane id="AnchorPane" layoutX="70.0" layoutY="5.0" prefHeight="400.0" prefWidth="600.0">
+            <children>
+                <GridPane layoutY="98.0" prefHeight="241.0" prefWidth="533.0">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="354.0" minWidth="10.0" prefWidth="157.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="239.0" minWidth="1.0" prefWidth="178.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="354.0" minWidth="10.0" prefWidth="193.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                    <children>
+                        <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="168.0" text="Emitir relatórios" GridPane.rowIndex="2" />
+                        <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="199.0" text="Cadastrar Pedido" GridPane.columnIndex="2" />
+                        <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="289.0" text="Cadastrar Produto" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                        <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="164.0" text="Listar Pedidos" textAlignment="CENTER" />
+                        <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="164.0" text="Listar Produtos" GridPane.rowIndex="1" />
+                        <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="235.0" text="Cadastrar Perfil" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                    </children>
+                </GridPane>
+            </children>
+        </AnchorPane>
+        <Label fx:id="welcomeLabel" layoutX="42.0" layoutY="40.0" text="Bem vindo">
+            <font>
+                <Font size="30.0" />
+            </font>
+        </Label>
+    </children>
 </AnchorPane>

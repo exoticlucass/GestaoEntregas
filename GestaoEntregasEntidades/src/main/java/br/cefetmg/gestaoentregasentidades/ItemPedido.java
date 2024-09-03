@@ -22,7 +22,6 @@ public class ItemPedido {
     private Pedido pedido;
     
     
-    // Conferir se ta certo no banco de dados
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_produto_produto")
     private Produto produto;
@@ -58,6 +57,8 @@ public class ItemPedido {
     public void setProduto(Produto produto) {
         this.produto = produto;
     }
-    
+    public double getValorTotal() {
+        return this.produto.getValorUnitario() * this.quantidade;
+    }
     
 }
