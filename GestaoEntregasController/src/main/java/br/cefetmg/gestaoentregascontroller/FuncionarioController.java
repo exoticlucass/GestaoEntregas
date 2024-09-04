@@ -86,4 +86,7 @@ public class FuncionarioController {
         }
         return false;
     }
+    public List<Funcionario> pesquisarFuncionarios(String cpf, String nome, String telefone, Double porcentagem, String tipos) {
+        return funcionarioDAO.pesquisarFuncionarios(cpf, nome, telefone, porcentagem, tipos);
+    }
 }

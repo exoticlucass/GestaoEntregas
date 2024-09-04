@@ -52,4 +52,7 @@ public class PedidoController {
     public List<Pedido> pesquisarPeriodo(Funcionario funcionario, Date startDate, Date endDate) {
         return pedidoDAO.pesquisarPeriodo(funcionario, startDate, endDate);
     }
+    public List<Pedido> pesquisarPedidos(String cpfCliente, String cpfFuncionario, String status, Date dataInicio, Date dataFim) {
+        return pedidoDAO.pesquisarPedidos(cpfCliente, cpfFuncionario, status, dataInicio, dataFim);
+    }
 }

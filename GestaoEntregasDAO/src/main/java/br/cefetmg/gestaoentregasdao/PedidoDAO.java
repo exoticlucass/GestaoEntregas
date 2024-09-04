@@ -2,14 +2,7 @@ package br.cefetmg.gestaoentregasdao;
 
 import br.cefetmg.gestaoentregasentidades.Funcionario;
 import br.cefetmg.gestaoentregasentidades.Pedido;
-// import br.cefetmg.gestaoentregasentidades.Status; // Supondo que Status é um enum
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.sql.Timestamp;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -61,7 +54,7 @@ public class PedidoDAO {
         return x;
     }
     
-     public List<Pedido> pesquisarData(String data) {
+    public List<Pedido> pesquisarData(String data) {
         var cb = em.getCriteriaBuilder();
         CriteriaQuery<Pedido> criteria = cb.createQuery(Pedido.class);
         var root = criteria.from(Pedido.class);
@@ -71,11 +64,56 @@ public class PedidoDAO {
     }
     
     public List<Pedido> pesquisarPeriodo(Funcionario funcionario, Date startDate, Date endDate) {
-        String jpql = "SELECT p FROM Pedido p JOIN p.funcionario f WHERE f = :funcionario AND p.dt BETWEEN :startDate AND :endDate";
+        String jpql = "SELECT p FROM Pedido p WHERE p.funcionario = :funcionario AND p.dt BETWEEN :startDate AND :endDate";
         TypedQuery<Pedido> query = em.createQuery(jpql, Pedido.class);
         query.setParameter("funcionario", funcionario);
         query.setParameter("startDate", startDate);
         query.setParameter("endDate", endDate);
+        return query.getResultList();
+    }
+    
+    public List<Pedido> pesquisarPedidos(String cpfCliente, String cpfFuncionario, String status, Date dataInicio, Date dataFim) {
+        StringBuilder queryStr = new StringBuilder("SELECT p FROM Pedido p WHERE 1=1");
+
+        if (cpfCliente != null && !cpfCliente.isEmpty()) {
+            queryStr.append(" AND p.cliente.CPF = :cpfCliente");
+        }
+        if (cpfFuncionario != null && !cpfFuncionario.isEmpty()) {
+            queryStr.append(" AND p.funcionario.CPF = :cpfFuncionario");
+        }
+        if (status != null && !status.isEmpty()) {
+            queryStr.append(" AND p.status = :status");
+        }
+        if (dataInicio != null) {
+            queryStr.append(" AND p.dt >= :dataInicio");
+        }
+        if (dataFim != null) {
+            queryStr.append(" AND p.dt <= :dataFim");
+        }
+
+        TypedQuery<Pedido> query = em.createQuery(queryStr.toString(), Pedido.class);
+
+        if (cpfCliente != null && !cpfCliente.isEmpty()) {
+            query.setParameter("cpfCliente", cpfCliente);
+        }
+        if (cpfFuncionario != null && !cpfFuncionario.isEmpty()) {
+            query.setParameter("cpfFuncionario", cpfFuncionario);
+        }
+        if (status != null && !status.isEmpty()) {
+            if(status.equals("EM_PREPARAÇÃO"))
+                query.setParameter("status", Pedido.Status.EM_PREPARACAO);
+            else if(status.equals("ENTREGA"))
+                query.setParameter("status", Pedido.Status.ENTREGA);
+            else if(status.equals("ENTREGUE"))
+                query.setParameter("status", Pedido.Status.ENTREGUE);
+        }
+        if (dataInicio != null) {
+            query.setParameter("dataInicio", dataInicio);
+        }
+        if (dataFim != null) {
+            query.setParameter("dataFim", dataFim);
+        }
+
         return query.getResultList();
     }
 }

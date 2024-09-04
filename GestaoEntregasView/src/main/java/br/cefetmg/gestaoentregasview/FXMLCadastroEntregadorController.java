@@ -56,7 +56,7 @@ public class FXMLCadastroEntregadorController {
                 String telefone = textFieldTelefone.getText();
                 String cpf = textFieldCPF.getText();
                 String senha = textFieldSenha.getText();
-                Double porcentagem = Double.parseDouble(textFieldPorcentagem.getText().replace(',', '.'));;
+                Double porcentagem = Double.parseDouble(textFieldPorcentagem.getText().replace(',', '.'));
                                 
 
                 Perfil perfil = new Perfil();

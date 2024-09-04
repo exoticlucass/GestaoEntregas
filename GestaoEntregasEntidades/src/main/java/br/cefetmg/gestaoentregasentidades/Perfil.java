@@ -21,15 +21,25 @@ public class Perfil {
     @Column(name = "tipo_perfil")
     private TipoPerfil tipoPerfil;
 
-    
+    public String getTipoEnumToString() {
+        if (this.getTipoPerfil() == TipoPerfil.ADMINISTRADOR) {
+            return "ADMINISTRADOR";
+        } else if (this.getTipoPerfil() == TipoPerfil.ATENDENTE) {
+            return "ATENDENTE";
+        } else if (this.getTipoPerfil() == TipoPerfil.CLIENTE) {
+            return "CLIENTE";
+        } else if (this.getTipoPerfil() == TipoPerfil.ENTREGADOR) {
+            return "ENTREGADOR";
+        }
+        return null;
+    }
 
     public int getTipoEnumToInt() {
         if (this.getTipoPerfil() == TipoPerfil.ADMINISTRADOR) {
             return 1;
         } else if (this.getTipoPerfil() == TipoPerfil.ATENDENTE) {
             return 2;
-        }
-        else if (this.getTipoPerfil() == TipoPerfil.CLIENTE) {
+        } else if (this.getTipoPerfil() == TipoPerfil.CLIENTE) {
             return 3;
         }
         return 4;
@@ -72,7 +82,6 @@ public class Perfil {
 //    public Funcionario getFuncionario() {
 //        return funcionario;
 //    }
-
     public String getSenha() {
         return senha;
     }
@@ -80,5 +89,5 @@ public class Perfil {
     public void setSenha(String senha) {
         this.senha = senha;
     }
-    
+
 }
