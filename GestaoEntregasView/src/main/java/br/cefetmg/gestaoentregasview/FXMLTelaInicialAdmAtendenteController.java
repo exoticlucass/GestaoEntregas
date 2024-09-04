@@ -13,10 +13,42 @@ public class FXMLTelaInicialAdmAtendenteController implements Initializable {
     private Label welcomeLabel;
 
     private Funcionario loggedInFuncionario;
+    private FXRedirecionador r = new FXRedirecionador();
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // Inicialização básica
+    }
+
+    @FXML
+    public void onRelatorio() {
+        r.loadScene("FXMLRelatorios.fxml", loggedInFuncionario, welcomeLabel);
+    }
+
+    @FXML
+    public void onCadastrarAtendente() {
+        r.loadScene("FXMLCadastroAtendente.fxml", loggedInFuncionario, welcomeLabel);
+
+    }
+
+    @FXML
+    public void onCadastrarProduto() {
+        r.loadScene("FXMLProdutoCadastro.fxml", loggedInFuncionario, welcomeLabel);
+    }
+
+    @FXML
+    public void onListarPedidos() {
+        r.loadScene("FXMLPedidosListagem.fxml", loggedInFuncionario, welcomeLabel);
+    }
+
+
+    @FXML
+    public void onCadastarPerfil() {
+        r.loadScene("FXMLCadastroEntregador.fxml", loggedInFuncionario, welcomeLabel);
+    }
+    @FXML
+    public void onSair(){
+        r.loadScene("FXMLLogin.fxml", welcomeLabel);
     }
 
     // Método para definir o Funcionario

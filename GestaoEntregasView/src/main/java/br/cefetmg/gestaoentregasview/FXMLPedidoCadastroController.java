@@ -65,6 +65,8 @@ public class FXMLPedidoCadastroController {
     private ObservableList<ItemPedido> listaItens;
 
     private Cliente loggedInCliente;
+    
+    private FXRedirecionador r = new FXRedirecionador();
 
     public FXMLPedidoCadastroController() {
         this.pedidoController = new PedidoController(); // Inicializa o PedidoController
@@ -109,6 +111,7 @@ public class FXMLPedidoCadastroController {
     @FXML
     private void onCancelar() {
         limparCampos();
+        r.loadScene("FXMLTelaInicialCliente.fxml", loggedInCliente, textFieldQuantidade);
     }
 
     private boolean verificarCamposPreenchidos() {

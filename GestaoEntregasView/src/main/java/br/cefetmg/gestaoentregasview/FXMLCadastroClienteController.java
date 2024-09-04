@@ -1,9 +1,10 @@
 package br.cefetmg.gestaoentregasview;
 
-import br.cefetmg.gestaoentregascontroller.FuncionarioController;
+import br.cefetmg.gestaoentregascontroller.ClienteController;
 import br.cefetmg.gestaoentregascontroller.PerfilController;
-import br.cefetmg.gestaoentregasentidades.Funcionario;
+import br.cefetmg.gestaoentregasentidades.Cliente;
 import br.cefetmg.gestaoentregasentidades.Perfil;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import javafx.collections.FXCollections;
@@ -15,58 +16,65 @@ import javafx.scene.control.Alert.AlertType;
 import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
-public class CadastroEntregador {
+public class FXMLCadastroClienteController {
 
     @FXML
     private TextField textFieldNome;
     @FXML
     private TextField textFieldTelefone;
-
+    @FXML
+    private TextField textFieldLogradouro;
+    @FXML
+    private TextField textFieldBairro;
     @FXML
     private TextField textFieldCPF;
 
     @FXML
     private TextField textFieldSenha;
-    @FXML
-    private TextField textFieldPorcentagem;
 
-    FuncionarioController funcionarioController;
+    private ClienteController clienteController;
+
+    private FXRedirecionador r = new FXRedirecionador();
 
     @FXML
     private void initialize() {
-        this.funcionarioController = new FuncionarioController();
+        this.clienteController = new ClienteController(); // Inicializa o PedidoController
     }
 
     @FXML
     private void salvarPedido() {
         try {
             if (verificarCamposPreenchidos()) {
-
-                // adicionar campos
-                Funcionario funcionario = new Funcionario();
+                Cliente cliente = new Cliente(); // colocar cliente logado
 
                 String nome = textFieldNome.getText();
                 String telefone = textFieldTelefone.getText();
+                String logradouro = textFieldLogradouro.getText();
+                String bairro = textFieldBairro.getText();
                 String cpf = textFieldCPF.getText();
                 String senha = textFieldSenha.getText();
-                Double porcentagem = Double.parseDouble(textFieldPorcentagem.getText().replace(',', '.'));;
-                                
 
                 Perfil perfil = new Perfil();
-                perfil.setTipoPerfil(Perfil.TipoPerfil.ENTREGADOR);
+                perfil.setTipoPerfil(Perfil.TipoPerfil.CLIENTE);
                 perfil.setSenha(senha);
 
-                funcionario.setCPF(cpf);
-                funcionario.setNome(nome);
-                funcionario.setPerfil(perfil);
-                funcionario.setPorcentagemComissaoEntregador(porcentagem);
-                funcionario.setTelefone(telefone);
+                cliente.setBairro(bairro);
+                cliente.setCPF(cpf);
+                cliente.setCNPJ(cpf);
+                cliente.setLogradouro(logradouro);
+                cliente.setNome(nome);
+                cliente.setPerfil(perfil);
 
-                funcionarioController.inserir(funcionario);
+                clienteController.salvarCliente(cliente);
 
                 exibirAlerta("Sucesso", "Perfil cadastrado com sucesso!", AlertType.INFORMATION);
                 limparCampos();
+                r.loadScene("FXMLLoginController.fxml",textFieldCPF);
             } else {
                 exibirAlerta("Campos Incompletos", "Preencha todos os campos obrigatórios.", AlertType.WARNING);
             }
@@ -79,6 +87,8 @@ public class CadastroEntregador {
     private boolean verificarCamposPreenchidos() {
         return !textFieldNome.getText().isEmpty()
                 && !textFieldTelefone.getText().isEmpty()
+                && !textFieldLogradouro.getText().isEmpty()
+                && !textFieldBairro.getText().isEmpty()
                 && !textFieldCPF.getText().isEmpty()
                 && !textFieldSenha.getText().isEmpty();
     }
@@ -86,6 +96,8 @@ public class CadastroEntregador {
     private void limparCampos() {
         textFieldNome.clear();
         textFieldTelefone.clear();
+        textFieldLogradouro.clear();
+        textFieldBairro.clear();
         textFieldCPF.clear();
         textFieldSenha.clear();
     }
@@ -98,10 +110,16 @@ public class CadastroEntregador {
         alerta.showAndWait();
     }
 
+    private void showAlert(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
     @FXML
     private void onCancelar() {
-        if (textFieldNome.getScene() != null) {
-            textFieldNome.getScene().getWindow().hide();
-        }
+        r.loadScene("FXMLLoginController.fxml", textFieldCPF);
     }
 }

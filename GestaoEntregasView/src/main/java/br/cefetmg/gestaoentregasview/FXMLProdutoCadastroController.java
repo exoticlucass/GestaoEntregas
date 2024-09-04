@@ -25,6 +25,12 @@ public class FXMLProdutoCadastroController {
     private TextField textFieldValorUnitario;    
     
     private ProdutoController produtoController;
+    private Funcionario loggedInFuncionario;
+    private FXRedirecionador r = new FXRedirecionador();
+    public void setFuncionario(Funcionario funcionario) {
+        this.loggedInFuncionario = funcionario;
+    }
+
 
     public FXMLProdutoCadastroController() {
         this.produtoController = new ProdutoController(); 
@@ -59,6 +65,7 @@ public class FXMLProdutoCadastroController {
     @FXML
     private void onCancelar() {
         limparCampos();
+        r.loadScene("FXMLTelaInicialAdmAtendente.fxml", loggedInFuncionario, textFieldNome);
     }
 
     private boolean verificarCamposPreenchidos() {

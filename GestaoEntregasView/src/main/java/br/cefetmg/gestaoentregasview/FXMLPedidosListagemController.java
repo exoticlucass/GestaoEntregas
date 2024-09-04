@@ -1,6 +1,7 @@
 package br.cefetmg.gestaoentregasview;
 
 import br.cefetmg.gestaoentregascontroller.PedidoController;
+import br.cefetmg.gestaoentregasentidades.Funcionario;
 import br.cefetmg.gestaoentregasentidades.Pedido;
 import br.cefetmg.gestaoentregasentidades.Pedido.Status;
 import javafx.collections.FXCollections;
@@ -30,6 +31,10 @@ public class FXMLPedidosListagemController {
     private TableColumn<Pedido, Void> columnAcoes;
 
     private PedidoController pedidoController;
+    private Funcionario loggedInFuncionario;
+    public void setFuncionario(Funcionario funcionario) {
+        this.loggedInFuncionario = funcionario;
+    }
 
     @FXML
     private void initialize() {

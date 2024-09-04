@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<GridPane alignment="center" hgap="10" prefHeight="501.0" prefWidth="779.0" stylesheets="@style.css" vgap="10" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.cefetmg.gestaoentregasview.CadastroEntregador">
+<GridPane alignment="center" hgap="10" prefHeight="501.0" prefWidth="779.0" stylesheets="@style.css" vgap="10" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.cefetmg.gestaoentregasview.FXMLCadastroEntregadorController">
     <!-- Labels and Inputs -->
     <Label text="Nome: " GridPane.rowIndex="1" />
     <TextField fx:id="textFieldNome" GridPane.columnIndex="1" GridPane.rowIndex="1" />

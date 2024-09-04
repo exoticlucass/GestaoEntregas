@@ -50,6 +50,12 @@ public class FXMLRelatoriosController {
 
     private FuncionarioController funcionarioController = new FuncionarioController();
     private PedidoController pedidoController = new PedidoController();
+    
+    private Funcionario loggedInFuncionario;
+    public void setFuncionario(Funcionario funcionario) {
+        this.loggedInFuncionario = funcionario;
+    }
+
 
     @FXML
     public void initialize() {

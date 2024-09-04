@@ -16,20 +16,28 @@ import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
 
-public class CadastroAtendente {
+public class FXMLCadastroEntregadorController {
 
     @FXML
     private TextField textFieldNome;
     @FXML
     private TextField textFieldTelefone;
-    
+
     @FXML
     private TextField textFieldCPF;
 
     @FXML
     private TextField textFieldSenha;
+    @FXML
+    private TextField textFieldPorcentagem;
 
-    FuncionarioController funcionarioController;
+    private FuncionarioController funcionarioController;
+    
+    private FXRedirecionador r = new FXRedirecionador();
+    private Funcionario loggedInFuncionario;
+    public void setFuncionario(Funcionario funcionario) {
+        this.loggedInFuncionario = funcionario;
+    }
 
     @FXML
     private void initialize() {
@@ -40,7 +48,7 @@ public class CadastroAtendente {
     private void salvarPedido() {
         try {
             if (verificarCamposPreenchidos()) {
-                
+
                 // adicionar campos
                 Funcionario funcionario = new Funcionario();
 
@@ -48,21 +56,19 @@ public class CadastroAtendente {
                 String telefone = textFieldTelefone.getText();
                 String cpf = textFieldCPF.getText();
                 String senha = textFieldSenha.getText();
+                Double porcentagem = Double.parseDouble(textFieldPorcentagem.getText().replace(',', '.'));;
+                                
 
                 Perfil perfil = new Perfil();
-                perfil.setTipoPerfil(Perfil.TipoPerfil.ATENDENTE);
+                perfil.setTipoPerfil(Perfil.TipoPerfil.ENTREGADOR);
                 perfil.setSenha(senha);
-                
 
-                
                 funcionario.setCPF(cpf);
                 funcionario.setNome(nome);
                 funcionario.setPerfil(perfil);
-                funcionario.setPorcentagemComissaoEntregador(0);
+                funcionario.setPorcentagemComissaoEntregador(porcentagem);
                 funcionario.setTelefone(telefone);
-                
-                
-                
+
                 funcionarioController.inserir(funcionario);
 
                 exibirAlerta("Sucesso", "Perfil cadastrado com sucesso!", AlertType.INFORMATION);
@@ -76,9 +82,8 @@ public class CadastroAtendente {
         }
     }
 
-
     private boolean verificarCamposPreenchidos() {
-        return  !textFieldNome.getText().isEmpty()
+        return !textFieldNome.getText().isEmpty()
                 && !textFieldTelefone.getText().isEmpty()
                 && !textFieldCPF.getText().isEmpty()
                 && !textFieldSenha.getText().isEmpty();
@@ -101,8 +106,6 @@ public class CadastroAtendente {
 
     @FXML
     private void onCancelar() {
-        if (textFieldNome.getScene() != null) {
-            textFieldNome.getScene().getWindow().hide();
-        }
+        r.loadScene("FXMLTelaInicialAdmAtendente.fxml", loggedInFuncionario, textFieldCPF);
     }
 }

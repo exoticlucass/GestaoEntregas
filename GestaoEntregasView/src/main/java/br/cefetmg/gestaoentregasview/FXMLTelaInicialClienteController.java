@@ -23,7 +23,7 @@ public class FXMLTelaInicialClienteController implements Initializable {
 
     private Cliente loggedInCliente;
 
-    FXRedirecionador r = new FXRedirecionador();
+    private FXRedirecionador r = new FXRedirecionador();
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -33,6 +33,10 @@ public class FXMLTelaInicialClienteController implements Initializable {
     @FXML
     private void onPedido() {
         r.loadScene("FXMLPedidoCadastro.fxml", loggedInCliente, welcomeLabel);
+    }
+    @FXML
+    public void onSair(){
+        r.loadScene("FXMLLogin.fxml", welcomeLabel);
     }
 
     // Método para definir o Cliente

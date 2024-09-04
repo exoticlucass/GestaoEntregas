@@ -13,12 +13,17 @@ public class FXMLTelaInicialEntregadorController implements Initializable {
     private Label welcomeLabel;
 
     private Funcionario loggedInFuncionario;
+    
+    private FXRedirecionador r = new FXRedirecionador();
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // Inicialização básica
     }
-
+    @FXML
+    public void onSair(){
+        r.loadScene("FXMLLogin.fxml", welcomeLabel);
+    }
     // Método para definir o Funcionario
     public void setFuncionario(Funcionario funcionario) {
         this.loggedInFuncionario = funcionario;
