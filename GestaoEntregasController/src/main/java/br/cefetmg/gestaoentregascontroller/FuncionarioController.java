@@ -5,9 +5,14 @@
 package br.cefetmg.gestaoentregascontroller;
 
 import br.cefetmg.gestaoentregasdao.FuncionarioDAO;
-import br.cefetmg.gestaoentregasdao.PerfilDAO;
+
 import br.cefetmg.gestaoentregasentidades.Funcionario;
+import br.cefetmg.gestaoentregascontroller.PedidoController;
+import br.cefetmg.gestaoentregasentidades.Pedido;
 import br.cefetmg.gestaoentregasentidades.Perfil;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -17,6 +22,7 @@ import java.util.List;
 public class FuncionarioController {
 
     FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
+    PedidoController pedidoController = new PedidoController();
 
     public void inserir(Funcionario funcionario) {
         
@@ -27,7 +33,41 @@ public class FuncionarioController {
 
         return funcionarioDAO.listAll();
     }
+    public List<Funcionario> listarEntregadores(){
+        List<Funcionario> entregadores = new ArrayList<>();
+        List<Funcionario> geral = this.listarTodos();
+        
+        for(Funcionario funcionario : geral){
+            if(funcionario.getPerfil().getTipoPerfil() == Perfil.TipoPerfil.ENTREGADOR){
+                entregadores.add(funcionario);
+            }
+        }
+        return entregadores;
+    }
 
+    public Funcionario escolhaDeFuncionario() {
+       
+        List<Funcionario> funcionarios = this.listarEntregadores(); 
+        Funcionario escolhido = null;
+        int menorNumeroDePedidos = Integer.MAX_VALUE;
+
+        
+        Calendar cal = Calendar.getInstance();
+        Date endDate = cal.getTime();
+        cal.add(Calendar.WEEK_OF_YEAR, -1);
+        Date startDate = cal.getTime();
+
+        for (Funcionario funcionario : funcionarios) {
+            List<Pedido> pedidosNaUltimaSemana = pedidoController.pesquisarPeriodo(funcionario, startDate, endDate);
+            int numeroDePedidos = pedidosNaUltimaSemana.size();
+
+            if (numeroDePedidos < menorNumeroDePedidos) {
+                menorNumeroDePedidos = numeroDePedidos;
+                escolhido = funcionario;
+            }
+        }
+        return escolhido;
+    }
     public Funcionario procurarCPF(String cpf) {
         List<Funcionario> lista = funcionarioDAO.listAll();
 

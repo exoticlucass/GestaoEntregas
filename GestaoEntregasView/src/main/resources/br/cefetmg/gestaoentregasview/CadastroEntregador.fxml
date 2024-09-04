@@ -7,23 +7,30 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<GridPane alignment="center" hgap="10" prefHeight="501.0" prefWidth="779.0" stylesheets="@style.css" vgap="10" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/22" fx:controller="br.cefetmg.gestaoentregasview.CadastroEntregador">
+<GridPane alignment="center" hgap="10" prefHeight="501.0" prefWidth="779.0" stylesheets="@style.css" vgap="10" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.cefetmg.gestaoentregasview.CadastroEntregador">
     <!-- Labels and Inputs -->
     <Label text="Nome: " GridPane.rowIndex="1" />
     <TextField fx:id="textFieldNome" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-    <Label text="Telefone: " GridPane.rowIndex="5" />
-    <TextField fx:id="textFieldTelefone" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-    <Label text="Senha: " GridPane.rowIndex="3" />
-    <TextField fx:id="textFieldSenha" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+    <Label text="Telefone: " GridPane.rowIndex="6" />
+    <TextField fx:id="textFieldTelefone" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+    <Label text="Senha: " GridPane.rowIndex="4" />
+    <TextField fx:id="textFieldSenha" GridPane.columnIndex="1" GridPane.rowIndex="4" />
     <!-- Buttons -->
-    <Button onAction="#salvarPedido" text="Salvar" GridPane.rowIndex="9" />
-    <Button onAction="#onCancelar" text="Cancelar" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+    <Button onAction="#salvarPedido" text="Salvar" GridPane.rowIndex="11" />
+    <Button onAction="#onCancelar" text="Cancelar" GridPane.columnIndex="1" GridPane.rowIndex="11" />
+   <Label GridPane.rowIndex="7" />
+   <Label text="CPF: " GridPane.rowIndex="2" />
+   <TextField fx:id="textFieldCPF" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+   <Label prefHeight="54.0" prefWidth="97.0" text="Porcentagem:" GridPane.rowIndex="7" />
+   <TextField fx:id="textFieldPorcentagem" GridPane.columnIndex="1" GridPane.rowIndex="7" />
    <columnConstraints>
       <ColumnConstraints />
       <ColumnConstraints />
       <ColumnConstraints />
    </columnConstraints>
    <rowConstraints>
+      <RowConstraints />
+      <RowConstraints />
       <RowConstraints />
       <RowConstraints />
       <RowConstraints />

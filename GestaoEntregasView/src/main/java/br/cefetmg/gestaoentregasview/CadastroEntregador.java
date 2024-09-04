@@ -22,12 +22,14 @@ public class CadastroEntregador {
     private TextField textFieldNome;
     @FXML
     private TextField textFieldTelefone;
-    
+
     @FXML
     private TextField textFieldCPF;
 
     @FXML
     private TextField textFieldSenha;
+    @FXML
+    private TextField textFieldPorcentagem;
 
     FuncionarioController funcionarioController;
 
@@ -40,7 +42,7 @@ public class CadastroEntregador {
     private void salvarPedido() {
         try {
             if (verificarCamposPreenchidos()) {
-                
+
                 // adicionar campos
                 Funcionario funcionario = new Funcionario();
 
@@ -48,21 +50,19 @@ public class CadastroEntregador {
                 String telefone = textFieldTelefone.getText();
                 String cpf = textFieldCPF.getText();
                 String senha = textFieldSenha.getText();
+                Double porcentagem = Double.parseDouble(textFieldPorcentagem.getText().replace(',', '.'));;
+                                
 
                 Perfil perfil = new Perfil();
                 perfil.setTipoPerfil(Perfil.TipoPerfil.ENTREGADOR);
                 perfil.setSenha(senha);
-                
 
-                
                 funcionario.setCPF(cpf);
                 funcionario.setNome(nome);
                 funcionario.setPerfil(perfil);
-                funcionario.setPorcentagemComissaoEntregador(0);
+                funcionario.setPorcentagemComissaoEntregador(porcentagem);
                 funcionario.setTelefone(telefone);
-                
-                
-                
+
                 funcionarioController.inserir(funcionario);
 
                 exibirAlerta("Sucesso", "Perfil cadastrado com sucesso!", AlertType.INFORMATION);
@@ -76,9 +76,8 @@ public class CadastroEntregador {
         }
     }
 
-
     private boolean verificarCamposPreenchidos() {
-        return  !textFieldNome.getText().isEmpty()
+        return !textFieldNome.getText().isEmpty()
                 && !textFieldTelefone.getText().isEmpty()
                 && !textFieldCPF.getText().isEmpty()
                 && !textFieldSenha.getText().isEmpty();

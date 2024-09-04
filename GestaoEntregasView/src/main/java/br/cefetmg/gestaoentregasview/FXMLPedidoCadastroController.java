@@ -2,6 +2,8 @@ package br.cefetmg.gestaoentregasview;
 
 import br.cefetmg.gestaoentregascontroller.PedidoController;
 import br.cefetmg.gestaoentregascontroller.ProdutoController;
+import br.cefetmg.gestaoentregascontroller.FuncionarioController;
+
 import br.cefetmg.gestaoentregasentidades.*;
 import java.util.ArrayList;
 import java.util.Date;
@@ -77,7 +79,19 @@ public class FXMLPedidoCadastroController {
                 pedido.setData(new Date());
                 pedido.setItemPedido(new ArrayList<>(listaItens));
                 pedido.setStatus(Pedido.Status.EM_PREPARACAO);
-                pedido.setValorTotal(Double.parseDouble(textFieldValorTotal.getText()));
+
+                // Atribui um funcionário ao pedido usando a função de escolha de funcionário
+                FuncionarioController funcionarioController = new FuncionarioController();
+                Funcionario funcionarioEscolhido = funcionarioController.escolhaDeFuncionario();
+                if (funcionarioEscolhido != null) {
+                    pedido.setFuncionario(funcionarioEscolhido);
+                } else {
+                    exibirAlerta("Erro", "Não foi possível atribuir um funcionário ao pedido.", AlertType.ERROR);
+                    return; 
+                }
+
+                double valorTotalPedido = calcularValorTotalPedido(); 
+                pedido.setValorTotal(valorTotalPedido);
 
                 pedidoController.salvarPedido(pedido);
 
@@ -101,10 +115,7 @@ public class FXMLPedidoCadastroController {
         return comboBoxProduto.getValue() != null
                 && !textFieldQuantidade.getText().isEmpty()
                 && !textFieldValorUnitario.getText().isEmpty()
-                && !textFieldValorTotal.getText().isEmpty()
-                && !textFieldMarca.getText().isEmpty()
-                && !textFieldFormaPagamento.getText().isEmpty()
-                && !textFieldEndereco.getText().isEmpty();
+                && !textFieldMarca.getText().isEmpty();
     }
 
     private void limparCampos() {
@@ -113,7 +124,7 @@ public class FXMLPedidoCadastroController {
         textFieldEndereco.clear();
         textAreaObservacoes.clear();
         listaItens.clear();
-        textFieldValorTotal.clear();
+        textFieldValorTotal.clear(); // Limpa o valor total do pedido
     }
 
     private void exibirAlerta(String titulo, String mensagem, AlertType tipo) {
@@ -171,7 +182,6 @@ public class FXMLPedidoCadastroController {
             Produto produto = comboBoxProduto.getValue();
             int quantidade = Integer.parseInt(textFieldQuantidade.getText());
             double valorUnitario = Double.parseDouble(textFieldValorUnitario.getText().replace(',', '.'));
-            double valorTotal = quantidade * valorUnitario;
 
             ItemPedido itemPedido = new ItemPedido();
             itemPedido.setProduto(produto);
@@ -186,9 +196,12 @@ public class FXMLPedidoCadastroController {
         }
     }
 
-    private void calcularValorTotalPedido() {
-        double valorTotalPedido = listaItens.stream().mapToDouble(item -> item.getQuantidade() * item.getProduto().getValorUnitario()).sum();
+    private double calcularValorTotalPedido() {
+        double valorTotalPedido = listaItens.stream()
+                .mapToDouble(item -> item.getQuantidade() * item.getProduto().getValorUnitario())
+                .sum();
         textFieldValorTotal.setText(String.format("%.2f", valorTotalPedido));
+        return valorTotalPedido; // Retorna o valor total para uso posterior
     }
 
     private void preencherCamposProduto(Produto produto) {
