@@ -106,6 +106,7 @@ public class FXRedirecionador {
             stage.show();
 
         } catch (IOException e) {
+            e.printStackTrace();
             showAlert("Erro", "Não foi possível carregar a tela: " + e.getMessage());
         }
     }

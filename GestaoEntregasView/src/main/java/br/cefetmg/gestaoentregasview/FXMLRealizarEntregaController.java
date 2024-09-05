@@ -58,14 +58,15 @@ public class FXMLRealizarEntregaController {
     private ComboBox<String> comboBoxStatus;
     
     private PedidoController pedidoController;
-FuncionarioController fc = new FuncionarioController();
-    private Funcionario loggedInFuncionario = fc.procurarCPF("1234");
     
+    private FuncionarioController fc = new FuncionarioController();
+    private Funcionario loggedInFuncionario;
     private FXRedirecionador r = new FXRedirecionador();
 
     public void setFuncionario(Funcionario funcionario) {
+        this.loggedInFuncionario = funcionario;
         
-        this.loggedInFuncionario = fc.procurarCPF("1234");
+        carregarPedidos();
     }
 
     @FXML
@@ -93,7 +94,6 @@ FuncionarioController fc = new FuncionarioController();
         });
         comboBoxStatus.setItems(FXCollections.observableArrayList("EM_PREPARAÇÃO", "ENTREGA", "ENTREGUE"));
 
-        carregarPedidos();
     }
 
     private void carregarPedidos() {
@@ -121,7 +121,6 @@ FuncionarioController fc = new FuncionarioController();
         } catch (ParseException e) {
             e.printStackTrace();
         }
-
         List<Pedido> pedidosFiltrados = pedidoController.pesquisarPedidos(cpfCliente, cpfFuncionario, status, dataInicio, dataFim);
         tableViewPedidos.setItems(FXCollections.observableArrayList(pedidosFiltrados));
     }
