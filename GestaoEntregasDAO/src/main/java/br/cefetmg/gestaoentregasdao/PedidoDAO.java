@@ -53,16 +53,16 @@ public class PedidoDAO {
         Pedido x = em.find(Pedido.class, id);
         return x;
     }
-    
+
     public List<Pedido> pesquisarData(String data) {
         var cb = em.getCriteriaBuilder();
         CriteriaQuery<Pedido> criteria = cb.createQuery(Pedido.class);
         var root = criteria.from(Pedido.class);
-        criteria.select(root).where(cb.like(root.get("data"), "%"+data+"%"));
+        criteria.select(root).where(cb.like(root.get("data"), "%" + data + "%"));
         List<Pedido> lista = em.createQuery(criteria).getResultList();
         return lista;
     }
-    
+
     public List<Pedido> pesquisarPeriodo(Funcionario funcionario, Date startDate, Date endDate) {
         String jpql = "SELECT p FROM Pedido p WHERE p.funcionario = :funcionario AND p.dt BETWEEN :startDate AND :endDate";
         TypedQuery<Pedido> query = em.createQuery(jpql, Pedido.class);
@@ -71,7 +71,7 @@ public class PedidoDAO {
         query.setParameter("endDate", endDate);
         return query.getResultList();
     }
-    
+
     public List<Pedido> pesquisarPedidos(String cpfCliente, String cpfFuncionario, String status, Date dataInicio, Date dataFim) {
         StringBuilder queryStr = new StringBuilder("SELECT p FROM Pedido p WHERE 1=1");
 
@@ -100,12 +100,13 @@ public class PedidoDAO {
             query.setParameter("cpfFuncionario", cpfFuncionario);
         }
         if (status != null && !status.isEmpty()) {
-            if(status.equals("EM_PREPARAÇÃO"))
+            if (status.equals("EM_PREPARAÇÃO")) {
                 query.setParameter("status", Pedido.Status.EM_PREPARACAO);
-            else if(status.equals("ENTREGA"))
+            } else if (status.equals("ENTREGA")) {
                 query.setParameter("status", Pedido.Status.ENTREGA);
-            else if(status.equals("ENTREGUE"))
+            } else if (status.equals("ENTREGUE")) {
                 query.setParameter("status", Pedido.Status.ENTREGUE);
+            }
         }
         if (dataInicio != null) {
             query.setParameter("dataInicio", dataInicio);

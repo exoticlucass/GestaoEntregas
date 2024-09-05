@@ -34,12 +34,8 @@
                         <Button mnemonicParsing="false" onAction="#onListarPedidos" prefHeight="40.0" prefWidth="164.0" text="Listar Pedidos" textAlignment="CENTER" />
                         <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="164.0" text="Listar Produtos" GridPane.rowIndex="1" />
                         <Button mnemonicParsing="false" onAction="#onCadastarPerfil" prefHeight="40.0" prefWidth="235.0" text="Cadastrar Entregador" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                  <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="164.0" text="Cadastrar Cliente" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                     <GridPane.margin>
-                        <Insets left="7.5" />
-                     </GridPane.margin>
-                  </Button>
-                  <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="164.0" text="Listar Funcionarios" GridPane.rowIndex="2" />
+                  
+                  <Button mnemonicParsing="false" onAction="#onListarFuncionarios" prefHeight="40.0" prefWidth="164.0" text="Listar Funcionarios" GridPane.rowIndex="2" />
                     </children>
                 </GridPane>
             <Button onAction="#onSair" layoutX="502.0" layoutY="29.0" mnemonicParsing="false" text="Sair" />

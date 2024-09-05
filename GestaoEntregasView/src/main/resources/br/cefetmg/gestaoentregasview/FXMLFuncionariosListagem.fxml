@@ -9,14 +9,14 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.cefetmg.gestaoentregasview.FXMLFuncionariosListagemController">
+<VBox xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" prefHeight="400.0" prefWidth="800.0" fx:controller="br.cefetmg.gestaoentregasview.FXMLFuncionariosListagemController">
     <HBox spacing="10">
         <TextField fx:id="textFieldCpf" promptText="CPF" />
-        <TextField fx:id="textFieldNome" promptText="Nome>
-            <TextField fx:id="textFieldTelefone" promptText="Telefone" />
-            <TextField fx:id="textFieldPorcentagem" promptText="porcentagem" />
-            <ComboBox fx:id="comboBoxTipo" promptText="Status" />
-            <Button text="Pesquisar" onAction="#pesquisar" />
+        <TextField fx:id="textFieldNome" promptText="Nome" />
+        <TextField fx:id="textFieldTelefone" promptText="Telefone" />
+        <TextField fx:id="textFieldPorcentagem" promptText="Porcentagem" />
+        <ComboBox fx:id="comboBoxTipo" promptText="Status" />
+        <Button text="Pesquisar" onAction="#pesquisar" />
     </HBox>
     
     <TableView fx:id="tableViewFuncionarios" prefHeight="400.0" prefWidth="600.0">

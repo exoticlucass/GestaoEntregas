@@ -71,13 +71,13 @@ public class FuncionarioDAO {
             queryStr.append(" AND f.nome = :nome");
         }
         if (tipos != null && !tipos.isEmpty()) {
-            queryStr.append(" AND f.perfil.tipo_perfil = :tipos");
+            queryStr.append(" AND f.perfil.tipoPerfil = :tipos");
         }
         if (telefone != null && !telefone.isEmpty()) {
-            queryStr.append(" AND f.telefone = :tipos");
+            queryStr.append(" AND f.telefone = :telefone");
         }
         if (porcentagem != null) {
-            queryStr.append(" AND f.porcentagem_comissao_entregador = :porcentagem");
+            queryStr.append(" AND f.porcentagemComissaoEntregador = :porcentagem");
         }
 
         TypedQuery<Funcionario> query = em.createQuery(queryStr.toString(), Funcionario.class);
@@ -98,11 +98,11 @@ public class FuncionarioDAO {
             if (tipos.equals("ADMINISTRADOR")) {
                 query.setParameter("tipos", Perfil.TipoPerfil.ADMINISTRADOR);
             } else if (tipos.equals("ATENDENTE")) {
-                query.setParameter("status", Perfil.TipoPerfil.ATENDENTE);
+                query.setParameter("tipos", Perfil.TipoPerfil.ATENDENTE);
             } else if (tipos.equals("CLIENTE")) {
-                query.setParameter("status", Perfil.TipoPerfil.CLIENTE);
+                query.setParameter("tipos", Perfil.TipoPerfil.CLIENTE);
             } else if (tipos.equals("ENTREGADOR")) {
-                query.setParameter("status", Perfil.TipoPerfil.ENTREGADOR);
+                query.setParameter("tipos", Perfil.TipoPerfil.ENTREGADOR);
             }
         }
 

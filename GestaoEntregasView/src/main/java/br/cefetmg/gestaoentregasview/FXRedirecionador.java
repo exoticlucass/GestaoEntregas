@@ -67,7 +67,8 @@ public class FXRedirecionador {
 
     public void loadScene(String fxmlFile, Funcionario funcionario, Label label) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
+
+            FXMLLoader loader = new FXMLLoader(App.class.getResource(fxmlFile));
             Parent root = loader.load();
 
             // Grama esse aqui é o codigo que passa se vc precisar (dentro do controller desse fxml tem a outra parte dele)
@@ -92,11 +93,18 @@ public class FXRedirecionador {
             } else if (fxmlFile.equals("FXMLCadastroEntregador.fxml")) {
                 FXMLCadastroEntregadorController controller = loader.getController();
                 controller.setFuncionario(funcionario);
+            } else if (fxmlFile.equals("FXMLFuncionariosListagem.fxml")) {
+                FXMLFuncionariosListagemController controller = loader.getController();
+                controller.setFuncionario(funcionario);
+            } else if (fxmlFile.equals("FXMLRealizarEntrega.fxml")) {
+                FXMLRealizarEntregaController controller = loader.getController();
+                controller.setFuncionario(funcionario);
             }
 
             Stage stage = (Stage) label.getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.show();
+
         } catch (IOException e) {
             showAlert("Erro", "Não foi possível carregar a tela: " + e.getMessage());
         }

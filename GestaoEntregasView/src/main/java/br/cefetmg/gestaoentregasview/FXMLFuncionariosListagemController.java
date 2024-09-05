@@ -30,6 +30,8 @@ public class FXMLFuncionariosListagemController {
     @FXML
     private TableColumn<Funcionario, String> columnTelefone;
     @FXML
+    private TableColumn<Funcionario, Double> columnPorcentagem;
+    @FXML
     private TableColumn<Funcionario, String> columnTipo;
 
     @FXML
@@ -57,9 +59,11 @@ public class FXMLFuncionariosListagemController {
         funcionarioController = new FuncionarioController();
 
         columnId.setCellValueFactory(new PropertyValueFactory<>("id"));
-        columnCpf.setCellValueFactory(new PropertyValueFactory<>("cpf"));
-        columnNome.setCellValueFactory(new PropertyValueFactory<>("data"));
-        columnTelefone.setCellValueFactory(new PropertyValueFactory<>("valorTotal"));
+        columnCpf.setCellValueFactory(new PropertyValueFactory<>("CPF"));
+        columnNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
+        columnTelefone.setCellValueFactory(new PropertyValueFactory<>("telefone"));
+        columnPorcentagem.setCellValueFactory(new PropertyValueFactory<>("porcentagemComissaoEntregador"));
+
         columnTipo.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getPerfil().getTipoEnumToString()));
 
         comboBoxTipo.setItems(FXCollections.observableArrayList("ADMINISTRADOR", "ATENDENTE", "ENTREGADOR", "CLIENTE"));
@@ -77,7 +81,12 @@ public class FXMLFuncionariosListagemController {
         String cpf = textFieldCpf.getText();
         String nome = textFieldNome.getText();
         String telefone = textFieldTelefone.getText();
-        Double porcentagem = Double.parseDouble(textFieldPorcentagem.getText().replace(',', '.'));
+        String porcentagemText = textFieldPorcentagem.getText().replace(',', '.');
+        Double porcentagem = null;
+
+        if (!porcentagemText.isEmpty()) {
+            porcentagem = Double.parseDouble(porcentagemText);
+        }
 
         String tipos = comboBoxTipo.getValue();
 

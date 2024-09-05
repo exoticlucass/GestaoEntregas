@@ -21,6 +21,10 @@ public class FXMLTelaInicialEntregadorController implements Initializable {
         // Inicialização básica
     }
     @FXML
+    public void onEntrega(){
+        r.loadScene("FXMLRealizarEntrega.fxml", loggedInFuncionario, welcomeLabel);
+    }
+    @FXML
     public void onSair(){
         r.loadScene("FXMLLogin.fxml", welcomeLabel);
     }
