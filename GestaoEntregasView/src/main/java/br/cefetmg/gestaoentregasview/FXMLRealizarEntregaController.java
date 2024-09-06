@@ -170,4 +170,8 @@ public class FXMLRealizarEntregaController {
             }
         }
     }
+    @FXML
+    private void voltarPagina() {
+        r.loadScene("FXMLTelaInicialEntregador.fxml", loggedInFuncionario, textFieldCpfCliente);
+    }
 }

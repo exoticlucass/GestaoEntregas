@@ -23,4 +23,7 @@ public class ProdutoController {
     public List<Produto> listarProdutos() {
         return produtoDAO.listAll();
     }
+    public List<Produto> pesquisarProdutos(String nome, String localizacao, Double valorUnitario) {
+        return produtoDAO.pesquisarProdutos(nome, localizacao, valorUnitario);
+    }
 }

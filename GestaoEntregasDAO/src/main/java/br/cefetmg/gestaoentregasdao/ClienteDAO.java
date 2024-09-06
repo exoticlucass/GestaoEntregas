@@ -9,6 +9,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.TypedQuery;
 
 public class ClienteDAO {
 
@@ -53,5 +54,32 @@ public class ClienteDAO {
         em.getTransaction().begin();
         Cliente x = em.find(Cliente.class, id);
         return x;
+    }
+    public List<Cliente> pesquisarClientes(String cpf, String nome, String telefone) {
+        StringBuilder queryStr = new StringBuilder("SELECT c FROM Cliente c WHERE 1=1");
+
+        if (cpf != null && !cpf.isEmpty()) {
+            queryStr.append(" AND c.cpf = :cpf");
+        }
+        if (nome != null && !nome.isEmpty()) {
+            queryStr.append(" AND c.nome LIKE :nome");
+        }
+        if (telefone != null && !telefone.isEmpty()) {
+            queryStr.append(" AND c.telefone = :telefone");
+        }
+
+        TypedQuery<Cliente> query = em.createQuery(queryStr.toString(), Cliente.class);
+
+        if (cpf != null && !cpf.isEmpty()) {
+            query.setParameter("cpf", cpf);
+        }
+        if (nome != null && !nome.isEmpty()) {
+            query.setParameter("nome", "%" + nome + "%");
+        }
+        if (telefone != null && !telefone.isEmpty()) {
+            query.setParameter("telefone", telefone);
+        }
+
+        return query.getResultList();
     }
 }

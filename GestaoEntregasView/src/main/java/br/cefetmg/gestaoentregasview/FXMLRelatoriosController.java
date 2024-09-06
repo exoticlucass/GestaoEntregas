@@ -1,111 +1,125 @@
 package br.cefetmg.gestaoentregasview;
 
-import br.cefetmg.gestaoentregasview.model.FuncionarioComissao;
-import br.cefetmg.gestaoentregasentidades.Funcionario;
-import br.cefetmg.gestaoentregasentidades.Pedido;
 import br.cefetmg.gestaoentregascontroller.FuncionarioController;
 import br.cefetmg.gestaoentregascontroller.PedidoController;
-
+import br.cefetmg.gestaoentregasentidades.Funcionario;
+import br.cefetmg.gestaoentregasentidades.ItemPedido;
+import br.cefetmg.gestaoentregasentidades.Pedido;
+import br.cefetmg.gestaoentregasentidades.Perfil;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.VBox;
 
-import java.time.LocalDate;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 public class FXMLRelatoriosController {
 
     @FXML
-    private TableView<FuncionarioComissao> tabelaFuncionarios;
-
+    private TextField textFieldCpfEntregador;
     @FXML
-    private TableColumn<FuncionarioComissao, String> colunaNome;
-
+    private TextField textFieldDataInicio;
     @FXML
-    private TableColumn<FuncionarioComissao, String> colunaCpf;
-
+    private TextField textFieldDataFim;
     @FXML
-    private TableColumn<FuncionarioComissao, Double> colunaValorTotalVendido;
-
+    private Button buttonPesquisar;
     @FXML
-    private TableColumn<FuncionarioComissao, Double> colunaPorcentagem;
-
+    private Label labelTotalEntregue;
     @FXML
-    private TableColumn<FuncionarioComissao, Double> colunaComissao;
-
+    private Label labelTotalComissao;
     @FXML
-    private TextField campoBuscaCpf;
-
-    @FXML
-    private DatePicker dataInicio;
-
-    @FXML
-    private DatePicker dataFim;
-
-    private FuncionarioController funcionarioController = new FuncionarioController();
-    private PedidoController pedidoController = new PedidoController();
+    private Label labelMediaDia;
     
+    
+    @FXML
+    private VBox vboxResultados;
+
+    private PedidoController pedidoController;
+    private FuncionarioController funcionarioController;
     private Funcionario loggedInFuncionario;
+    private FXRedirecionador r = new FXRedirecionador();
+
     public void setFuncionario(Funcionario funcionario) {
         this.loggedInFuncionario = funcionario;
     }
 
-
     @FXML
-    public void initialize() {
-        // Configurando as colunas da tabela
-        colunaNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
-        colunaCpf.setCellValueFactory(new PropertyValueFactory<>("cpf"));
-        colunaValorTotalVendido.setCellValueFactory(new PropertyValueFactory<>("valorTotalVendido"));
-        colunaPorcentagem.setCellValueFactory(new PropertyValueFactory<>("porcentagem"));
-        colunaComissao.setCellValueFactory(new PropertyValueFactory<>("comissao"));
+    private void initialize() {
+        pedidoController = new PedidoController();
+        funcionarioController = new FuncionarioController();
+    }
 
-        preencherTabelaFuncionarios();
+    private Double somarValores(List<ItemPedido> lista) {
+        Double valorTotal = 0d;
+        for (ItemPedido itens : lista) {
+            valorTotal += itens.getValorTotal();
+        }
+        return valorTotal;
     }
 
     @FXML
-    private void preencherTabelaFuncionarios() {
-        List<Funcionario> funcionarios = funcionarioController.listarTodos();
+    private void pesquisarPedidos() {
+        String cpfEntregador = textFieldCpfEntregador.getText();
+        String dataInicioStr = textFieldDataInicio.getText();
+        String dataFimStr = textFieldDataFim.getText();
 
-        String cpfBusca = campoBuscaCpf.getText().trim();
-        if (!cpfBusca.isEmpty()) {
-            funcionarios = funcionarios.stream()
-                    .filter(funcionario -> funcionario.getCPF().contains(cpfBusca))
-                    .collect(Collectors.toList());
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        Date dataInicio = null;
+        Date dataFim = null;
+
+        try {
+            dataInicio = sdf.parse(dataInicioStr);
+            dataFim = sdf.parse(dataFimStr);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return;
         }
 
-        LocalDate startDate = dataInicio.getValue();
-        LocalDate endDate = dataFim.getValue();
+        Funcionario entregador = funcionarioController.procurarCPF(cpfEntregador);
+        if (entregador == null || entregador.getPerfil().getTipoPerfil() != Perfil.TipoPerfil.ENTREGADOR) {
+            System.out.println("Entregador não encontrado!");
+            return;
+        }
 
-        ObservableList<FuncionarioComissao> listaFuncionariosComissao = FXCollections.observableArrayList();
+        List<Pedido> pedidos = pedidoController.pesquisarPeriodo(entregador, dataInicio, dataFim);
 
-        for (Funcionario funcionario : funcionarios) {
-            double valorTotalVendido = 0.0;
-            if (startDate != null && endDate != null) {
-                valorTotalVendido = calcularValorTotalVendido(funcionario, startDate, endDate);
+        double totalEntregue = 0d;
+        for (Pedido pedido : pedidos) {
+            if (pedido.getStatus() == Pedido.Status.ENTREGUE) {
+                totalEntregue += pedido.getValorTotal();
             }
-
-            double porcentagem = funcionario.getPorcentagemComissaoEntregador();
-            double comissao = valorTotalVendido * porcentagem;
-
-            FuncionarioComissao funcionarioComissao = new FuncionarioComissao(funcionario.getNome(),funcionario.getCPF(),valorTotalVendido,porcentagem,comissao
-            );
-
-            listaFuncionariosComissao.add(funcionarioComissao);
         }
 
-        tabelaFuncionarios.setItems(listaFuncionariosComissao);
-    }
+        // Preencher os resultados na tela
+        labelTotalEntregue.setText(String.format("R$ %.2f", totalEntregue));
+        labelTotalComissao.setText(String.format("R$ %.2f", totalEntregue * entregador.getPorcentagemComissaoEntregador()));
 
-    private double calcularValorTotalVendido(Funcionario funcionario, LocalDate startDate, LocalDate endDate) {
-        List<Pedido> pedidos = pedidoController.pesquisarPeriodo(funcionario, java.sql.Date.valueOf(startDate), java.sql.Date.valueOf(endDate));
-        return pedidos.stream().mapToDouble(Pedido::getValorTotal).sum();
+        // Calcular a diferença em milissegundos
+        long diferencaEmMilissegundos = dataFim.getTime() - dataInicio.getTime();
+
+        // Converter a diferença de milissegundos para dias
+        double milissegundosPorDia = 1000.0 * 60 * 60 * 24;
+        double diferencaEmDias = diferencaEmMilissegundos / milissegundosPorDia;
+        labelMediaDia.setText(String.format("R$ %.2f", totalEntregue/diferencaEmDias));
+        
+        // Exibir o container de resultados
+        vboxResultados.setVisible(true);
+    }
+    @FXML
+    private Button buttonVoltar;
+
+    @FXML
+    private void voltarPagina() {
+        r.loadScene("FXMLTelaInicialAdmAtendente.fxml", loggedInFuncionario, textFieldDataFim);
     }
 
 }

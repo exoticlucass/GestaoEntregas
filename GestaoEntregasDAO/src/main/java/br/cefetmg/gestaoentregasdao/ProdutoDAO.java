@@ -10,6 +10,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.TypedQuery;
 
 public class ProdutoDAO {
 
@@ -54,5 +55,32 @@ public class ProdutoDAO {
         em.getTransaction().begin();
         Produto x = em.find(Produto.class, id);
         return x;
+    }
+    public List<Produto> pesquisarProdutos(String nome, String localizacao, Double valorUnitario) {
+        StringBuilder queryStr = new StringBuilder("SELECT p FROM Produto p WHERE 1=1");
+
+        if (nome != null && !nome.isEmpty()) {
+            queryStr.append(" AND p.nome LIKE :nome");
+        }
+        if (localizacao != null && !localizacao.isEmpty()) {
+            queryStr.append(" AND p.localizacao LIKE :localizacao");
+        }
+        if (valorUnitario != null) {
+            queryStr.append(" AND p.valorUnitario >= :valorUnitario");
+        }
+
+        TypedQuery<Produto> query = em.createQuery(queryStr.toString(), Produto.class);
+
+        if (nome != null && !nome.isEmpty()) {
+            query.setParameter("nome", "%" + nome + "%");
+        }
+        if (localizacao != null && !localizacao.isEmpty()) {
+            query.setParameter("localizacao", "%" + localizacao + "%");
+        }
+        if (valorUnitario != null) {
+            query.setParameter("valorUnitario", valorUnitario);
+        }
+
+        return query.getResultList();
     }
 }

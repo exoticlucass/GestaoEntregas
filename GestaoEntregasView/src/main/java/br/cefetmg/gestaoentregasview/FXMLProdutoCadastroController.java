@@ -46,7 +46,7 @@ public class FXMLProdutoCadastroController {
                 
                 Produto produto = new Produto();
                 produto.setNome(nome);
-                produto.setLocalização(localizacao);
+                produto.setLocalizacao(localizacao);
                 produto.setValorUnitario(valorUnitario);
                 
                 produtoController.salvarProduto(produto);

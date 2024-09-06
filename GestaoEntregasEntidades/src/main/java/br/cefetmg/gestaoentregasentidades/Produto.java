@@ -1,4 +1,4 @@
-/*
+    /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
@@ -17,7 +17,7 @@ public class Produto {
     @Column(name = "nome_produto")
     private String nome;
     @Column(name = "localizacao_produto")
-    private String localização;
+    private String localizacao;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_itemPedido_itemPedido")
@@ -30,10 +30,10 @@ public class Produto {
     public Produto() {
     }
 
-    public Produto(int id, String nome, String localização, ItemPedido itemPedido) {
+    public Produto(int id, String nome, String localizacao, ItemPedido itemPedido) {
         this.id = id;
         this.nome = nome;
-        this.localização = localização;
+        this.localizacao = localizacao;
         this.itemPedido = itemPedido;
     }
 
@@ -53,12 +53,12 @@ public class Produto {
         this.nome = nome;
     }
 
-    public String getLocalização() {
-        return localização;
+    public String getLocalizacao() {
+        return localizacao;
     }
 
-    public void setLocalização(String localização) {
-        this.localização = localização;
+    public void setLocalizacao(String localização) {
+        this.localizacao = localização;
     }
 
     public ItemPedido getItemPedido() {
@@ -71,7 +71,7 @@ public class Produto {
 
     public Produto(String nome, String localização) {
         this.nome = nome;
-        this.localização = localização;
+        this.localizacao = localização;
     }
 
     @Override

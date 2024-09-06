@@ -11,6 +11,7 @@
 <?import javafx.scene.control.cell.PropertyValueFactory?>
 
 <VBox prefHeight="653.0" prefWidth="629.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.cefetmg.gestaoentregasview.FXMLRealizarEntregaController">
+    <Button fx:id="buttonVoltar" onAction="#voltarPagina" text="Voltar" />
     <HBox spacing="10">
         <TextField fx:id="textFieldCpfCliente" promptText="CPF do Cliente" />
         <TextField fx:id="textFieldDataInicio" promptText="Data Início (dd/MM/yyyy)" />

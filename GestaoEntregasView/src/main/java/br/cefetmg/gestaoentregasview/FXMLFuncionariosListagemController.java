@@ -93,5 +93,8 @@ public class FXMLFuncionariosListagemController {
         List<Funcionario> funcionariosFiltrados = funcionarioController.pesquisarFuncionarios(cpf, nome, telefone, porcentagem, tipos);
         tableViewFuncionarios.setItems(FXCollections.observableArrayList(funcionariosFiltrados));
     }
-
+    @FXML
+    private void voltarPagina() {
+        r.loadScene("FXMLTelaInicialAdmAtendente.fxml", loggedInFuncionario, textFieldCpf);
+    }
 }

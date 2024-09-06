@@ -1,52 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane xmlns:fx="http://javafx.com/fxml" prefHeight="600.0" prefWidth="800.0" fx:controller="br.cefetmg.gestaoentregasview.FXMLRelatoriosController">
-    
-    <top>
-        <VBox spacing="10" padding="10">
-            <GridPane hgap="10" vgap="10">
+<AnchorPane prefHeight="489.0" prefWidth="723.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/22" fx:controller="br.cefetmg.gestaoentregasview.FXMLRelatoriosController">
 
-                <Label text="CPF:" GridPane.rowIndex="0" GridPane.columnIndex="0" />
-                <TextField fx:id="cpfSearchField" promptText="Digite o CPF" GridPane.rowIndex="0" GridPane.columnIndex="1" />
+    <VBox alignment="CENTER" prefHeight="489.0" prefWidth="723.0" spacing="10.0">
+        <!-- Botão Voltar no canto superior direito -->
+        <Button fx:id="buttonVoltar" onAction="#voltarPagina" text="Voltar" />
+        <HBox alignment="CENTER" spacing="10.0">
+            <Label text="CPF Entregador:" />
+            <TextField fx:id="textFieldCpfEntregador" promptText="Digite o CPF do entregador" />
+        </HBox>
+        <HBox alignment="CENTER" spacing="10.0">
+            <Label text="Data Início:" />
+            <TextField fx:id="textFieldDataInicio" promptText="dd/MM/yyyy" />
+        </HBox>
+        <HBox alignment="CENTER" spacing="10.0">
+            <Label text="Data Fim:" />
+            <TextField fx:id="textFieldDataFim" promptText="dd/MM/yyyy" />
+        </HBox>
+        <Button fx:id="buttonPesquisar" onAction="#pesquisarPedidos" text="Pesquisar" />
+        
+        <!-- Container para resultados -->
+        <VBox fx:id="vboxResultados" alignment="CENTER" prefHeight="268.0" prefWidth="216.0" spacing="10.0" visible="false">
+            <HBox alignment="CENTER" spacing="10.0">
+                <Label text="Total Entregue: " />
+                <Label fx:id="labelTotalEntregue" text="R$ 0.00" />
+            </HBox>
+            <HBox alignment="CENTER" spacing="10.0">
+                <Label text="Média por dia deste período: " />
+                <Label fx:id="labelMediaDia" text="R$ 0.00" />
+            </HBox>
+            <HBox alignment="CENTER" spacing="10.0">
+                <Label text="Comissão deste período: " />
+                <Label fx:id="labelTotalComissao" text="R$ 0.00" />
+            </HBox>
 
-                <Label text="Data Início:" GridPane.rowIndex="1" GridPane.columnIndex="0" />
-                <DatePicker fx:id="startDatePicker" GridPane.rowIndex="1" GridPane.columnIndex="1" />
-
-                <Label text="Data Fim:" GridPane.rowIndex="2" GridPane.columnIndex="0" />
-                <DatePicker fx:id="endDatePicker" GridPane.rowIndex="2" GridPane.columnIndex="1" />
-
-                <Button text="Buscar" GridPane.rowIndex="3" GridPane.columnIndex="1" />
-            </GridPane>
         </VBox>
-    </top>
-
-    <center>
-        <VBox spacing="10" padding="10">
-            <TableView fx:id="funcionarioTable">
-
-                <TableColumn fx:id="nomeColumn" text="Nome" />
-
-                <TableColumn fx:id="cpfColumn" text="CPF" />
-                
-                <TableColumn fx:id="valorTotalVendidoColumn" text="Valor Total Vendido" />
-
-                <TableColumn fx:id="porcentagemColumn" text="Porcentagem" />
-
-                <TableColumn fx:id="comissaoColumn" text="Comissão" />
-            </TableView>
-        </VBox>
-    </center>
-
-</BorderPane>
+    </VBox>
+</AnchorPane>

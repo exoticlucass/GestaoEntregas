@@ -42,4 +42,7 @@ public class ClienteController {
         }
         return false;
     }
+//    public List<Cliente> pesquisarClientes(String cpf, String nome, String email, String telefone) {
+//        return clienteDAO.pesquisarClientes(cpf, nome, email, telefone);
+//    }
 }

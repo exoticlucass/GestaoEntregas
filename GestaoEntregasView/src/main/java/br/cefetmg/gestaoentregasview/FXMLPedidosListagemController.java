@@ -129,4 +129,8 @@ public class FXMLPedidosListagemController {
         ObservableList<ItemPedido> itensPedido = FXCollections.observableArrayList(pedido.getItemPedido());
         tableViewItensPedido.setItems(itensPedido);
     }
+    @FXML
+    private void voltarPagina() {
+        r.loadScene("FXMLTelaInicialAdmAtendente.fxml", loggedInFuncionario, textFieldCpfCliente);
+    }
 }
