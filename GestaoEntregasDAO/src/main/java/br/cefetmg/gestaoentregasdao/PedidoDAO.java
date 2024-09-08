@@ -1,5 +1,6 @@
 package br.cefetmg.gestaoentregasdao;
 
+import br.cefetmg.gestaoentregasentidades.Cliente;
 import br.cefetmg.gestaoentregasentidades.Funcionario;
 import br.cefetmg.gestaoentregasentidades.Pedido;
 import java.util.*;
@@ -20,6 +21,8 @@ public class PedidoDAO {
     }
 
     public void create(Pedido pedido) {
+        Cliente clienteExistente = em.find(Cliente.class, pedido.getCliente().getId());
+        pedido.setCliente(em.merge(clienteExistente));
         em.getTransaction().begin();
         em.persist(pedido);
         em.getTransaction().commit();

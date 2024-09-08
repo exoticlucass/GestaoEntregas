@@ -1,5 +1,6 @@
 package br.cefetmg.gestaoentregasview;
 
+import br.cefetmg.gestaoentregascontroller.ClienteController;
 import br.cefetmg.gestaoentregascontroller.PedidoController;
 import br.cefetmg.gestaoentregascontroller.ProdutoController;
 import br.cefetmg.gestaoentregascontroller.FuncionarioController;
@@ -77,7 +78,8 @@ public class FXMLPedidoCadastroController {
         try {
             if (!listaItens.isEmpty()) {
                 Pedido pedido = new Pedido();
-                pedido.setCliente(loggedInCliente);
+                ClienteController cc = new ClienteController();
+                pedido.setCliente(cc.procurarCPF(loggedInCliente.getCPF()));
                 pedido.setData(new Date());
                 pedido.setItemPedido(new ArrayList<>(listaItens));
                 pedido.setStatus(Pedido.Status.EM_PREPARACAO);
