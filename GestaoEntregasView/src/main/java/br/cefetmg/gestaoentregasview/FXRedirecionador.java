@@ -68,7 +68,7 @@ public class FXRedirecionador {
     public void loadScene(String fxmlFile, Funcionario funcionario, Label label) {
         try {
 
-            FXMLLoader loader = new FXMLLoader(App.class.getResource(fxmlFile));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
             Parent root = loader.load();
 
             // Grama esse aqui é o codigo que passa se vc precisar (dentro do controller desse fxml tem a outra parte dele)
@@ -99,6 +99,12 @@ public class FXRedirecionador {
             } else if (fxmlFile.equals("FXMLRealizarEntrega.fxml")) {
                 FXMLRealizarEntregaController controller = loader.getController();
                 controller.setFuncionario(funcionario);
+            } else if (fxmlFile.equals("FXMLProdutosListagem.fxml")) {
+                FXMLProdutosListagemController controller = loader.getController();
+                controller.setFuncionario(funcionario);
+            } else if (fxmlFile.equals("FXMLClientesListagem.fxml")) {
+                FXMLClientesListagemController controller = loader.getController();
+                controller.setFuncionario(funcionario);
             }
 
             Stage stage = (Stage) label.getScene().getWindow();
@@ -120,11 +126,16 @@ public class FXRedirecionador {
                 FXMLTelaInicialClienteController controller = loader.getController();
                 controller.setCliente(cliente);
             }
+            if (fxmlFile.equals("FXMLPedidosCliente.fxml")) {
+                FXMLPedidosClienteController controller = loader.getController();
+                controller.setCliente(cliente);
+            }
 
             Stage stage = (Stage) field.getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.show();
         } catch (IOException e) {
+            e.printStackTrace();
             showAlert("Erro", "Não foi possível carregar a tela: " + e.getMessage());
         }
     }
@@ -142,11 +153,16 @@ public class FXRedirecionador {
                 FXMLPedidoCadastroController controller = loader.getController();
                 controller.setCliente(cliente);
             }
+            if (fxmlFile.equals("FXMLPedidosCliente.fxml")) {
+                FXMLPedidosClienteController controller = loader.getController();
+                controller.setCliente(cliente);
+            }
 
             Stage stage = (Stage) label.getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.show();
         } catch (IOException e) {
+            e.printStackTrace();
             showAlert("Erro", "Não foi possível carregar a tela: " + e.getMessage());
         }
     }

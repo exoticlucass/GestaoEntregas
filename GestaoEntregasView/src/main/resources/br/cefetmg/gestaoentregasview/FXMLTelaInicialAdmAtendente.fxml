@@ -32,13 +32,18 @@
                         <Button mnemonicParsing="false" onAction="#onCadastrarAtendente" prefHeight="40.0" prefWidth="199.0" text="Cadastrar Atendente" GridPane.columnIndex="2" />
                         <Button mnemonicParsing="false" onAction="#onCadastrarProduto" prefHeight="40.0" prefWidth="289.0" text="Cadastrar Produto" GridPane.columnIndex="2" GridPane.rowIndex="1" />
                         <Button mnemonicParsing="false" onAction="#onListarPedidos" prefHeight="40.0" prefWidth="164.0" text="Listar Pedidos" textAlignment="CENTER" />
-                        <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="164.0" text="Listar Produtos" GridPane.rowIndex="1" />
+                        <Button mnemonicParsing="false" onAction="#onListarProdutos" prefHeight="40.0" prefWidth="164.0" text="Listar Produtos" GridPane.rowIndex="1" />
                         <Button mnemonicParsing="false" onAction="#onCadastarPerfil" prefHeight="40.0" prefWidth="235.0" text="Cadastrar Entregador" GridPane.columnIndex="2" GridPane.rowIndex="2" />
                   
                   <Button mnemonicParsing="false" onAction="#onListarFuncionarios" prefHeight="40.0" prefWidth="164.0" text="Listar Funcionarios" GridPane.rowIndex="2" />
+                  <Button mnemonicParsing="false" onAction="#onListarClientes" prefHeight="40.0" prefWidth="164.0" text="Listar Clientes" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <GridPane.margin>
+                        <Insets left="7.5" />
+                     </GridPane.margin>
+                  </Button>
                     </children>
                 </GridPane>
-            <Button onAction="#onSair" layoutX="502.0" layoutY="29.0" mnemonicParsing="false" text="Sair" />
+            <Button layoutX="502.0" layoutY="29.0" mnemonicParsing="false" onAction="#onSair" text="Sair" />
             </children>
         </AnchorPane>
         <Label fx:id="welcomeLabel" layoutX="42.0" layoutY="40.0" text="Bem vindo">

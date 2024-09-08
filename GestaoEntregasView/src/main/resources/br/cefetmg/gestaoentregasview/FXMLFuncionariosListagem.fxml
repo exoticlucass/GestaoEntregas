@@ -16,7 +16,7 @@
         <TextField fx:id="textFieldNome" promptText="Nome" />
         <TextField fx:id="textFieldTelefone" promptText="Telefone" />
         <TextField fx:id="textFieldPorcentagem" promptText="Porcentagem" />
-        <ComboBox fx:id="comboBoxTipo" promptText="Status" />
+        <ComboBox fx:id="comboBoxTipo" promptText="Tipo" />
         <Button text="Pesquisar" onAction="#pesquisar" />
     </HBox>
     

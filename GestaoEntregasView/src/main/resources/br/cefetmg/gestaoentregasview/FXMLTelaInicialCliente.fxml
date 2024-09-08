@@ -22,7 +22,7 @@
             </rowConstraints>
             <children>
                 <Button fx:id="pedidoButton" onAction="#onPedido" mnemonicParsing="false" text="Realizar Pedido" />
-                <Button fx:id="listaPedidoButton" mnemonicParsing="false" text="Lista de meus pedidos" GridPane.columnSpan="2" GridPane.rowIndex="1" />
+                <Button fx:id="listaPedidoButton" onAction="#onListaPedido" mnemonicParsing="false" text="Lista de meus pedidos" GridPane.columnSpan="2" GridPane.rowIndex="1" />
             </children>
         </GridPane>
         <Label fx:id="welcomeLabel" layoutX="42.0" layoutY="40.0" text="Bem vindo">
@@ -30,6 +30,6 @@
                 <Font size="30.0" />
             </font>
         </Label>
-
+        <Button onAction="#onSair" layoutX="512.0" layoutY="28.0" mnemonicParsing="false" text="Sair" />
     </children>
 </AnchorPane>

@@ -69,12 +69,13 @@ public class FXMLCadastroClienteController {
                 cliente.setLogradouro(logradouro);
                 cliente.setNome(nome);
                 cliente.setPerfil(perfil);
+                cliente.setTelefone(telefone);
 
                 clienteController.salvarCliente(cliente);
 
                 exibirAlerta("Sucesso", "Perfil cadastrado com sucesso!", AlertType.INFORMATION);
                 limparCampos();
-                r.loadScene("FXMLLoginController.fxml",textFieldCPF);
+                r.loadScene("FXMLLogin.fxml",textFieldCPF);
             } else {
                 exibirAlerta("Campos Incompletos", "Preencha todos os campos obrigatórios.", AlertType.WARNING);
             }
@@ -120,6 +121,6 @@ public class FXMLCadastroClienteController {
 
     @FXML
     private void onCancelar() {
-        r.loadScene("FXMLLoginController.fxml", textFieldCPF);
+        r.loadScene("FXMLLogin.fxml", textFieldCPF);
     }
 }

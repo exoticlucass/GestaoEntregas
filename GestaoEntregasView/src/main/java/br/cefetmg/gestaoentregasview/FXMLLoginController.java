@@ -53,7 +53,6 @@ public class FXMLLoginController implements Initializable {
 
         Cliente cliente = clienteController.procurarCPF(cpf);
         if (cliente != null && clienteController.validarSenha(cliente, senha)) {
-            r.showAlert("Login bem-sucedido", "Bem-vindo, " + cliente.getNome() + "!");
             r.loadScene("FXMLTelaInicialCliente.fxml", cliente, usernameField);
             return;
         }
@@ -64,6 +63,6 @@ public class FXMLLoginController implements Initializable {
 
     @FXML
     private void handleCadastro() {
-        r.loadScene("CadastroCliente.fxml", usernameField);
+        r.loadScene("FXMLCadastroCliente.fxml", usernameField);
     }
 }

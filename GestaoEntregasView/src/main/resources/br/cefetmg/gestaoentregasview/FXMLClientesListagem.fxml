@@ -8,23 +8,24 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.control.cell.PropertyValueFactory?>
 
-<VBox xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.cefetmg.gestaoentregasview.FXMLProdutosListagemController">
+<VBox xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.cefetmg.gestaoentregasview.FXMLClientesListagemController">
     <Button fx:id="buttonVoltar" onAction="#voltarPagina" text="Voltar" />
     <HBox spacing="10">
+        <TextField fx:id="textFieldCpf" promptText="CPF" />
         <TextField fx:id="textFieldNome" promptText="Nome" />
-        <TextField fx:id="textFieldLocalizacao" promptText="Localização" />
+        <TextField fx:id="textFieldTelefone" promptText="Telefone" />
         <Button text="Pesquisar" onAction="#pesquisar" />
     </HBox>
     
-    <TableView fx:id="tableViewProdutos" prefHeight="400.0" prefWidth="600.0">
+    <TableView fx:id="tableViewClientes" prefHeight="400.0" prefWidth="600.0">
         <columns>
             <TableColumn fx:id="columnId" text="ID" />
             <TableColumn fx:id="columnCpf" text="CPF" />
             <TableColumn fx:id="columnNome" text="Nome" />
-            <TableColumn fx:id="columnLocalizacao" text="Telefone" />
-            <TableColumn fx:id="columnValorUnitario" text="Valor unitario" />
+            <TableColumn fx:id="columnTelefone" text="Telefone" />
+            <TableColumn fx:id="columnBairro" text="Bairro" />
+            <TableColumn fx:id="columnLogradouro" text="Logradouro" />
         </columns>
     </TableView>
 </VBox>

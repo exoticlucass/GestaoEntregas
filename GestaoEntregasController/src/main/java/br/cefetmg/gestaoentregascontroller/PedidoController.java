@@ -32,9 +32,11 @@ public class PedidoController {
     public void salvarPedido(Pedido pedido) {
         pedidoDAO.create(pedido);
     }
-    public void atualizarPedido(Pedido pedido){
+
+    public void atualizarPedido(Pedido pedido) {
         pedidoDAO.update(pedido);
     }
+
     public List<Pedido> listarPedidos() {
         return pedidoDAO.listAll();
     }
@@ -49,10 +51,16 @@ public class PedidoController {
         }
         return listaStatus;
     }
+
     public List<Pedido> pesquisarPeriodo(Funcionario funcionario, Date startDate, Date endDate) {
         return pedidoDAO.pesquisarPeriodo(funcionario, startDate, endDate);
     }
+
     public List<Pedido> pesquisarPedidos(String cpfCliente, String cpfFuncionario, String status, Date dataInicio, Date dataFim) {
         return pedidoDAO.pesquisarPedidos(cpfCliente, cpfFuncionario, status, dataInicio, dataFim);
+    }
+
+    public void deletarPedido(int id) {
+        pedidoDAO.delete(id);
     }
 }

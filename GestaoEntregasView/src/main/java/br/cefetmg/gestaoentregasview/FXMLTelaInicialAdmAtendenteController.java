@@ -35,6 +35,14 @@ public class FXMLTelaInicialAdmAtendenteController implements Initializable {
     public void onCadastrarProduto() {
         r.loadScene("FXMLProdutoCadastro.fxml", loggedInFuncionario, welcomeLabel);
     }
+    @FXML
+    public void onListarProdutos(){
+        r.loadScene("FXMLProdutosListagem.fxml", loggedInFuncionario, welcomeLabel);
+    }
+    @FXML
+    public void onListarClientes(){
+        r.loadScene("FXMLClientesListagem.fxml", loggedInFuncionario, welcomeLabel);
+    }
 
     @FXML
     public void onListarPedidos() {

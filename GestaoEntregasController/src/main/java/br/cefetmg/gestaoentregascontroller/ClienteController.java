@@ -35,14 +35,19 @@ public class ClienteController {
         }
         return null;
     }
-    
+
     public boolean validarSenha(Cliente c, String senha) {
-        if (c.getPerfil().getSenha()    .equals(senha)) {
+        if (c.getPerfil().getSenha().equals(senha)) {
             return true;
         }
         return false;
     }
-//    public List<Cliente> pesquisarClientes(String cpf, String nome, String email, String telefone) {
-//        return clienteDAO.pesquisarClientes(cpf, nome, email, telefone);
-//    }
+
+    public List<Cliente> pesquisarClientes(String cpf, String nome, String telefone) {
+        return clienteDAO.pesquisarClientes(cpf, nome, telefone);
+    }
+
+    public void deletarCliente(int id) {
+        clienteDAO.delete(id);
+    }
 }

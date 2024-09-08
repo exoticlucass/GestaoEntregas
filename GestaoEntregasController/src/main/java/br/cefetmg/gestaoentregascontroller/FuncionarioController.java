@@ -25,7 +25,7 @@ public class FuncionarioController {
     PedidoController pedidoController = new PedidoController();
 
     public void inserir(Funcionario funcionario) {
-        
+
         funcionarioDAO.create(funcionario);
     }
 
@@ -33,12 +33,13 @@ public class FuncionarioController {
 
         return funcionarioDAO.listAll();
     }
-    public List<Funcionario> listarEntregadores(){
+
+    public List<Funcionario> listarEntregadores() {
         List<Funcionario> entregadores = new ArrayList<>();
         List<Funcionario> geral = this.listarTodos();
-        
-        for(Funcionario funcionario : geral){
-            if(funcionario.getPerfil().getTipoPerfil() == Perfil.TipoPerfil.ENTREGADOR){
+
+        for (Funcionario funcionario : geral) {
+            if (funcionario.getPerfil().getTipoPerfil() == Perfil.TipoPerfil.ENTREGADOR) {
                 entregadores.add(funcionario);
             }
         }
@@ -46,12 +47,11 @@ public class FuncionarioController {
     }
 
     public Funcionario escolhaDeFuncionario() {
-       
-        List<Funcionario> funcionarios = this.listarEntregadores(); 
+
+        List<Funcionario> funcionarios = this.listarEntregadores();
         Funcionario escolhido = null;
         int menorNumeroDePedidos = Integer.MAX_VALUE;
 
-        
         Calendar cal = Calendar.getInstance();
         Date endDate = cal.getTime();
         cal.add(Calendar.WEEK_OF_YEAR, -1);
@@ -68,6 +68,7 @@ public class FuncionarioController {
         }
         return escolhido;
     }
+
     public Funcionario procurarCPF(String cpf) {
         List<Funcionario> lista = funcionarioDAO.listAll();
 
@@ -86,7 +87,12 @@ public class FuncionarioController {
         }
         return false;
     }
+
     public List<Funcionario> pesquisarFuncionarios(String cpf, String nome, String telefone, Double porcentagem, String tipos) {
         return funcionarioDAO.pesquisarFuncionarios(cpf, nome, telefone, porcentagem, tipos);
+    }
+
+    public void deletarFuncionario(int id) {
+        funcionarioDAO.delete(id);
     }
 }

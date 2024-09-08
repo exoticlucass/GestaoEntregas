@@ -56,7 +56,7 @@ public class ProdutoDAO {
         Produto x = em.find(Produto.class, id);
         return x;
     }
-    public List<Produto> pesquisarProdutos(String nome, String localizacao, Double valorUnitario) {
+    public List<Produto> pesquisarProdutos(String nome, String localizacao) {
         StringBuilder queryStr = new StringBuilder("SELECT p FROM Produto p WHERE 1=1");
 
         if (nome != null && !nome.isEmpty()) {
@@ -64,9 +64,6 @@ public class ProdutoDAO {
         }
         if (localizacao != null && !localizacao.isEmpty()) {
             queryStr.append(" AND p.localizacao LIKE :localizacao");
-        }
-        if (valorUnitario != null) {
-            queryStr.append(" AND p.valorUnitario >= :valorUnitario");
         }
 
         TypedQuery<Produto> query = em.createQuery(queryStr.toString(), Produto.class);
@@ -76,9 +73,6 @@ public class ProdutoDAO {
         }
         if (localizacao != null && !localizacao.isEmpty()) {
             query.setParameter("localizacao", "%" + localizacao + "%");
-        }
-        if (valorUnitario != null) {
-            query.setParameter("valorUnitario", valorUnitario);
         }
 
         return query.getResultList();

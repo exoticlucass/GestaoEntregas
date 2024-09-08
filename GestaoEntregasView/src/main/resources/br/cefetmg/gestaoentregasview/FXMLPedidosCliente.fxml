@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.cefetmg.gestaoentregasview.FXMLPedidosClienteController">
+    <Button fx:id="buttonVoltar" onAction="#voltarPagina" text="Voltar" />
+    <TextField fx:id="textFieldCpfCliente" promptText="CPF do Cliente" visible="false"/>
+    <TableView fx:id="tableViewPedidos" prefHeight="400.0" prefWidth="600.0">
+        <columns>
+            <TableColumn fx:id="columnId" text="ID" />
+            <TableColumn fx:id="columnClienteCpf" text="CPF Cliente" />
+            <TableColumn fx:id="columnFuncionarioCpf" text="CPF Funcionário" />
+            <TableColumn fx:id="columnData" text="Data" />
+            <TableColumn fx:id="columnValorTotal" text="Valor Total" />
+            <TableColumn fx:id="columnStatus" text="Status" />
+        </columns>
+    </TableView>
+
+    <VBox fx:id="detalhePedido" spacing="10" visible="false">
+        <Label text="Itens do Pedido" />
+        <TableView fx:id="tableViewItensPedido" prefHeight="200.0" prefWidth="400.0">
+            <columns>
+                <TableColumn fx:id="columnItemNome" text="Nome do Produto" />
+                <TableColumn fx:id="columnItemQuantidade" text="Quantidade" />
+            </columns>
+        </TableView>
+    </VBox>
+</VBox>

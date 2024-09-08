@@ -35,6 +35,10 @@ public class FXMLTelaInicialClienteController implements Initializable {
         r.loadScene("FXMLPedidoCadastro.fxml", loggedInCliente, welcomeLabel);
     }
     @FXML
+    private void onListaPedido(){
+        r.loadScene("FXMLPedidosCliente.fxml", loggedInCliente, welcomeLabel);
+    }
+    @FXML
     public void onSair(){
         r.loadScene("FXMLLogin.fxml", welcomeLabel);
     }
