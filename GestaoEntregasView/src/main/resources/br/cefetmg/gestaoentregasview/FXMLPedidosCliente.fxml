@@ -16,7 +16,6 @@
         <columns>
             <TableColumn fx:id="columnId" text="ID" />
             <TableColumn fx:id="columnClienteCpf" text="CPF Cliente" />
-            <TableColumn fx:id="columnFuncionarioCpf" text="CPF Funcionário" />
             <TableColumn fx:id="columnData" text="Data" />
             <TableColumn fx:id="columnValorTotal" text="Valor Total" />
             <TableColumn fx:id="columnStatus" text="Status" />

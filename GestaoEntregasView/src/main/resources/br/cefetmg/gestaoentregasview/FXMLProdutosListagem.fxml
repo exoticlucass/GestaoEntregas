@@ -23,7 +23,7 @@
             <TableColumn fx:id="columnId" text="ID" />
             <TableColumn fx:id="columnCpf" text="CPF" />
             <TableColumn fx:id="columnNome" text="Nome" />
-            <TableColumn fx:id="columnLocalizacao" text="Telefone" />
+            <TableColumn fx:id="columnLocalizacao" text="Localização" />
             <TableColumn fx:id="columnValorUnitario" text="Valor unitario" />
         </columns>
     </TableView>

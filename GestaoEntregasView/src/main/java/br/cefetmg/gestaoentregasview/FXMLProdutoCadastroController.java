@@ -53,9 +53,11 @@ public class FXMLProdutoCadastroController {
 
                 exibirAlerta("Sucesso", "Produto salvo com sucesso!", AlertType.INFORMATION);
                 limparCampos();
+                onCancelar();
             } else {
                 exibirAlerta("Campos Incompletos", "Preencha todos os campos obrigatórios.", AlertType.WARNING);
             }
+            
         }
         catch(Exception e){
             exibirAlerta("Erro", "Erro ao salvar o produto. Tente novamente.", AlertType.ERROR);

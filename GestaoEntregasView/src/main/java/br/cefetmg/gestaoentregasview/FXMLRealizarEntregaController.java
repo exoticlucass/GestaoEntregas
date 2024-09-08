@@ -56,16 +56,16 @@ public class FXMLRealizarEntregaController {
     private TextField textFieldDataFim;
     @FXML
     private ComboBox<String> comboBoxStatus;
-    
+
     private PedidoController pedidoController;
-    
+
     private FuncionarioController fc = new FuncionarioController();
     private Funcionario loggedInFuncionario;
     private FXRedirecionador r = new FXRedirecionador();
 
     public void setFuncionario(Funcionario funcionario) {
         this.loggedInFuncionario = funcionario;
-        
+
         carregarPedidos();
     }
 
@@ -78,7 +78,7 @@ public class FXMLRealizarEntregaController {
         columnData.setCellValueFactory(new PropertyValueFactory<>("data"));
         columnValorTotal.setCellValueFactory(new PropertyValueFactory<>("valorTotal"));
         columnStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
-        
+
         // Defina a célula diretamente no código Java
         columnAcoes.setCellFactory(param -> new ButtonTableCell());
 
@@ -129,8 +129,7 @@ public class FXMLRealizarEntregaController {
         ObservableList<ItemPedido> itensPedido = FXCollections.observableArrayList(pedido.getItemPedido());
         tableViewItensPedido.setItems(itensPedido);
     }
-    
-    
+
     private class ButtonTableCell extends TableCell<Pedido, Void> {
 
         private final Button btnAcao = new Button();
@@ -155,21 +154,26 @@ public class FXMLRealizarEntregaController {
         protected void updateItem(Void item, boolean empty) {
             super.updateItem(item, empty);
             if (empty) {
-                setGraphic(null);
+                setGraphic(null); 
             } else {
                 Pedido pedido = getTableView().getItems().get(getIndex());
+
                 if (pedido.getStatus() == Pedido.Status.EM_PREPARACAO) {
                     btnAcao.setText("Realizar entrega");
+                    btnAcao.setDisable(false);
                 } else if (pedido.getStatus() == Pedido.Status.ENTREGA) {
                     btnAcao.setText("Terminar entrega");
+                    btnAcao.setDisable(false);
                 } else {
                     btnAcao.setText("Entregue");
-                    btnAcao.setDisable(true);
+                    btnAcao.setDisable(true); 
                 }
-                setGraphic(btnAcao);
+
+                setGraphic(btnAcao); 
             }
         }
     }
+
     @FXML
     private void voltarPagina() {
         r.loadScene("FXMLTelaInicialEntregador.fxml", loggedInFuncionario, textFieldCpfCliente);

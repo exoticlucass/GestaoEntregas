@@ -62,7 +62,10 @@ public class Perfil {
             this.tipoPerfil = TipoPerfil.ADMINISTRADOR;
         } else if (id == 2) {
             this.tipoPerfil = TipoPerfil.ATENDENTE;
-        } else {
+        } else if(id == 3){
+            this.tipoPerfil = TipoPerfil.CLIENTE;
+        }
+        else if(id == 4){
             this.tipoPerfil = TipoPerfil.ENTREGADOR;
         }
     }

@@ -22,7 +22,7 @@ public class FXMLCadastroAtendenteController {
     private TextField textFieldNome;
     @FXML
     private TextField textFieldTelefone;
-    
+
     @FXML
     private TextField textFieldCPF;
 
@@ -30,14 +30,14 @@ public class FXMLCadastroAtendenteController {
     private TextField textFieldSenha;
 
     private FuncionarioController funcionarioController;
-    
+
     private FXRedirecionador r = new FXRedirecionador();
-    
+
     private Funcionario loggedInFuncionario;
+
     public void setFuncionario(Funcionario funcionario) {
         this.loggedInFuncionario = funcionario;
     }
-
 
     @FXML
     private void initialize() {
@@ -48,33 +48,36 @@ public class FXMLCadastroAtendenteController {
     private void salvarPedido() {
         try {
             if (verificarCamposPreenchidos()) {
-                
-                // adicionar campos
-                Funcionario funcionario = new Funcionario();
-
-                String nome = textFieldNome.getText();
-                String telefone = textFieldTelefone.getText();
                 String cpf = textFieldCPF.getText();
-                String senha = textFieldSenha.getText();
+                if (!r.cpfJaExiste(cpf)) {
 
-                Perfil perfil = new Perfil();
-                perfil.setTipoPerfil(Perfil.TipoPerfil.ATENDENTE);
-                perfil.setSenha(senha);
-                
+                    // adicionar campos
+                    Funcionario funcionario = new Funcionario();
 
-                
-                funcionario.setCPF(cpf);
-                funcionario.setNome(nome);
-                funcionario.setPerfil(perfil);
-                funcionario.setPorcentagemComissaoEntregador(0);
-                funcionario.setTelefone(telefone);
-                
-                
-                
-                funcionarioController.inserir(funcionario);
+                    String nome = textFieldNome.getText();
+                    String telefone = textFieldTelefone.getText();
 
-                exibirAlerta("Sucesso", "Perfil cadastrado com sucesso!", AlertType.INFORMATION);
-                limparCampos();
+                    String senha = textFieldSenha.getText();
+
+                    Perfil perfil = new Perfil();
+                    perfil.setTipoPerfil(Perfil.TipoPerfil.ATENDENTE);
+                    perfil.setSenha(senha);
+
+                    funcionario.setCPF(cpf);
+                    funcionario.setNome(nome);
+                    funcionario.setPerfil(perfil);
+                    funcionario.setPorcentagemComissaoEntregador(0);
+                    funcionario.setTelefone(telefone);
+
+                    funcionarioController.inserir(funcionario);
+
+                    exibirAlerta("Sucesso", "Perfil cadastrado com sucesso!", AlertType.INFORMATION);
+                    limparCampos();
+                    onCancelar();
+                }
+                else {
+                    exibirAlerta("CPF Já existe", "Este CPF já foi cadastrado", AlertType.WARNING);
+                }
             } else {
                 exibirAlerta("Campos Incompletos", "Preencha todos os campos obrigatórios.", AlertType.WARNING);
             }
@@ -84,9 +87,8 @@ public class FXMLCadastroAtendenteController {
         }
     }
 
-
     private boolean verificarCamposPreenchidos() {
-        return  !textFieldNome.getText().isEmpty()
+        return !textFieldNome.getText().isEmpty()
                 && !textFieldTelefone.getText().isEmpty()
                 && !textFieldCPF.getText().isEmpty()
                 && !textFieldSenha.getText().isEmpty();

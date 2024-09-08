@@ -32,9 +32,10 @@ public class FXMLCadastroEntregadorController {
     private TextField textFieldPorcentagem;
 
     private FuncionarioController funcionarioController;
-    
+
     private FXRedirecionador r = new FXRedirecionador();
     private Funcionario loggedInFuncionario;
+
     public void setFuncionario(Funcionario funcionario) {
         this.loggedInFuncionario = funcionario;
     }
@@ -48,31 +49,35 @@ public class FXMLCadastroEntregadorController {
     private void salvarPedido() {
         try {
             if (verificarCamposPreenchidos()) {
-
-                // adicionar campos
-                Funcionario funcionario = new Funcionario();
-
-                String nome = textFieldNome.getText();
-                String telefone = textFieldTelefone.getText();
                 String cpf = textFieldCPF.getText();
-                String senha = textFieldSenha.getText();
-                Double porcentagem = Double.parseDouble(textFieldPorcentagem.getText().replace(',', '.'));
-                                
+                if (!r.cpfJaExiste(cpf)) {
+                    // adicionar campos
+                    Funcionario funcionario = new Funcionario();
 
-                Perfil perfil = new Perfil();
-                perfil.setTipoPerfil(Perfil.TipoPerfil.ENTREGADOR);
-                perfil.setSenha(senha);
+                    String nome = textFieldNome.getText();
+                    String telefone = textFieldTelefone.getText();
 
-                funcionario.setCPF(cpf);
-                funcionario.setNome(nome);
-                funcionario.setPerfil(perfil);
-                funcionario.setPorcentagemComissaoEntregador(porcentagem);
-                funcionario.setTelefone(telefone);
+                    String senha = textFieldSenha.getText();
+                    Double porcentagem = Double.parseDouble(textFieldPorcentagem.getText().replace(',', '.'));
 
-                funcionarioController.inserir(funcionario);
+                    Perfil perfil = new Perfil();
+                    perfil.setTipoPerfil(Perfil.TipoPerfil.ENTREGADOR);
+                    perfil.setSenha(senha);
 
-                exibirAlerta("Sucesso", "Perfil cadastrado com sucesso!", AlertType.INFORMATION);
-                limparCampos();
+                    funcionario.setCPF(cpf);
+                    funcionario.setNome(nome);
+                    funcionario.setPerfil(perfil);
+                    funcionario.setPorcentagemComissaoEntregador(porcentagem);
+                    funcionario.setTelefone(telefone);
+
+                    funcionarioController.inserir(funcionario);
+
+                    exibirAlerta("Sucesso", "Perfil cadastrado com sucesso!", AlertType.INFORMATION);
+                    limparCampos();
+                    onCancelar();
+                } else {
+                    exibirAlerta("CPF Já existe", "Este CPF já foi cadastrado", AlertType.WARNING);
+                }
             } else {
                 exibirAlerta("Campos Incompletos", "Preencha todos os campos obrigatórios.", AlertType.WARNING);
             }
@@ -80,6 +85,7 @@ public class FXMLCadastroEntregadorController {
             e.printStackTrace();
             exibirAlerta("Erro", "Erro ao cadastrar o Perfil. Tente novamente.", AlertType.ERROR);
         }
+
     }
 
     private boolean verificarCamposPreenchidos() {

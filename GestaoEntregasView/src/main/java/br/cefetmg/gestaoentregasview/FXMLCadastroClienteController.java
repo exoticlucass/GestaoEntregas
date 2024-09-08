@@ -50,32 +50,38 @@ public class FXMLCadastroClienteController {
     private void salvarPedido() {
         try {
             if (verificarCamposPreenchidos()) {
-                Cliente cliente = new Cliente(); // colocar cliente logado
-
-                String nome = textFieldNome.getText();
-                String telefone = textFieldTelefone.getText();
-                String logradouro = textFieldLogradouro.getText();
-                String bairro = textFieldBairro.getText();
                 String cpf = textFieldCPF.getText();
-                String senha = textFieldSenha.getText();
 
-                Perfil perfil = new Perfil();
-                perfil.setTipoPerfil(Perfil.TipoPerfil.CLIENTE);
-                perfil.setSenha(senha);
+                if (!r.cpfJaExiste(cpf)) {
+                    Cliente cliente = new Cliente(); // colocar cliente logado
 
-                cliente.setBairro(bairro);
-                cliente.setCPF(cpf);
-                cliente.setCNPJ(cpf);
-                cliente.setLogradouro(logradouro);
-                cliente.setNome(nome);
-                cliente.setPerfil(perfil);
-                cliente.setTelefone(telefone);
+                    String nome = textFieldNome.getText();
+                    String telefone = textFieldTelefone.getText();
+                    String logradouro = textFieldLogradouro.getText();
+                    String bairro = textFieldBairro.getText();
 
-                clienteController.salvarCliente(cliente);
+                    String senha = textFieldSenha.getText();
 
-                exibirAlerta("Sucesso", "Perfil cadastrado com sucesso!", AlertType.INFORMATION);
-                limparCampos();
-                r.loadScene("FXMLLogin.fxml",textFieldCPF);
+                    Perfil perfil = new Perfil();
+                    perfil.setTipoPerfil(Perfil.TipoPerfil.CLIENTE);
+                    perfil.setSenha(senha);
+
+                    cliente.setBairro(bairro);
+                    cliente.setCPF(cpf);
+                    cliente.setCNPJ(cpf);
+                    cliente.setLogradouro(logradouro);
+                    cliente.setNome(nome);
+                    cliente.setPerfil(perfil);
+                    cliente.setTelefone(telefone);
+
+                    clienteController.salvarCliente(cliente);
+
+                    exibirAlerta("Sucesso", "Perfil cadastrado com sucesso!", AlertType.INFORMATION);
+                    limparCampos();
+                    r.loadScene("FXMLLogin.fxml", textFieldCPF);
+                } else {
+                    exibirAlerta("CPF Já existe", "Este CPF já foi cadastrado", AlertType.WARNING);
+                }
             } else {
                 exibirAlerta("Campos Incompletos", "Preencha todos os campos obrigatórios.", AlertType.WARNING);
             }

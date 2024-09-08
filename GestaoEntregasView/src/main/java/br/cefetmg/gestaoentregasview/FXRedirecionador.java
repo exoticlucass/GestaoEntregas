@@ -4,6 +4,8 @@
  */
 package br.cefetmg.gestaoentregasview;
 
+import br.cefetmg.gestaoentregascontroller.ClienteController;
+import br.cefetmg.gestaoentregascontroller.FuncionarioController;
 import br.cefetmg.gestaoentregasentidades.Cliente;
 import br.cefetmg.gestaoentregasentidades.Funcionario;
 import java.io.IOException;
@@ -173,6 +175,15 @@ public class FXRedirecionador {
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
+    }
+        public boolean cpfJaExiste(String cpf){
+        ClienteController cc = new ClienteController();
+        FuncionarioController fc = new FuncionarioController();
+        if(fc.procurarCPF(cpf) != null || cc.procurarCPF(cpf) != null){
+            return true;
+        }
+        else
+            return false;
     }
 
 }

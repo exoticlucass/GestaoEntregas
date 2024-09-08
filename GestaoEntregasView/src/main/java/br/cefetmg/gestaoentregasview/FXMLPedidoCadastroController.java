@@ -108,6 +108,7 @@ public class FXMLPedidoCadastroController {
             e.printStackTrace();
             exibirAlerta("Erro", "Erro ao salvar o pedido. Tente novamente.", AlertType.ERROR);
         }
+        onCancelar();
     }
 
     @FXML
